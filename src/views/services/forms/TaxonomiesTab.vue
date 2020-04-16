@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     contactAdminTeamEmail() {
-      const to = "info@connectedkingston.uk";
+      const to = "info@connectedtogether.org.uk";
       const subject = `Incorrect taxonomies applied to ${this.type}`;
       const body =
         `${this.$options.filters.ucfirst(this.type)} Name: XXX\n\nI believe that the tags applied to the above ${this.type} are incorrect. The following changes should be made:`;

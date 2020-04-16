@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Connected Kingston - Admin: Collections" />
+    <vue-headful title="Connected Together - Admin: Collections" />
 
     <gov-tabs :tabs="tabs">
       <router-view />

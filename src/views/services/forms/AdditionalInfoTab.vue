@@ -131,7 +131,7 @@
 
         <gov-body>
           Please provide your {{ type }}’s public-facing contact details. These
-          will be displayed on your {{ type }}’s page on the Connected Kingston
+          will be displayed on your {{ type }}’s page on the Connected Together
           website.
         </gov-body>
 
@@ -270,10 +270,10 @@ export default {
       ];
     },
     videoEmbedHelpHref() {
-      const to = "info@connectedkingston.uk";
+      const to = "info@connectedtogether.org.uk";
       const subject = `Make a video for my ${this.type}`;
       const body =
-        `My ${this.type} is: xxx\n\nI am interested in making a video for my ${this.type} page on Connected Kingston.`;
+        `My ${this.type} is: xxx\n\nI am interested in making a video for my ${this.type} page on Connected Together.`;
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject

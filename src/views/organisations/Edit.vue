@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`Connected Kingston - Edit Organisation: ${organisation.name}`" />
+      <vue-headful :title="`Connected Together - Edit Organisation: ${organisation.name}`" />
 
       <gov-back-link :to="{ name: 'organisations-show', params: { organisation: organisation.id } }">Back to organisation</gov-back-link>
       <gov-main-wrapper>

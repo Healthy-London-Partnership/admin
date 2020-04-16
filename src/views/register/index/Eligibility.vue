@@ -8,7 +8,7 @@
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="l">
-            Is your service right for Connected Kingston?
+            Is your service right for Connected Together?
           </gov-heading>
 
           <gov-body>

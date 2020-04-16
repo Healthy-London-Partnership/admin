@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Connected Kingston - Admin: Page Feedback" />
+    <vue-headful title="Connected Together - Admin: Page Feedback" />
 
     <gov-heading size="l">Feedback</gov-heading>
 

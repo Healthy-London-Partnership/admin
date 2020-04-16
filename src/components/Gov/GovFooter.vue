@@ -33,7 +33,7 @@
                     </template>
 
                     <span class="govuk-footer__licence-description">
-                        For any feedback or technical queries, please email <gov-link href="mailto:info@connectedkingston.uk">info@connectedkingston.uk</gov-link>
+                        For any feedback or technical queries, please email <gov-link href="mailto:info@connectedtogether.org.uk">info@connectedtogether.org.uk</gov-link>
                     </span>
                 </div>
                 <div class="govuk-footer__meta-item">

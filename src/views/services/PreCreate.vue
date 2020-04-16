@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Kingston - Add Service" />
+    <vue-headful title="Connected Together - Add Service" />
 
     <gov-back-link :to="{ name: 'services-index' }">
       Back to services

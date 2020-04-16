@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Kingston - View Update Request" />
+    <vue-headful title="Connected Together - View Update Request" />
 
     <gov-back-link :to="{ name: 'update-requests-index' }">Back to update requests</gov-back-link>
     <gov-main-wrapper>

@@ -46,7 +46,7 @@
               E.g ‘Sign Up’, ‘Refer To’, or ‘Join In’
             </gov-hint>
             <gov-hint for="referral_button_text" v-if="referral_method === 'internal'">
-              By enabling referrals through Connected Kingston, a button will be
+              By enabling referrals through Connected Together, a button will be
               added to your page which will link to the referral form.
             </gov-hint>
             <gov-hint for="referral_button_text" v-if="referral_method === 'external'">
@@ -141,7 +141,7 @@ export default {
     referralMethodOptions() {
       return [
         { text: "Please select", value: null, disabled: true },
-        { text: "Yes - Through Connected Kingston", value: "internal" },
+        { text: "Yes - Through Connected Together", value: "internal" },
         { text: "Yes - Through an external form", value: "external" },
         { text: `No - This ${this.type} doesn’t accept referrals`, value: "none" }
       ];
@@ -150,10 +150,10 @@ export default {
       return this.referral_method !== null && this.referral_method !== "none";
     },
     contactAdminTeamEmail() {
-      const to = "info@connectedkingston.uk";
+      const to = "info@connectedtogether.org.uk";
       const subject = `Turn referrals on for my ${this.type}`;
       const body =
-        `${this.$options.filters.ucfirst(this.type)} Name: XXX\n\nWe are interested in finding out more about accepting referrals through Connected Kingston.`;
+        `${this.$options.filters.ucfirst(this.type)} Name: XXX\n\nWe are interested in finding out more about accepting referrals through Connected Together.`;
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject

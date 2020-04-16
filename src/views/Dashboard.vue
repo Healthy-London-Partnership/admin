@@ -1,19 +1,19 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Kingston - Dashboard" />
+    <vue-headful title="Connected Together - Dashboard" />
 
     <gov-main-wrapper>
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="xl">
-            Welcome to the Connected Kingston admin portal
+            Welcome to the Connected Together admin portal
           </gov-heading>
 
           <gov-body size="l">
-            From here, you can add and edit your pages on Connected Kingston, as
+            From here, you can add and edit your pages on Connected Together, as
             well as manage referrals into your service. For any support, contact
-            <gov-link href="mailto:info@connectedkingston.uk">
-              info@connectedkingston.uk
+            <gov-link href="mailto:info@connectedtogether.org.uk">
+              info@connectedtogether.org.uk
             </gov-link>
           </gov-body>
         </gov-grid-column>
@@ -24,7 +24,7 @@
       <gov-grid-row>
         <gov-grid-column width="one-half">
           <gov-heading size="l">Services</gov-heading>
-          <gov-body>Add or edit your pages on Connected Kingston.</gov-body>
+          <gov-body>Add or edit your pages on Connected Together.</gov-body>
           <gov-button start :to="{ name: 'services-index' }">
             Go to services
           </gov-button>
@@ -51,7 +51,7 @@
 
         <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin">
           <gov-heading size="l">Organisations</gov-heading>
-          <gov-body>Add or edit organisations on Connected Kingston.</gov-body>
+          <gov-body>Add or edit organisations on Connected Together.</gov-body>
           <gov-button start :to="{ name: 'organisations-index' }">
             Go to organisations
           </gov-button>
@@ -70,7 +70,7 @@
         <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin">
           <gov-heading size="l">Reports</gov-heading>
           <gov-body>
-            Download reports of activity on Connected Kingston.
+            Download reports of activity on Connected Together.
           </gov-body>
           <gov-button start :to="{ name: 'reports-index' }">
             Go to reports

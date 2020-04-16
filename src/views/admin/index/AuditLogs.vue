@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Connected Kingston - Admin: Audits" />
+    <vue-headful title="Connected Together - Admin: Audits" />
 
     <gov-heading size="l">Audit logs</gov-heading>
 

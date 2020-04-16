@@ -92,7 +92,7 @@ export default {
           type: "Locations Export",
           description:
             "Generate a report with all the locations of services on " +
-            "Connected Kingston, and the number of services delivered at each.",
+            "Connected Together, and the number of services delivered at each.",
           scheduleForm: new Form({
             report_type: "Locations Export",
             repeat_type: null

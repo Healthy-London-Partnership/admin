@@ -1,7 +1,7 @@
 <template>
     <gov-width-container>
 
-        <vue-headful title="Connected Kingston - Edit Stop Words" />
+        <vue-headful title="Connected Together - Edit Stop Words" />
 
         <gov-back-link :to="{ name: 'admin-index-search-engine-stop-words' }">Back to stop words</gov-back-link>
         <gov-main-wrapper>

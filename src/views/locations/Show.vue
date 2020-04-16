@@ -4,7 +4,7 @@
     <gov-main-wrapper>
       <ck-loader v-if="loading" />
       <gov-grid-row v-else>
-        <vue-headful :title="`Connected Kingston - Location: ${location.address_line_1}`" />
+        <vue-headful :title="`Connected Together - Location: ${location.address_line_1}`" />
 
         <gov-grid-column width="two-thirds">
           <gov-heading size="m">View location</gov-heading>

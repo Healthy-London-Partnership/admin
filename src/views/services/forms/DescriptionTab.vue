@@ -6,7 +6,7 @@
 
         <gov-body>
           These sections should describe what your {{ type }} offers and is the
-          main body of content on your page on Connected Kingston.
+          main body of content on your page on Connected Together.
         </gov-body>
 
         <gov-section-break size="l" />

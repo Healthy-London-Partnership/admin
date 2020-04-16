@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`Connected Kingston - Service Updated: ${service.name}`" />
+      <vue-headful :title="`Connected Together - Service Updated: ${service.name}`" />
 
       <gov-back-link :to="{ name: 'services-show', params: { service: service.id } }">Back to {{ service.type }}</gov-back-link>
       <gov-main-wrapper>

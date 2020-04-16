@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Connected Kingston - Admin: Notifications" />
+    <vue-headful title="Connected Together - Admin: Notifications" />
 
     <gov-heading size="l">Notifications</gov-heading>
     <ck-loader v-if="loading" />

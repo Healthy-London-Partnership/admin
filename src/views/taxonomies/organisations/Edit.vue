@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`Connected Kingston - Edit Taxonomy Organisation: ${taxonomy.name}`" />
+      <vue-headful :title="`Connected Together - Edit Taxonomy Organisation: ${taxonomy.name}`" />
 
       <gov-back-link :to="{ name: 'admin-index-taxonomies-organisations' }">Back to taxonomy organisations</gov-back-link>
       <gov-main-wrapper>

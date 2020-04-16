@@ -16,7 +16,7 @@
           @input="$emit('update:type', $event); $emit('clear', 'type')"
           id="type"
           label="What is it?"
-          hint="This option changes how your page is described on Connected Kingston"
+          hint="This option changes how your page is described on Connected Together"
           :options="typeOptions"
           :error="errors.get('type')"
         />
@@ -179,7 +179,7 @@ export default {
   },
   computed: {
     logoHelpHref() {
-      const to = "info@connectedkingston.uk";
+      const to = "info@connectedtogether.org.uk";
       const subject = "Help uploading service logo";
 
       return `mailto:${to}?subject=${encodeURIComponent(subject)}`;

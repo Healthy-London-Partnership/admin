@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Kingston - Logout" />
+    <vue-headful title="Connected Together - Logout" />
 
     <gov-main-wrapper>
       <gov-grid-row>

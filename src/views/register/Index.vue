@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Kingston - Register" />
+    <vue-headful title="Connected Together - Register" />
 
     <gov-error-summary v-if="form.$errors.any()" title="Check for errors">
       <gov-list>

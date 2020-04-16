@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`Connected Kingston - Edit Collection Persona: ${collection.name}`" />
+      <vue-headful :title="`Connected Together - Edit Collection Persona: ${collection.name}`" />
 
       <gov-back-link :to="{ name: 'admin-index-collections-personas' }">Back to collection personas</gov-back-link>
       <gov-main-wrapper>

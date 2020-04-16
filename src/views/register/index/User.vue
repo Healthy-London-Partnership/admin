@@ -12,7 +12,7 @@
           </gov-heading>
 
           <gov-body>
-            First, create an account to login to the Connected Kingston
+            First, create an account to login to the Connected Together
             administration portal
           </gov-body>
 
@@ -63,7 +63,7 @@
 
           <gov-body>
             User account details are held in line with our
-            <gov-link href="https://www.connectedkingston.uk/privacy-policy" target="_blank">privacy policy</gov-link>.
+            <gov-link href="https://www.connectedtogether.org.uk/privacy-policy" target="_blank">privacy policy</gov-link>.
           </gov-body>
 
           <gov-button start :to="{ name: 'register-index-organisation' }">

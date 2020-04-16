@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Kingston - Page Not Found" />
+    <vue-headful title="Connected Together - Page Not Found" />
 
     <gov-main-wrapper>
       <gov-grid-row>

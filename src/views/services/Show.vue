@@ -4,7 +4,7 @@
     <gov-main-wrapper>
       <ck-loader v-if="loading" />
       <gov-grid-row v-else>
-        <vue-headful :title="`Connected Kingston - Service: ${service.name}`" />
+        <vue-headful :title="`Connected Together - Service: ${service.name}`" />
 
         <gov-grid-column width="full">
           <gov-grid-row>

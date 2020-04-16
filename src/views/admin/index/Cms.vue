@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Connected Kingston - Admin: CMS" />
+    <vue-headful title="Connected Together - Admin: CMS" />
 
     <gov-heading size="l">Frontend</gov-heading>
 

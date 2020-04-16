@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Kingston - Add User" />
+    <vue-headful title="Connected Together - Add User" />
 
     <gov-back-link :to="{ name: 'users-index' }">Back to users</gov-back-link>
     <gov-main-wrapper>
@@ -11,7 +11,7 @@
 
           <gov-heading size="m">Add user</gov-heading>
 
-          <gov-body>Create users to be able to acces the back-end of the Connected Kingston service (deciding their permissions in what they have access to)</gov-body>
+          <gov-body>Create users to be able to acces the back-end of the Connected Together service (deciding their permissions in what they have access to)</gov-body>
 
           <user-form
             :errors="form.$errors"

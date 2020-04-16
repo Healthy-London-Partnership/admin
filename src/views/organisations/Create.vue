@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Kingston - Add Organisation" />
+    <vue-headful title="Connected Together - Add Organisation" />
 
     <gov-back-link :to="{ name: 'organisations-index' }">Back to organisations</gov-back-link>
     <gov-main-wrapper>

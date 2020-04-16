@@ -10,7 +10,7 @@ import uuid
 # ==================================================
 # Template details.
 # ==================================================
-template = Template('Create the infrastructure needed to run the Connected Kingston Backend')
+template = Template('Create the infrastructure needed to run the Connected Together Admin')
 template.add_version('2010-09-09')
 
 # ==================================================
@@ -58,8 +58,8 @@ certificate_arn_parameter = template.add_parameter(
 # ==================================================
 # Variables.
 # ==================================================
-bucket_name_variable = Join('-', ['backend', Ref(environment_parameter), Ref(uuid_parameter)])
-ci_user_name_variable = Join('-', ['ci-backend', Ref(environment_parameter)])
+bucket_name_variable = Join('-', ['admin', Ref(environment_parameter), Ref(uuid_parameter)])
+ci_user_name_variable = Join('-', ['ci-admin', Ref(environment_parameter)])
 
 # ==================================================
 # Resources.
