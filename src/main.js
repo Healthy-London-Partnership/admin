@@ -211,7 +211,10 @@ Vue.mixin({
         service: "services",
         activity: "activities",
         club: "clubs",
-        group: "groups"
+        group: "groups",
+        helpline: "helplines",
+        information: "information",
+        app: "apps"
       };
 
       return plurals[string];

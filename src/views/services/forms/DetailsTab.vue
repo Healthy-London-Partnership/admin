@@ -169,7 +169,10 @@ export default {
         { text: "It is a Service", value: "service" },
         { text: "It is an Activity", value: "activity" },
         { text: "It is a Club", value: "club" },
-        { text: "It is a Group", value: "group" }
+        { text: "It is a Group", value: "group" },
+        { text: "It is a Helpline", value: "helpline" },
+        { text: "It is an Information", value: "information" },
+        { text: "It is an App", value: "app" }
       ],
       statusOptions: [
         { label: "Enabled", value: "active" },
