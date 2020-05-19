@@ -1,13 +1,7 @@
 <template>
     <header class="govuk-header" role="banner" data-module="header">
         <div class="govuk-header__container govuk-width-container">
-            <div class="govuk-header__logo">
-                <router-link :to="{ name: 'dashboard' }" class="govuk-header__link govuk-header__link--homepage">
-                    <span class="govuk-header__logotype">
-                        <img src="@/assets/logo-white.png" class="govuk-header__logotype-crown">
-                    </span>
-                </router-link>
-            </div>
+            <div class="govuk-header__logo" />
             <div class="govuk-header__content">
                 <div class="ck-header__main">
                   <router-link :to="{ name: 'dashboard' }" class="govuk-header__link govuk-header__link--service-name">
