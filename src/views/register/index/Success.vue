@@ -4,7 +4,7 @@
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="l">
-            Thank you for adding your service to Connected Together
+            Thank you for adding your service to {{appName}}
           </gov-heading>
 
           <gov-body>

@@ -16,7 +16,7 @@
           @input="$emit('update:type', $event); $emit('clear', 'type')"
           id="type"
           label="What is it?"
-          hint="This option changes how your page is described on Connected Together"
+          :hint="`This option changes how your page is described on ${appName}`"
           :options="typeOptions"
           :error="errors.get('type')"
         />

@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`Connected Together - Edit Service: ${service.name}`" />
+      <vue-headful :title="`${appName} - Edit Service: ${service.name}`" />
 
       <!-- Edit form -->
       <div v-show="updateRequest === null">

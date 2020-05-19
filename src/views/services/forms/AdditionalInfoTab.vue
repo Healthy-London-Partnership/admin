@@ -131,7 +131,7 @@
 
         <gov-body>
           Please provide your {{ type }}’s public-facing contact details. These
-          will be displayed on your {{ type }}’s page on the Connected Together
+          will be displayed on your {{ type }}’s page on the {{appName}}
           website.
         </gov-body>
 
@@ -273,7 +273,7 @@ export default {
       const to = "info@connectedtogether.org.uk";
       const subject = `Make a video for my ${this.type}`;
       const body =
-        `My ${this.type} is: xxx\n\nI am interested in making a video for my ${this.type} page on Connected Together.`;
+        `My ${this.type} is: xxx\n\nI am interested in making a video for my ${this.type} page on ${this.appName}.`;
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject

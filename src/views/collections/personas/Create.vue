@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Together - Add Collection Persona" />
+    <vue-headful :title="`${appName} - Add Collection Persona`" />
 
     <gov-back-link :to="{ name: 'admin-index-collections-personas' }">Back to collection personas</gov-back-link>
     <gov-main-wrapper>

@@ -4,7 +4,7 @@
     <gov-main-wrapper>
       <ck-loader v-if="loading" />
       <gov-grid-row v-else>
-        <vue-headful :title="`Connected Together - Audit: ${audit.description.substr(0, 10)}...`" />
+        <vue-headful :title="`${appName} - Audit: ${audit.description.substr(0, 10)}...`" />
 
         <gov-grid-column width="two-thirds">
 

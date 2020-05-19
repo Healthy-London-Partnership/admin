@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Together - Page Not Found" />
+    <vue-headful :title="`${appName} - Page Not Found`" />
 
     <gov-main-wrapper>
       <gov-grid-row>

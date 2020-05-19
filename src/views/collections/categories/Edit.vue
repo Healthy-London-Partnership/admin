@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`Connected Together - Edit Collection Category: ${collection.name}`" />
+      <vue-headful :title="`${appName} - Edit Collection Category: ${collection.name}`" />
 
       <gov-back-link :to="{ name: 'admin-index-collections' }">Back to collection categories</gov-back-link>
       <gov-main-wrapper>

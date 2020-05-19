@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Together - Add Location" />
+    <vue-headful :title="`${appName} - Add Location`" />
 
     <gov-back-link :to="{ name: 'locations-index' }">Back to locations</gov-back-link>
     <gov-main-wrapper>

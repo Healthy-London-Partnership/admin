@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <vue-headful title="Connected Together" :head="headAttributes" :html="htmlAttributes" />
+    <vue-headful :title="appName" :head="headAttributes" :html="htmlAttributes" />
 
     <gov-skip-link href="#main-content">Skip to main content</gov-skip-link>
 
-    <gov-header service-name="Connected Together" :navigation="headerNav" />
+    <gov-header :service-name="appName" :navigation="headerNav" />
 
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper" :class="mainClasses" id="main-content" role="main">

@@ -5,9 +5,8 @@
       <gov-grid-column width="one-half">
 
         <gov-body>
-          Your {{ type }} can be set up to accept referrals through Connected
-          Kingston. These referrals directly connect your {{ type }} to
-          residents.
+          Your {{ type }} can be set up to accept referrals through {{appName}}.
+          These referrals directly connect your {{ type }} to residents.
         </gov-body>
         <gov-body>
           If you are interested in turning on referrals for your organisation, please
@@ -46,7 +45,7 @@
               E.g ‘Sign Up’, ‘Refer To’, or ‘Join In’
             </gov-hint>
             <gov-hint for="referral_button_text" v-if="referral_method === 'internal'">
-              By enabling referrals through Connected Together, a button will be
+              By enabling referrals through {{appName}}, a button will be
               added to your page which will link to the referral form.
             </gov-hint>
             <gov-hint for="referral_button_text" v-if="referral_method === 'external'">
@@ -141,7 +140,7 @@ export default {
     referralMethodOptions() {
       return [
         { text: "Please select", value: null, disabled: true },
-        { text: "Yes - Through Connected Together", value: "internal" },
+        { text: `Yes - Through ${this.appName}`, value: "internal" },
         { text: "Yes - Through an external form", value: "external" },
         { text: `No - This ${this.type} doesn’t accept referrals`, value: "none" }
       ];
@@ -153,7 +152,7 @@ export default {
       const to = "info@connectedtogether.org.uk";
       const subject = `Turn referrals on for my ${this.type}`;
       const body =
-        `${this.$options.filters.ucfirst(this.type)} Name: XXX\n\nWe are interested in finding out more about accepting referrals through Connected Together.`;
+        `${this.$options.filters.ucfirst(this.type)} Name: XXX\n\nWe are interested in finding out more about accepting referrals through ${this.appName}.`;
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject

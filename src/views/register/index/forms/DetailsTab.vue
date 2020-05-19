@@ -17,7 +17,7 @@
           @input="$emit('input', { field: 'type', value: $event })"
           id="type"
           label="What is it?"
-          hint="This option changes how your page is described on Connected Together"
+          :hint="`This option changes how your page is described on ${appName}`"
           :options="typeOptions"
           :error="errors.get('service.type')"
         />

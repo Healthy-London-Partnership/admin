@@ -12,7 +12,7 @@
           </gov-heading>
 
           <gov-body>
-            First, create an account to login to the Connected Together
+            First, create an account to login to the {{appName}}
             administration portal
           </gov-body>
 

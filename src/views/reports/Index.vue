@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Together - Reports" />
+    <vue-headful :title="`${appName} - Reports`" />
 
     <gov-back-link :to="{ name: 'dashboard' }">Back to dashboard</gov-back-link>
     <gov-main-wrapper>

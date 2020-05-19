@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Together - Add Collection Category" />
+    <vue-headful :title="`${appName} - Add Collection Category`" />
 
     <gov-back-link :to="{ name: 'admin-index-collections' }">Back to collection categories</gov-back-link>
     <gov-main-wrapper>

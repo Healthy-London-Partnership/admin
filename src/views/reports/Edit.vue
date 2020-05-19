@@ -90,9 +90,7 @@ export default {
         },
         {
           type: "Locations Export",
-          description:
-            "Generate a report with all the locations of services on " +
-            "Connected Together, and the number of services delivered at each.",
+          description: `Generate a report with all the locations of services on ${process.env.VUE_APP_NAME}, and the number of services delivered at each.`,
           scheduleForm: new Form({
             report_type: "Locations Export",
             repeat_type: null
@@ -105,9 +103,7 @@ export default {
         },
         {
           type: "Organisations Export",
-          description:
-            "Generate a report of all the organisations on Connected " +
-            "Kingston with the number of services and attributed accounts.",
+          description: `Generate a report of all the organisations on ${process.env.VUE_APP_NAME} with the number of services and attributed accounts.`,
           scheduleForm: new Form({
             report_type: "Organisations Export",
             repeat_type: null

@@ -4,7 +4,7 @@
     <gov-main-wrapper>
       <ck-loader v-if="loading" />
       <gov-grid-row v-else>
-        <vue-headful :title="`Connected Together - Notification: ${notification.message.substr(0, 10)}...`" />
+        <vue-headful :title="`${appName} - Notification: ${notification.message.substr(0, 10)}...`" />
 
         <gov-grid-column width="two-thirds">
 

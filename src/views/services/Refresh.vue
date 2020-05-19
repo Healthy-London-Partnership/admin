@@ -4,7 +4,7 @@
 
     <template v-else>
       <vue-headful
-        :title="`Connected Together - Refresh Service: ${service.name}`"
+        :title="`${appName} - Refresh Service: ${service.name}`"
       />
 
       <gov-back-link

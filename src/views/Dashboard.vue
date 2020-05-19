@@ -1,16 +1,16 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Together - Dashboard" />
+    <vue-headful :title="`${appName} - Dashboard`" />
 
     <gov-main-wrapper>
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="xl">
-            Welcome to the Connected Together admin portal
+            Welcome to the {{appName}} admin portal
           </gov-heading>
 
           <gov-body size="l">
-            From here, you can add and edit your pages on Connected Together, as
+            From here, you can add and edit your pages on {{appName}}, as
             well as manage referrals into your service. For any support, contact
             <gov-link href="mailto:info@connectedtogether.org.uk">
               info@connectedtogether.org.uk
@@ -24,7 +24,7 @@
       <gov-grid-row>
         <gov-grid-column width="one-half">
           <gov-heading size="l">Services</gov-heading>
-          <gov-body>Add or edit your pages on Connected Together.</gov-body>
+          <gov-body>Add or edit your pages on {{appName}}.</gov-body>
           <gov-button start :to="{ name: 'services-index' }">
             Go to services
           </gov-button>
@@ -51,7 +51,7 @@
 
         <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin">
           <gov-heading size="l">Organisations</gov-heading>
-          <gov-body>Add or edit organisations on Connected Together.</gov-body>
+          <gov-body>Add or edit organisations on {{appName}}.</gov-body>
           <gov-button start :to="{ name: 'organisations-index' }">
             Go to organisations
           </gov-button>
@@ -70,7 +70,7 @@
         <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin">
           <gov-heading size="l">Reports</gov-heading>
           <gov-body>
-            Download reports of activity on Connected Together.
+            Download reports of activity on {{appName}}.
           </gov-body>
           <gov-button start :to="{ name: 'reports-index' }">
             Go to reports

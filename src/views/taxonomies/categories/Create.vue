@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Together - Add Taxonomy Category" />
+    <vue-headful :title="`${appName} - Add Taxonomy Category`" />
 
     <gov-back-link :to="{ name: 'admin-index-taxonomies' }">Back to taxonomy categories</gov-back-link>
     <gov-main-wrapper>

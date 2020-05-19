@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`Connected Together - Location Updated: ${location.address_line_1}`" />
+      <vue-headful :title="`${appName} - Location Updated: ${location.address_line_1}`" />
 
       <gov-back-link :to="{ name: 'locations-show', params: { location: location.id } }">Back to location</gov-back-link>
       <gov-main-wrapper>

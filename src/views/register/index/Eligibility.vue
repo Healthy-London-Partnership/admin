@@ -8,7 +8,7 @@
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="l">
-            Is your service right for Connected Together?
+            Is your service right for {{appName}}?
           </gov-heading>
 
           <gov-body>
@@ -19,8 +19,7 @@
           <gov-form-group>
             <gov-label>
               <strong>
-                The organisation that you want to be listed on Connected
-                Kingston is:
+                The organisation that you want to be listed on {{appName}} is:
               </strong>
             </gov-label>
 

@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Connected Together - Add Service" />
+    <vue-headful :title="`${appName} - Add Service`" />
 
     <gov-back-link :to="{ name: 'services-index' }">
       Back to services
@@ -13,7 +13,7 @@
 
           <gov-body>
             You’re about to add a service/club/activity/group/helpline/information/app
-            to Connected Kingston. Here are some things you should know:
+            to {{appName}}. Here are some things you should know:
           </gov-body>
 
           <gov-list bullet>

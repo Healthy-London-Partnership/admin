@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`Connected Together - Edit User: ${user.first_name} ${user.last_name}`" />
+      <vue-headful :title="`${appName} - Edit User: ${user.first_name} ${user.last_name}`" />
 
       <gov-back-link :to="{ name: 'users-show', params: { user: user.id } }">Back to user</gov-back-link>
       <gov-main-wrapper>
@@ -10,7 +10,7 @@
           <gov-grid-column width="one-half">
             <gov-heading size="xl">Users</gov-heading>
             <gov-heading size="m">Edit user</gov-heading>
-            <gov-body>Edit users who can acces the back-end of the Connected Together service (deciding their permissions in what they have access to)</gov-body>
+            <gov-body>Edit users who can acces the back-end of the {{appName}} service (deciding their permissions in what they have access to)</gov-body>
 
             <user-form
               :errors="form.$errors"

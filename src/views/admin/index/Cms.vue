@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Connected Together - Admin: CMS" />
+    <vue-headful :title="`${appName} - Admin: CMS`" />
 
     <gov-heading size="l">Frontend</gov-heading>
 

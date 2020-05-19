@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Connected Together - Admin: Collections" />
+    <vue-headful :title="`${appName} - Admin: Collections`" />
 
     <gov-tabs :tabs="tabs">
       <router-view />

@@ -4,7 +4,7 @@
     <gov-main-wrapper>
       <ck-loader v-if="loading" />
       <gov-grid-row v-else>
-        <vue-headful :title="`Connected Together - User: ${user.first_name} ${user.last_name}`" />
+        <vue-headful :title="`${appName} - User: ${user.first_name} ${user.last_name}`" />
 
         <gov-grid-column width="two-thirds">
 
