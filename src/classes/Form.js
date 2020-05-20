@@ -83,8 +83,8 @@ export default class Form {
    */
   submit(requestType, url, callback = null) {
     this.$submitting = true;
-    let config = { ...this.parseConfig() };
-    let data = { ...this.data() };
+    let config = JSON.parse(JSON.stringify(this.parseConfig()));
+    let data = JSON.parse(JSON.stringify(this.data()));
 
     if (callback !== null) {
       callback(config, data);

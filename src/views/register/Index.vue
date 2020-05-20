@@ -111,7 +111,12 @@ export default {
 
     async onSubmit() {
       try {
-        await this.form.post('/organisation-sign-up-forms');
+        await this.form.post('/organisation-sign-up-forms', (config, data) => {
+          // Use placeholder organisation email if no email or phone provided.a1
+          if (data.organisation.email === '' && data.organisation.phone === '') {
+            data.organisation.email = 'placeholder@example.com';
+          }
+        });
         this.$router.push({ name: 'register-index-success' });
       } catch (exception) {
         //
