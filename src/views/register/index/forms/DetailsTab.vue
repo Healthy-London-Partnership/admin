@@ -5,9 +5,8 @@
       <gov-grid-column width="one-half">
 
         <gov-body>
-          General details about the {{ service.type }}. (We use
-          {{ service.type }} in the broadcast sense, This could be counselling
-          or weekly yoga classes).
+          General details about the service (we use service in the broadest
+          sense, this could be counselling, a website, or an app).
         </gov-body>
 
         <gov-section-break size="l" />

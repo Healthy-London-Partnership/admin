@@ -9,8 +9,9 @@
 
         <gov-body>
           This section allows you to add more information to your
-          {{ service.type }} page. The more detail that can be provided, the
-          better.
+          {{ service.type }} page. Initially, not all the information provided
+          here will be shown to the public, however the more detail that can be
+          provided now, the better. You can also update this information later.
         </gov-body>
 
         <gov-section-break size="l" />
@@ -139,9 +140,8 @@
     <gov-grid-row>
       <gov-grid-column width="one-half">
         <gov-body>
-          Please provide your {{ service.type }}’s public-facing contact
-          details. These will be displayed on your {{ service.type }}’s page on
-          the {{appName}} website.
+          Please provide your {{ service.type }}’s public-facing contact details
+          if available.
         </gov-body>
 
         <gov-section-break size="l" />
