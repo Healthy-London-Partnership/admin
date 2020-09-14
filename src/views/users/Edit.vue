@@ -60,7 +60,7 @@ export default {
         first_name: this.user.first_name,
         last_name: this.user.last_name,
         email: this.user.email,
-        phone: this.user.phone,
+        phone: this.user.phone || "",
         password: "",
         roles: this.user.roles
       });
