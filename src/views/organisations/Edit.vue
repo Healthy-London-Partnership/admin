@@ -21,6 +21,7 @@
               :url.sync="form.url"
               :email.sync="form.email"
               :phone.sync="form.phone"
+              :social_medias.sync="form.social_medias"
               @update:logo_file_id="form.logo_file_id = $event"
               @clear="form.$errors.clear($event)"
             />
@@ -69,6 +70,7 @@ export default {
         url: this.organisation.url,
         email: this.organisation.email || '',
         phone: this.organisation.phone || '',
+        social_medias: this.organisation.social_medias,
         logo_file_id: null
       });
 

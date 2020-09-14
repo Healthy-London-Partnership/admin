@@ -67,15 +67,22 @@
       :existing-url="id ? apiUrl(`/organisations/${id}/logo.png?v=${now}`) : undefined"
     />
 
+    <social-medias-input
+      :social-medias="social_medias"
+      @input="$emit('update:social_medias', $event)"
+      :errors="errors"
+    />
+
   </div>
 </template>
 
 <script>
 import CkImageInput from "@/components/Ck/CkImageInput";
+import SocialMediasInput from "@/views/services/inputs/SocialMediasInput";
 
 export default {
   name: "OrganisationForm",
-  components: { CkImageInput },
+  components: { CkImageInput, SocialMediasInput },
   props: {
     errors: {
       required: true,
@@ -108,6 +115,9 @@ export default {
     id: {
       required: false,
       type: String
+    },
+    social_medias: {
+      required: true
     }
   },
   methods: {
