@@ -59,6 +59,10 @@
       :error="errors.get('email')"
     />
 
+    <gov-heading size="m">Organisation Address</gov-heading>
+
+    <organisation-location v-if="id" />
+
     <ck-image-input
       @input="onInput('logo_file_id', $event.file_id)"
       id="logo"
@@ -79,10 +83,11 @@
 <script>
 import CkImageInput from "@/components/Ck/CkImageInput";
 import SocialMediasInput from "@/views/services/inputs/SocialMediasInput";
+import OrganisationLocation from "@/views/organisation-location/Show";
 
 export default {
   name: "OrganisationForm",
-  components: { CkImageInput, SocialMediasInput },
+  components: { CkImageInput, OrganisationLocation, SocialMediasInput },
   props: {
     errors: {
       required: true,
@@ -101,23 +106,30 @@ export default {
       type: String
     },
     url: {
-      required: true,
-      type: String
+      required: false,
+      type: String,
+      default: ''
     },
     phone: {
-      required: true,
-      type: String
+      required: false,
+      type: String,
+      default: ''
     },
     email: {
-      required: true,
-      type: String
+      required: false,
+      type: String,
+      default: ''
     },
     id: {
       required: false,
       type: String
     },
     social_medias: {
-      required: true
+      required: false,
+      type: Array,
+      default() {
+        return []
+      }
     }
   },
   methods: {

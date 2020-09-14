@@ -12,7 +12,7 @@
             <gov-heading size="m">Edit organisation</gov-heading>
             <gov-body>General details about the organisation. To be found when searching or linked from a service page.</gov-body>
 
-            <organisation-form
+            <organisation-form v-if="!loading"
               :errors="form.$errors"
               :id="organisation.id"
               :name.sync="form.name"
@@ -67,10 +67,11 @@ export default {
         name: this.organisation.name,
         slug: this.organisation.slug,
         description: this.organisation.description,
-        url: this.organisation.url,
+        url: this.organisation.url || '',
         email: this.organisation.email || '',
         phone: this.organisation.phone || '',
         social_medias: this.organisation.social_medias,
+        location_id: this.organisation.location_id,
         logo_file_id: null
       });
 
