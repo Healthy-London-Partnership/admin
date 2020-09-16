@@ -27,18 +27,61 @@
           <img :src="apiUrl(`/organisations/${organisation.id}/logo.png?v=${organisation.updated_at}`)" alt="Organisation logo" class="ck-logo">
         </gov-table-cell>
       </gov-table-row>
+      <gov-table-row>
+          <gov-table-header scope="row" top>Social links</gov-table-header>
+          <gov-table-cell break>
+            <gov-list>
+              <li v-for="(socialMedia, index) in organisation.social_medias" :key="index">
+                ({{ humanReadableSocialMedia(socialMedia.type) }}) {{ socialMedia.url }}
+              </li>
+              <li v-if="organisation.social_medias.length === 0">-</li>
+            </gov-list>
+          </gov-table-cell>
+        </gov-table-row>
+      <gov-table-row>
+        <gov-table-header scope="row">Location</gov-table-header>
+        <gov-table-cell v-if="organisation.location">
+          {{addressString}} <gov-link :to="{ name: 'locations-show', params: { location: organisation.location.id } }">View</gov-link>
+        </gov-table-cell>
+        <gov-table-cell v-else>No locations for this organisation</gov-table-cell>
+      </gov-table-row>
     </template>
   </gov-table>
 </template>
 
 <script>
 export default {
-  name: "CkOrganisationDetails",
+  name: 'CkOrganisationDetails',
   props: {
     organisation: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
+  computed: {
+    addressString() {
+      return [
+        this.organisation.location.address_line_1,
+        this.organisation.location.city,
+        this.organisation.location.postcode,
+      ].join(', ');
+    },
+  },
+  methods: {
+    humanReadableSocialMedia(type) {
+      switch (type) {
+        case 'twitter':
+          return 'Twitter';
+        case 'facebook':
+          return 'Facebook';
+        case 'instagram':
+          return 'Instagram';
+        case 'youtube':
+          return 'YouTube';
+        case 'other':
+          return 'Other';
+      }
+    },
+  },
 };
 </script>
