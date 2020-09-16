@@ -49,86 +49,88 @@
 </template>
 
 <script>
-import Form from "@/classes/Form";
-import LocationForm from "@/views/locations/forms/LocationForm";
+import Form from '@/classes/Form';
+import LocationForm from '@/views/locations/forms/LocationForm';
 
 export default {
   components: {
-    LocationForm
+    LocationForm,
   },
   props: {
     location_id: {
       required: false,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
-      errors: {},
+      errors: {
+        location_id: null,
+      },
       locations: [],
       locationTypes: [
-        { value: "existing", label: "Existing" },
-        { value: "new", label: "New" }
+        { value: 'existing', label: 'Existing' },
+        { value: 'new', label: 'New' },
       ],
       location_type: null,
       locationForm: new Form({
-        address_line_1: "",
-        address_line_2: "",
-        address_line_3: "",
-        city: "",
-        county: "",
-        postcode: "",
-        country: "United Kingdom",
-        accessibility_info: "",
+        address_line_1: '',
+        address_line_2: '',
+        address_line_3: '',
+        city: '',
+        county: '',
+        postcode: '',
+        country: 'United Kingdom',
+        accessibility_info: '',
         has_wheelchair_access: false,
-        has_induction_loop: false
+        has_induction_loop: false,
       }),
       organisation: null,
       loading: false,
-      submitting: false
+      submitting: false,
     };
   },
   methods: {
     onInput({ field, value }) {
       this.$emit(`update:${field}`, value);
-      this.$emit("clear-location", field);
+      this.$emit('clear-location', field);
     },
     async onSubmit() {
       try {
         this.submitting = true;
 
         // Post the location if new.
-        if (this.location_type === "new") {
-          const { data: location } = await this.locationForm.post("/locations");
-          this.location_type = "existing";
+        if (this.location_type === 'new') {
+          const { data: location } = await this.locationForm.post('/locations');
+          this.location_type = 'existing';
           // Append the new location to the Locations array
           this.appendLocation(location);
           // Update the organisation location ID.
           this.location_id = location.id;
-          this.onInput({ field: "location_id", value: this.location_id });
+          this.onInput({ field: 'location_id', value: this.location_id });
         }
       } catch (error) {
         this.submitting = false;
       }
     },
     onUpdate({ value }) {
-      this.$emit("update:location_id", { location_id: value });
+      this.$emit('update:location_id', { location_id: value });
     },
     async fetchLocations() {
       this.loading = true;
-      this.locations = await this.fetchAll("/locations");
-      this.locations = this.locations.map(location => {
+      this.locations = await this.fetchAll('/locations');
+      this.locations = this.locations.map((location) => {
         return {
           text: `${location.address_line_1}, ${location.city}, ${
             location.postcode
           }`,
-          value: location.id
+          value: location.id,
         };
       });
       this.locations.unshift({
-        text: "Please select",
+        text: 'Please select',
         value: null,
-        disabled: true
+        disabled: true,
       });
       this.loading = false;
     },
@@ -137,14 +139,14 @@ export default {
         text: `${location.address_line_1}, ${location.city}, ${
           location.postcode
         }`,
-        value: location.id
+        value: location.id,
       });
-    }
+    },
   },
   created() {
-    this.location_type = this.location_id ? "existing" : "";
+    this.location_type = this.location_id ? 'existing' : '';
     this.fetchLocations();
-  }
+  },
 };
 </script>
 
