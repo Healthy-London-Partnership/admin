@@ -243,7 +243,7 @@ export default {
         { text: "Three weeks", value: "three_weeks" },
         { text: "One month", value: "month" },
         { text: "Longer than a month", value: "longer" }
-      ]
+      ];
     },
 
     isFreeOptions() {
@@ -251,7 +251,9 @@ export default {
         { value: true, label: `Yes - The ${this.service.type} is free` },
         {
           value: false,
-          label: `No - there are elements of this ${this.service.type} that must be paid for`
+          label: `No - there are elements of this ${
+            this.service.type
+          } that must be paid for`
         }
       ];
     },
@@ -259,8 +261,11 @@ export default {
     videoEmbedHelpHref() {
       const to = "info@connectedtogether.org.uk";
       const subject = `Make a video for my ${this.service.type}`;
-      const body =
-        `My ${this.service.type} is: xxx\n\nI am interested in making a video for my ${this.service.type} page on ${this.appName}.`;
+      const body = `My ${
+        this.service.type
+      } is: xxx\n\nI am interested in making a video for my ${
+        this.service.type
+      } page on ${this.appName}.`;
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject

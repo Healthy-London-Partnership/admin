@@ -73,7 +73,7 @@ export default {
     loggedOutItems() {
       return [
         { text: "Register", to: { name: "register-index" } },
-        { text: "Login", href: Auth.authorizeUrl },
+        { text: "Login", href: Auth.authorizeUrl }
       ];
     }
   },

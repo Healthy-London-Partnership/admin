@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'CkCarousel',
+  name: "CkCarousel",
 
   props: {
     imageUrls: {

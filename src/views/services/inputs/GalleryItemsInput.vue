@@ -88,7 +88,7 @@ export default {
       this.$emit("input", galleryItems);
       this.$emit("clear", `gallery_items.${deleteIndex}`);
       this.$emit("clear", `gallery_items.${deleteIndex}.file_id`);
-    },
+    }
   }
 };
 </script>

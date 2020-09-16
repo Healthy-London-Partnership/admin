@@ -93,14 +93,17 @@ export default {
 
   methods: {
     onInput(field, value) {
-      this.$emit('input', Object.assign(this.form, {
-        organisation: {
-          ...this.form.organisation,
-          [field]: value
-        }
-      }));
-      this.$emit('clear', `organisation.${field}`);
+      this.$emit(
+        "input",
+        Object.assign(this.form, {
+          organisation: {
+            ...this.form.organisation,
+            [field]: value
+          }
+        })
+      );
+      this.$emit("clear", `organisation.${field}`);
     }
   }
-}
+};
 </script>

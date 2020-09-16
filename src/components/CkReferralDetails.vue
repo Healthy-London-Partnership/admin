@@ -131,7 +131,7 @@ export default {
     return {
       loadingOrganisation: false,
       organisation: null
-    }
+    };
   },
   computed: {
     isSelfReferral() {
@@ -150,7 +150,7 @@ export default {
     }
   },
   created() {
-    this.fetchOrganisation()
+    this.fetchOrganisation();
   },
   methods: {
     autoDeleteDate(updated_at) {
@@ -166,7 +166,10 @@ export default {
 
       let businessDays = 0;
       for (var i = 0; i < duration; i++) {
-        const day = start.clone().add(i, "days").isoWeekday();
+        const day = start
+          .clone()
+          .add(i, "days")
+          .isoWeekday();
 
         if (day < 6) {
           businessDays += 1;
@@ -180,23 +183,21 @@ export default {
         return "N/A";
       }
 
-      const workingDays = this.diffInBusinessDays(
-        referral.created_at
-      );
+      const workingDays = this.diffInBusinessDays(referral.created_at);
 
       return workingDays >= 10 ? "Due" : 10 - workingDays;
     },
     async fetchOrganisation() {
-      this.loadingOrganisation = true
+      this.loadingOrganisation = true;
 
       const {
         data: { data: organisation }
       } = await http.get(
         `/organisations/${this.referral.service.organisation_id}`
-      )
-      this.organisation = organisation
+      );
+      this.organisation = organisation;
 
-      this.loadingOrganisation = false
+      this.loadingOrganisation = false;
     }
   },
   filters: {

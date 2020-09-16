@@ -103,7 +103,7 @@ export default {
       icons: [
         { text: "Please select...", value: null, disabled: true },
         ...icons
-      ],
+      ]
     };
   },
   methods: {

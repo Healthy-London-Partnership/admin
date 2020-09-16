@@ -132,7 +132,7 @@ export default {
     async onSubmit() {
       await this.form.put(`/users/${this.user.id}`, (config, data) => {
         // Strip spaces from the phone number.
-        data.phone = data.phone.replace(/\s/g, '')
+        data.phone = data.phone.replace(/\s/g, "");
 
         if (data.password.length === 0) {
           delete data.password;

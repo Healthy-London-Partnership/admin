@@ -21,6 +21,7 @@
               :url.sync="form.url"
               :email.sync="form.email"
               :phone.sync="form.phone"
+              :location_id.sync="form.location_id"
               :social_medias.sync="form.social_medias"
               @update:logo_file_id="form.logo_file_id = $event"
               @clear="form.$errors.clear($event)"
@@ -67,11 +68,11 @@ export default {
         name: this.organisation.name,
         slug: this.organisation.slug,
         description: this.organisation.description,
-        url: this.organisation.url || '',
-        email: this.organisation.email || '',
-        phone: this.organisation.phone || '',
+        url: this.organisation.url || "",
+        email: this.organisation.email || "",
+        phone: this.organisation.phone || "",
         social_medias: this.organisation.social_medias,
-        location_id: this.organisation.location_id,
+        location_id: this.organisation.location.id,
         logo_file_id: null
       });
 
@@ -94,10 +95,10 @@ export default {
           if (data.url === this.organisation.url) {
             delete data.url;
           }
-          if (data.email === (this.organisation.email || '-')) {
+          if (data.email === (this.organisation.email || "-")) {
             delete data.email;
           }
-          if (data.phone === (this.organisation.phone || '-')) {
+          if (data.phone === (this.organisation.phone || "-")) {
             delete data.phone;
           }
 

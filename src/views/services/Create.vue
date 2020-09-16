@@ -228,7 +228,9 @@ export default {
   computed: {
     allowedTabs() {
       if (!this.auth.isGlobalAdmin) {
-        const taxonomiesTabIndex = this.tabs.findIndex(tab => tab.id === "taxonomies");
+        const taxonomiesTabIndex = this.tabs.findIndex(
+          tab => tab.id === "taxonomies"
+        );
         const tabs = this.tabs.slice();
         tabs.splice(taxonomiesTabIndex, 1);
 
@@ -243,9 +245,9 @@ export default {
       const data = await this.form.post("/services", (config, data) => {
         // Remove useful info if only item and empty.
         if (
-          data.useful_infos.length === 1
-          && data.useful_infos[0].title === ""
-          && data.useful_infos[0].description === ""
+          data.useful_infos.length === 1 &&
+          data.useful_infos[0].title === "" &&
+          data.useful_infos[0].description === ""
         ) {
           data.useful_infos = [];
         }
@@ -266,7 +268,9 @@ export default {
       this.tabs.find(tab => tab.id === tabId).active = true;
     },
     onNext() {
-      const currentTabIndex = this.allowedTabs.findIndex(tab => tab.active === true);
+      const currentTabIndex = this.allowedTabs.findIndex(
+        tab => tab.active === true
+      );
       this.tabs.forEach(tab => (tab.active = false));
       const newTabId = this.allowedTabs[currentTabIndex + 1].id;
       this.tabs.find(tab => tab.id === newTabId).active = true;

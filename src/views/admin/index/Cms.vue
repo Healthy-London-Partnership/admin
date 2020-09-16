@@ -83,7 +83,9 @@ export default {
     async fetchSettings() {
       this.loading = true;
 
-      const { data: { data: settings } } = await http.get("/settings");
+      const {
+        data: { data: settings }
+      } = await http.get("/settings");
       this.settings = new Form(settings);
 
       this.loading = false;
@@ -91,7 +93,7 @@ export default {
 
     async onSubmit() {
       await this.settings.put("/settings");
-      this.$router.push({ name: 'admin-index-cms-updated' });
+      this.$router.push({ name: "admin-index-cms-updated" });
     }
   }
 };

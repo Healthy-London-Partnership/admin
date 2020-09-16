@@ -101,7 +101,7 @@ export default {
         phone: "",
         highest_role: "",
         at_organisation: "",
-        at_service: "",
+        at_service: ""
       },
       roles: [
         { value: "", text: "All" },
@@ -161,7 +161,9 @@ export default {
       this.filters.at_service = "";
 
       if (organisationId === "") {
-        this.services = [{ value: "", text: "First select an organisation..." }];
+        this.services = [
+          { value: "", text: "First select an organisation..." }
+        ];
       } else {
         this.fetchServices(organisationId);
       }

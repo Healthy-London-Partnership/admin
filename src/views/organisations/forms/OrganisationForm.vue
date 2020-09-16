@@ -61,7 +61,10 @@
 
     <gov-heading size="m">Organisation Address</gov-heading>
 
-    <organisation-location v-if="id" />
+    <organisation-location-form
+      :location_id="location_id"
+      @update:location_id="onInput('location_id', $event)"
+    />
 
     <ck-image-input
       @input="onInput('logo_file_id', $event.file_id)"
@@ -83,11 +86,11 @@
 <script>
 import CkImageInput from "@/components/Ck/CkImageInput";
 import SocialMediasInput from "@/views/services/inputs/SocialMediasInput";
-import OrganisationLocation from "@/views/organisation-location/Show";
+import OrganisationLocationForm from "@/views/organisations/forms/OrganisationLocationForm";
 
 export default {
   name: "OrganisationForm",
-  components: { CkImageInput, OrganisationLocation, SocialMediasInput },
+  components: { CkImageInput, OrganisationLocationForm, SocialMediasInput },
   props: {
     errors: {
       required: true,
@@ -108,27 +111,32 @@ export default {
     url: {
       required: false,
       type: String,
-      default: ''
+      default: ""
     },
     phone: {
       required: false,
       type: String,
-      default: ''
+      default: ""
     },
     email: {
       required: false,
       type: String,
-      default: ''
+      default: ""
     },
     id: {
       required: false,
       type: String
     },
+    location_id: {
+      required: false,
+      type: String,
+      default: null
+    },
     social_medias: {
       required: false,
       type: Array,
       default() {
-        return []
+        return [];
       }
     }
   },

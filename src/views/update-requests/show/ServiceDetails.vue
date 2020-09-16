@@ -421,7 +421,7 @@ export default {
       const {
         data: { data: original }
       } = await http.get(`/services/${this.service.id}`, {
-        params: { include: 'organisation' }
+        params: { include: "organisation" }
       });
       this.original = original;
     },
@@ -454,12 +454,16 @@ export default {
     },
 
     imageUrls(service) {
-      return service.gallery_items.map((galleryItem) => {
-        if (galleryItem.hasOwnProperty('url')) {
+      return service.gallery_items.map(galleryItem => {
+        if (galleryItem.hasOwnProperty("url")) {
           return galleryItem.url;
         }
 
-        return this.apiUrl(`/services/${service.id}/gallery-items/${galleryItem.file_id}?update_request_id=${this.updateRequestId}`);
+        return this.apiUrl(
+          `/services/${service.id}/gallery-items/${
+            galleryItem.file_id
+          }?update_request_id=${this.updateRequestId}`
+        );
       });
     }
   },

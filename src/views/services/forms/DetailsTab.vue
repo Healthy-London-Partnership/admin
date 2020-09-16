@@ -192,7 +192,7 @@ export default {
     async fetchOrganisations() {
       this.loading = true;
       let fetchedOrganisations = await this.fetchAll("/organisations", {
-        'filter[has_permission]': true
+        "filter[has_permission]": true
       });
       fetchedOrganisations = fetchedOrganisations.map(organisation => {
         return { text: organisation.name, value: organisation.id };
@@ -208,7 +208,7 @@ export default {
         this.$emit("update:slug", this.slugify(name));
         this.$emit("clear", "slug");
       }
-    },
+    }
   },
   created() {
     this.fetchOrganisations();
