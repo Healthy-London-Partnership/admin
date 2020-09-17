@@ -40,10 +40,10 @@
       :params="params"
       default-sort="-created_at"
       :columns="[
-        { heading: 'Action', sort: 'action', render: (audit) => formatAction(audit.action) },
-        { heading: 'Description', sort: 'description', render: (audit) => audit.description },
-        { heading: 'User', sort: 'user_full_name', render: (audit) => formatUserName(audit.user) },
-        { heading: 'Date / Time', sort: 'created_at', render: (audit) => formatDateTime(audit.created_at) },
+        { heading: 'Action', sort: 'action' },
+        { heading: 'Description', sort: 'description' },
+        { heading: 'User', sort: 'user_full_name' },
+        { heading: 'Date / Time', sort: 'created_at' },
       ]"
       :view-route="(audit) => {
         return {
@@ -51,7 +51,20 @@
           params: { audit: audit.id }
         }
       }"
-    />
+    >
+      <template slot="cell:0" scope="{ resource: audit }">
+        {{ formatAction(audit.action) }}
+      </template>
+      <template slot="cell:1" scope="{ resource: audit }">
+        {{ audit.description }}
+      </template>
+      <template slot="cell:2" scope="{ resource: audit }">
+        {{ formatUserName(audit.user) }}
+      </template>
+      <template slot="cell:3" scope="{ resource: audit }">
+        {{ formatDateTime(audit.created_at) }}
+      </template>
+    </ck-resource-listing-table>
   </div>
 </template>
 

@@ -67,10 +67,10 @@
             :params="params"
             default-sort="first_name"
             :columns="[
-              { heading: 'First name', sort: 'first_name', render: (user) => user.first_name },
-              { heading: 'Last name', sort: 'last_name', render: (user) => user.last_name },
-              { heading: 'Highest permission level', sort: 'highest_role', render: (user) => displayHighestRole(user.roles) },
-              { heading: 'Phone number', render: (user) => user.phone },
+              { heading: 'First name', sort: 'first_name' },
+              { heading: 'Last name', sort: 'last_name' },
+              { heading: 'Highest permission level', sort: 'highest_role' },
+              { heading: 'Phone number' },
             ]"
             :view-route="(user) => {
               return {
@@ -78,7 +78,20 @@
                 params: { user: user.id }
               }
             }"
-          />
+          >
+            <template slot="cell:0" scope="{ resource: user }">
+              {{ user.first_name }}
+            </template>
+            <template slot="cell:1" scope="{ resource: user }">
+              {{ user.last_name }}
+            </template>
+            <template slot="cell:2" scope="{ resource: user }">
+              {{ displayHighestRole(user.roles) }}
+            </template>
+            <template slot="cell:3" scope="{ resource: user }">
+              {{ user.phone }}
+            </template>
+          </ck-resource-listing-table>
         </gov-grid-column>
       </gov-grid-row>
     </gov-main-wrapper>

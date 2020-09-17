@@ -24,8 +24,9 @@
           <gov-table-cell
             v-for="(column, index) in columns"
             :key="`ResourceListingTableCell-${index}`"
-            v-html="column.render(resource)"
-          />
+          >
+            <slot :resource="resource" :name="`cell:${index}`" />
+          </gov-table-cell>
           <gov-table-cell right>
             <gov-link @click="onAction(resource)" :to="viewRoute ? viewRoute(resource) : null">
               {{ actionText }}

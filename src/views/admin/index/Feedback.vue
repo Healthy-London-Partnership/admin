@@ -21,10 +21,10 @@
       :params="params"
       default-sort="-created_at"
       :columns="[
-        { heading: 'Page URL', sort: 'url', render: (pageFeedback) => pageFeedback.url },
-        { heading: 'Contact name', render: (pageFeedback) => pageFeedback.name || '-' },
-        { heading: 'Contact details', render: (pageFeedback) => pageFeedback.email || pageFeedback.phone || '-' },
-        { heading: 'Date / Time', sort: 'created_at', render: (pageFeedback) => formatDateTime(pageFeedback.created_at) },
+        { heading: 'Page URL', sort: 'url' },
+        { heading: 'Contact name' },
+        { heading: 'Contact details' },
+        { heading: 'Date / Time', sort: 'created_at' },
       ]"
       :view-route="(pageFeedback) => {
         return {
@@ -32,7 +32,20 @@
           params: { pageFeedback: pageFeedback.id }
         }
       }"
-    />
+    >
+      <template slot="cell:0" scope="{ resource: pageFeedback }">
+        {{ pageFeedback.url }}
+      </template>
+      <template slot="cell:1" scope="{ resource: pageFeedback }">
+        {{ pageFeedback.name || '-' }}
+      </template>
+      <template slot="cell:2" scope="{ resource: pageFeedback }">
+        {{ pageFeedback.email || pageFeedback.phone || '-' }}
+      </template>
+      <template slot="cell:3" scope="{ resource: pageFeedback }">
+        {{ formatDateTime(pageFeedback.created_at) }}
+      </template>
+    </ck-resource-listing-table>
   </div>
 </template>
 

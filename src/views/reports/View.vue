@@ -6,14 +6,27 @@
       ref="reportsTable"
       uri="/reports"
       :columns="[
-        { heading: 'Type', render: (report) => report.report_type },
-        { heading: 'From', render: (report) => report.starts_at ? formatDate(report.starts_at) : 'N/A' },
-        { heading: 'To', render: (report) => report.ends_at ? formatDate(report.ends_at) : 'N/A' },
-        { heading: 'Date / Time', render: (report) => formatDateTime(report.created_at) },
+        { heading: 'Type' },
+        { heading: 'From' },
+        { heading: 'To' },
+        { heading: 'Date / Time' },
       ]"
       action-text="Download"
       @action="onDownload"
-    />
+    >
+      <template slot="cell:0" scope="{ resource: report }">
+        {{ report.report_type }}
+      </template>
+      <template slot="cell:1" scope="{ resource: report }">
+        {{ report.starts_at ? formatDate(report.starts_at) : 'N/A' }}
+      </template>
+      <template slot="cell:2" scope="{ resource: report }">
+        {{ report.ends_at ? formatDate(report.ends_at) : 'N/A' }}
+      </template>
+      <template slot="cell:3" scope="{ resource: report }">
+        {{ formatDateTime(report.created_at) }}
+      </template>
+    </ck-resource-listing-table>
   </div>
 </template>
 

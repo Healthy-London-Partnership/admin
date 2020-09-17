@@ -26,10 +26,10 @@
             :params="params"
             default-sort="-created_at"
             :columns="[
-              { heading: 'User', render: (updateRequest) => updateRequest.user ? `${updateRequest.user.first_name} ${updateRequest.user.last_name}` : 'N/A' },
-              { heading: 'Type', render: (updateRequest) => displayType(updateRequest.updateable_type) },
-              { heading: 'Entry', sort: 'entry', render: (updateRequest) => updateRequest.entry },
-              { heading: 'Date / Time', sort: 'created_at', render: (updateRequest) => formatDateTime(updateRequest.created_at) },
+              { heading: 'User' },
+              { heading: 'Type' },
+              { heading: 'Entry', sort: 'entry' },
+              { heading: 'Date / Time', sort: 'created_at' },
             ]"
             :view-route="(updateRequest) => {
               return {
@@ -37,7 +37,20 @@
                 params: { updateRequest: updateRequest.id }
               }
             }"
-          />
+          >
+            <template slot="cell:0" scope="{ resource: updateRequest }">
+              {{ updateRequest.user ? `${updateRequest.user.first_name} ${updateRequest.user.last_name}` : 'N/A' }}
+            </template>
+            <template slot="cell:1" scope="{ resource: updateRequest }">
+              {{ displayType(updateRequest.updateable_type) }}
+            </template>
+            <template slot="cell:2" scope="{ resource: updateRequest }">
+              {{ updateRequest.entry }}
+            </template>
+            <template slot="cell:3" scope="{ resource: updateRequest }">
+              {{ formatDateTime(updateRequest.created_at) }}
+            </template>
+          </ck-resource-listing-table>
         </gov-grid-column>
       </gov-grid-row>
     </gov-main-wrapper>
