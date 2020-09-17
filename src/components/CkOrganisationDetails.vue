@@ -27,7 +27,7 @@
           <img :src="apiUrl(`/organisations/${organisation.id}/logo.png?v=${organisation.updated_at}`)" alt="Organisation logo" class="ck-logo">
         </gov-table-cell>
       </gov-table-row>
-      <gov-table-row>
+      <gov-table-row v-if="auth.isSuperAdmin">
         <gov-table-header top scope="row">Organisation admin invite URL</gov-table-header>
         <gov-table-cell>
           <gov-link :to="inviteUrl" v-if="inviteUrl">{{ inviteUrl }}</gov-link>
