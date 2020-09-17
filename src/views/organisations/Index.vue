@@ -33,6 +33,7 @@
               { heading: 'Web address URL' },
               { heading: 'Phone number' },
               { heading: 'Email' },
+              { heading: 'Invite' },
             ]"
             :view-route="(organisation) => {
               return {
@@ -53,6 +54,16 @@
             <template slot="cell:3" scope="{ resource: organisation }">
               {{ organisation.email || '-' }}
             </template>
+            <template slot="cell:4" scope="{ resource: organisation }">
+              <gov-checkbox
+                @input="onInviteOrganisation(organisation.id)"
+                :value="organisationInviteSelected(organisation.id)"
+                :id="`organisation_invite_${organisation.id}`"
+                :name="`organisation_invite_${organisation.id}`"
+                label=""
+                :disabled="organisation.email === null"
+              />
+            </template>
           </ck-resource-listing-table>
         </gov-grid-column>
       </gov-grid-row>
@@ -71,7 +82,8 @@ export default {
     return {
       filters: {
         name: ""
-      }
+      },
+      organisationInvites: []
     };
   },
   computed: {
@@ -94,6 +106,17 @@ export default {
     },
     onAddOrganisation() {
       this.$router.push({ name: "organisations-create" });
+    },
+    onInviteOrganisation(organisationId) {
+      if (this.organisationInviteSelected(organisationId)) {
+        this.organisationInvites.splice(this.organisationInvites.indexOf(organisationId), 1);
+        return;
+      }
+
+      this.organisationInvites.push(organisationId);
+    },
+    organisationInviteSelected(organisationId) {
+      return this.organisationInvites.includes(organisationId)
     }
   }
 };
