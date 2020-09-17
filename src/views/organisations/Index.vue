@@ -84,6 +84,7 @@
 <script>
 import CkResourceListingTable from "@/components/Ck/CkResourceListingTable.vue";
 import CkTableFilters from "@/components/Ck/CkTableFilters.vue";
+import http from "@/http";
 
 export default {
   name: "ListOrganisations",
@@ -93,7 +94,8 @@ export default {
       filters: {
         name: ""
       },
-      organisationInvites: []
+      organisationInvites: [],
+      inviting: false
     };
   },
   computed: {
@@ -143,8 +145,19 @@ export default {
         .filter(organisation => organisation.email !== null)
         .forEach(organisation => this.organisationInvites.push(organisation.id))
     },
-    onInvite() {
-      //
+    async onInvite() {
+      this.inviting = true
+
+      await http.post("/organisation-admin-invites", {
+        organisations: this.organisationInvites.map(organisationId => {
+          return {
+            organisation_id: organisationId,
+            use_email: true
+          }
+        })
+      })
+
+      this.inviting = false
     }
   }
 };
