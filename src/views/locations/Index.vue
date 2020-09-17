@@ -42,9 +42,9 @@
             :params="params"
             default-sort="address_line_1"
             :columns="[
-              { heading: 'Address line 1', sort: 'address_line_1', render: (location) => location.address_line_1 },
-              { heading: 'City', sort: 'city', render: (location) => location.city },
-              { heading: 'Postcode', sort: 'postcode', render: (location) => location.postcode },
+              { heading: 'Address line 1', sort: 'address_line_1' },
+              { heading: 'City', sort: 'city' },
+              { heading: 'Postcode', sort: 'postcode' },
             ]"
             :view-route="(location) => {
               return {
@@ -52,7 +52,17 @@
                 params: { location: location.id }
               }
             }"
-          />
+          >
+            <template slot="cell:0" scope="{ resource: location }">
+              {{ location.address_line_1 }}
+            </template>
+            <template slot="cell:1" scope="{ resource: location }">
+              {{ location.city }}
+            </template>
+            <template slot="cell:2" scope="{ resource: location }">
+              {{ location.postcode }}
+            </template>
+          </ck-resource-listing-table>
         </gov-grid-column>
       </gov-grid-row>
     </gov-main-wrapper>

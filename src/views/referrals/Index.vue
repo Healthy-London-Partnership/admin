@@ -51,35 +51,11 @@
             :params="params"
             default-sort="-created_at"
             :columns="[
-              {
-                heading: 'Reference no.',
-                sort: 'reference',
-                render: (referral) => referral.reference
-              },
-              {
-                heading: 'Service',
-                sort: 'service_name',
-                render: (referral) => referral.service.name
-              },
-              {
-                heading: 'Referred by',
-                render: (referral) => referral.referee_name || '-'
-              },
-              {
-                heading: 'Status',
-                render: (referral) => $options.filters.status(referral.status)
-              },
-              {
-                heading: 'Date submitted',
-                sort: 'created_at',
-                render: (referral) => {
-                  return `
-                    ${formatDateTime(referral.created_at)}
-                    <br>
-                    ${statusLastUpdated(referral)} days remaining
-                  `
-                }
-              },
+              { heading: 'Reference no.', sort: 'reference' },
+              { heading: 'Service', sort: 'service_name' },
+              { heading: 'Referred by' },
+              { heading: 'Status' },
+              { heading: 'Date submitted', sort: 'created_at' },
             ]"
             :view-route="(referral) => {
               return {
@@ -87,7 +63,29 @@
                 params: { referral: referral.id }
               }
             }"
-          />
+          >
+            <template slot="cell:0" scope="{ resource: referral }">
+              {{ referral.reference }}
+            </template>
+            <template slot="cell:1" scope="{ resource: referral }">
+              {{ referral.service.name }}
+            </template>
+            <template slot="cell:2" scope="{ resource: referral }">
+              {{ referral.referee_name || '-' }}
+            </template>
+            </template>
+            <template slot="cell:3" scope="{ resource: referral }">
+              {{ $options.filters.status(referral.status) }}
+            </template>
+            </template>
+            <template slot="cell:4" scope="{ resource: referral }">
+              <div>
+                {{ formatDateTime(referral.created_at) }}
+                <br>
+                {{ statusLastUpdated(referral) }} days remaining
+              </div>
+            </template>
+          </ck-resource-listing-table>
         </gov-grid-column>
       </gov-grid-row>
     </gov-main-wrapper>

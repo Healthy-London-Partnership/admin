@@ -47,10 +47,10 @@
             :params="params"
             default-sort="name"
             :columns="[
-              { heading: 'Service name', sort: 'name', render: (service) => service.name },
-              { heading: 'Organisation', sort: 'organisation_name', render: (service) => service.organisation.name },
-              { heading: 'Status', render: (service) => displayStatus(service.status) },
-              { heading: 'Referral method', render: (service) => displayReferralMethod(service.referral_method) },
+              { heading: 'Service name', sort: 'name' },
+              { heading: 'Organisation', sort: 'organisation_name' },
+              { heading: 'Status' },
+              { heading: 'Referral method' },
             ]"
             :view-route="(service) => {
               return {
@@ -58,7 +58,20 @@
                 params: { service: service.id }
               }
             }"
-          />
+          >
+            <template slot="cell:0" scope="{ resource: service }">
+              {{ service.name }}
+            </template>
+            <template slot="cell:1" scope="{ resource: service }">
+              {{ service.organisation.name }}
+            </template>
+            <template slot="cell:2" scope="{ resource: service }">
+              {{ displayStatus(service.status) }}
+            </template>
+            <template slot="cell:3" scope="{ resource: service }">
+              {{ displayReferralMethod(service.referral_method) }}
+            </template>
+          </ck-resource-listing-table>
 
         </gov-grid-column>
       </gov-grid-row>

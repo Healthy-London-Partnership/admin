@@ -29,10 +29,10 @@
             :params="params"
             default-sort="name"
             :columns="[
-              { heading: 'Organisation name', sort: 'name', render: (organisation) => organisation.name },
-              { heading: 'Web address URL', render: (organisation) => organisation.url },
-              { heading: 'Phone number', render: (organisation) => organisation.phone || '-' },
-              { heading: 'Email', render: (organisation) => organisation.email || '-' },
+              { heading: 'Organisation name', sort: 'name' },
+              { heading: 'Web address URL' },
+              { heading: 'Phone number' },
+              { heading: 'Email' },
             ]"
             :view-route="(organisation) => {
               return {
@@ -40,7 +40,20 @@
                 params: { organisation: organisation.id }
               }
             }"
-          />
+          >
+            <template slot="cell:0" scope="{ resource: organisation }">
+              {{ organisation.name }}
+            </template>
+            <template slot="cell:1" scope="{ resource: organisation }">
+              {{ organisation.url }}
+            </template>
+            <template slot="cell:2" scope="{ resource: organisation }">
+              {{ organisation.phone || '-' }}
+            </template>
+            <template slot="cell:3" scope="{ resource: organisation }">
+              {{ organisation.email || '-' }}
+            </template>
+          </ck-resource-listing-table>
         </gov-grid-column>
       </gov-grid-row>
     </gov-main-wrapper>
