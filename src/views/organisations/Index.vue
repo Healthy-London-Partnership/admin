@@ -52,19 +52,19 @@
               }
             }"
           >
-            <template slot="cell:0" scope="{ resource: organisation }">
+            <template slot="cell:0" slot-scope="{ resource: organisation }">
               {{ organisation.name }}
             </template>
-            <template slot="cell:1" scope="{ resource: organisation }">
+            <template slot="cell:1" slot-scope="{ resource: organisation }">
               {{ organisation.url }}
             </template>
-            <template slot="cell:2" scope="{ resource: organisation }">
+            <template slot="cell:2" slot-scope="{ resource: organisation }">
               {{ organisation.phone || '-' }}
             </template>
-            <template slot="cell:3" scope="{ resource: organisation }">
+            <template slot="cell:3" slot-scope="{ resource: organisation }">
               {{ organisation.email || '-' }}
             </template>
-            <template slot="cell:4" scope="{ resource: organisation }">
+            <template slot="cell:4" slot-scope="{ resource: organisation }">
               <gov-checkbox
                 @input="onInviteOrganisation(organisation.id)"
                 :value="organisationInviteSelected(organisation.id)"

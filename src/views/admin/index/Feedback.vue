@@ -33,16 +33,16 @@
         }
       }"
     >
-      <template slot="cell:0" scope="{ resource: pageFeedback }">
+      <template slot="cell:0" slot-scope="{ resource: pageFeedback }">
         {{ pageFeedback.url }}
       </template>
-      <template slot="cell:1" scope="{ resource: pageFeedback }">
+      <template slot="cell:1" slot-scope="{ resource: pageFeedback }">
         {{ pageFeedback.name || '-' }}
       </template>
-      <template slot="cell:2" scope="{ resource: pageFeedback }">
+      <template slot="cell:2" slot-scope="{ resource: pageFeedback }">
         {{ pageFeedback.email || pageFeedback.phone || '-' }}
       </template>
-      <template slot="cell:3" scope="{ resource: pageFeedback }">
+      <template slot="cell:3" slot-scope="{ resource: pageFeedback }">
         {{ formatDateTime(pageFeedback.created_at) }}
       </template>
     </ck-resource-listing-table>

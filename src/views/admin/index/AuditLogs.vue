@@ -52,16 +52,16 @@
         }
       }"
     >
-      <template slot="cell:0" scope="{ resource: audit }">
+      <template slot="cell:0" slot-scope="{ resource: audit }">
         {{ formatAction(audit.action) }}
       </template>
-      <template slot="cell:1" scope="{ resource: audit }">
+      <template slot="cell:1" slot-scope="{ resource: audit }">
         {{ audit.description }}
       </template>
-      <template slot="cell:2" scope="{ resource: audit }">
+      <template slot="cell:2" slot-scope="{ resource: audit }">
         {{ formatUserName(audit.user) }}
       </template>
-      <template slot="cell:3" scope="{ resource: audit }">
+      <template slot="cell:3" slot-scope="{ resource: audit }">
         {{ formatDateTime(audit.created_at) }}
       </template>
     </ck-resource-listing-table>

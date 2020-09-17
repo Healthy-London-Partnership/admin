@@ -38,16 +38,16 @@
               }
             }"
           >
-            <template slot="cell:0" scope="{ resource: updateRequest }">
+            <template slot="cell:0" slot-scope="{ resource: updateRequest }">
               {{ updateRequest.user ? `${updateRequest.user.first_name} ${updateRequest.user.last_name}` : 'N/A' }}
             </template>
-            <template slot="cell:1" scope="{ resource: updateRequest }">
+            <template slot="cell:1" slot-scope="{ resource: updateRequest }">
               {{ displayType(updateRequest.updateable_type) }}
             </template>
-            <template slot="cell:2" scope="{ resource: updateRequest }">
+            <template slot="cell:2" slot-scope="{ resource: updateRequest }">
               {{ updateRequest.entry }}
             </template>
-            <template slot="cell:3" scope="{ resource: updateRequest }">
+            <template slot="cell:3" slot-scope="{ resource: updateRequest }">
               {{ formatDateTime(updateRequest.created_at) }}
             </template>
           </ck-resource-listing-table>

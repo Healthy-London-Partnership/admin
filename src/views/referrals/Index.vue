@@ -64,21 +64,21 @@
               }
             }"
           >
-            <template slot="cell:0" scope="{ resource: referral }">
+            <template slot="cell:0" slot-scope="{ resource: referral }">
               {{ referral.reference }}
             </template>
-            <template slot="cell:1" scope="{ resource: referral }">
+            <template slot="cell:1" slot-scope="{ resource: referral }">
               {{ referral.service.name }}
             </template>
-            <template slot="cell:2" scope="{ resource: referral }">
+            <template slot="cell:2" slot-scope="{ resource: referral }">
               {{ referral.referee_name || '-' }}
             </template>
             </template>
-            <template slot="cell:3" scope="{ resource: referral }">
+            <template slot="cell:3" slot-scope="{ resource: referral }">
               {{ $options.filters.status(referral.status) }}
             </template>
             </template>
-            <template slot="cell:4" scope="{ resource: referral }">
+            <template slot="cell:4" slot-scope="{ resource: referral }">
               <div>
                 {{ formatDateTime(referral.created_at) }}
                 <br>
