@@ -140,16 +140,22 @@ export default {
       this.totalPages = response.data.meta.last_page;
 
       this.loading = false;
+
+      this.$emit("fetch");
     },
 
     onPrevious() {
       this.currentPage = this.currentPage - 1;
       this.fetchResources();
+
+      this.$emit("previous");
     },
 
     onNext() {
       this.currentPage = this.currentPage + 1;
       this.fetchResources();
+
+      this.$emit("next");
     },
 
     onSort(column) {

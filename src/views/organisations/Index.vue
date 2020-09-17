@@ -24,16 +24,18 @@
           </gov-grid-row>
 
           <div class="text-right">
-            <gov-button @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2">
+            <gov-button @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2" :disabled="inviting">
               Select/deselect all
             </gov-button>
 
-            <gov-button @click="onInvite" type="button" :disabled="organisationInvites.length === 0">
-              Invite selected
+            <gov-button @click="onInvite" type="button" :disabled="organisationInvites.length === 0 || inviting">
+              <template v-if="!inviting">Invite selected</template>
+              <template v-else>Inviting selected...</template>
             </gov-button>
           </div>
 
           <ck-resource-listing-table
+            @fetch="onFetch"
             ref="organisationsTable"
             uri="/organisations"
             :params="params"
@@ -71,7 +73,7 @@
                 :id="`organisation_invite_${organisation.id}`"
                 :name="`organisation_invite_${organisation.id}`"
                 label=""
-                :disabled="organisation.email === null"
+                :disabled="organisation.email === null || inviting"
               />
             </template>
           </ck-resource-listing-table>
@@ -157,7 +159,12 @@ export default {
         })
       })
 
+      window.alert("The organisations will have invitation emails sent out shortly.");
+
       this.inviting = false
+    },
+    onFetch() {
+      this.organisationInvites.splice(0, this.organisationInvites.length);
     }
   }
 };
