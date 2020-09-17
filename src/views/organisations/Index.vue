@@ -23,6 +23,11 @@
             </gov-grid-column>
           </gov-grid-row>
 
+          <div class="text-right">
+            <gov-button @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2">Select/deselect all</gov-button>
+            <gov-button @click="onInvite" type="button">Invite selected</gov-button>
+          </div>
+
           <ck-resource-listing-table
             ref="organisationsTable"
             uri="/organisations"
@@ -116,7 +121,22 @@ export default {
       this.organisationInvites.push(organisationId);
     },
     organisationInviteSelected(organisationId) {
-      return this.organisationInvites.includes(organisationId)
+      return this.organisationInvites.includes(organisationId);
+    },
+    onSelectAllInvites() {
+      if (this.organisationInvites.length === this.$refs.organisationsTable.resources.length) {
+        this.organisationInvites.splice(0, this.organisationInvites.length);
+        return;
+      }
+
+      this.organisationInvites.splice(0, this.organisationInvites.length);
+
+      this.$refs.organisationsTable.resources.forEach(organisation => {
+        this.organisationInvites.push(organisation.id);
+      })
+    },
+    onInvite() {
+      //
     }
   }
 };
