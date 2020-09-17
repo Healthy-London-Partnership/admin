@@ -24,8 +24,13 @@
           </gov-grid-row>
 
           <div class="text-right">
-            <gov-button @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2">Select/deselect all</gov-button>
-            <gov-button @click="onInvite" type="button">Invite selected</gov-button>
+            <gov-button @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2">
+              Select/deselect all
+            </gov-button>
+
+            <gov-button @click="onInvite" type="button" :disabled="organisationInvites.length === 0">
+              Invite selected
+            </gov-button>
           </div>
 
           <ck-resource-listing-table
@@ -124,16 +129,19 @@ export default {
       return this.organisationInvites.includes(organisationId);
     },
     onSelectAllInvites() {
-      if (this.organisationInvites.length === this.$refs.organisationsTable.resources.length) {
+      if (
+          this.organisationInvites.length === this.$refs.organisationsTable.resources
+            .filter(organisation => organisation.email !== null).length
+        ) {
         this.organisationInvites.splice(0, this.organisationInvites.length);
         return;
       }
 
       this.organisationInvites.splice(0, this.organisationInvites.length);
 
-      this.$refs.organisationsTable.resources.forEach(organisation => {
-        this.organisationInvites.push(organisation.id);
-      })
+      this.$refs.organisationsTable.resources
+        .filter(organisation => organisation.email !== null)
+        .forEach(organisation => this.organisationInvites.push(organisation.id))
     },
     onInvite() {
       //
