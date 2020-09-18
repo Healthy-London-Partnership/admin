@@ -60,6 +60,26 @@
           </gov-table-cell>
         </gov-table-row>
 
+        <gov-table-row v-if="organisation.hasOwnProperty('social_medias')">
+          <gov-table-header top scope="row">Social medias</gov-table-header>
+          <gov-table-cell break>
+            <gov-list v-if="original.social_medias.length > 0">
+              <li v-for="(socialMedia, index) in original.social_medias" :key="`social_media.${index}`">
+                <span class="govuk-!-font-weight-bold">{{ socialMedia.type | socialMediaType }}:</span> {{ socialMedia.url }}
+              </li>
+            </gov-list>
+            <template v-else>None</template>
+          </gov-table-cell>
+          <gov-table-cell break>
+            <gov-list v-if="organisation.social_medias.length > 0">
+              <li v-for="(socialMedia, index) in organisation.social_medias" :key="`social_media.${index}`">
+                <span class="govuk-!-font-weight-bold">{{ socialMedia.type | socialMediaType }}:</span> {{ socialMedia.url }}
+              </li>
+            </gov-list>
+            <template v-else>None</template>
+          </gov-table-cell>
+        </gov-table-row>
+
       </template>
     </gov-table>
   </div>
@@ -100,6 +120,22 @@ export default {
       } = await http.get(`/organisations/${this.organisation.id}`);
       this.original = original;
       this.loading = false;
+    }
+  },
+  filters: {
+    socialMediaType(type) {
+      switch (type) {
+        case "twitter":
+          return "Twitter";
+        case "facebook":
+          return "Facebook";
+        case "instagram":
+          return "Instagram";
+        case "youtube":
+          return "YouTube";
+        case "other":
+          return "Other";
+      }
     }
   },
   created() {

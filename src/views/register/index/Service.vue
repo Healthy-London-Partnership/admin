@@ -117,18 +117,21 @@ export default {
         { id: "who-for", heading: "Who is it for?", active: false },
         { id: "description", heading: "Description", active: false }
       ]
-    }
+    };
   },
 
   methods: {
     onInput(field, value) {
-      this.$emit('input', Object.assign(this.form, {
-        service: {
-          ...this.form.service,
-          [field]: value
-        }
-      }));
-      this.$emit('clear', `service.${field}`);
+      this.$emit(
+        "input",
+        Object.assign(this.form, {
+          service: {
+            ...this.form.service,
+            [field]: value
+          }
+        })
+      );
+      this.$emit("clear", `service.${field}`);
     },
 
     onTabChange({ index }) {

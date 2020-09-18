@@ -62,7 +62,7 @@ export default {
       frontend.about[field] = value;
 
       this.$emit("input", frontend);
-      this.$emit("clear", `frontend.about.${field}`)
+      this.$emit("clear", `frontend.about.${field}`);
     }
   }
 };

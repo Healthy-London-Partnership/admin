@@ -67,7 +67,7 @@ export default {
         { text: "Additional information", value: "Additional information" }
       ],
       usefulInfosIndex: 1,
-      extensions: [new Link()],
+      extensions: [new Link()]
     };
   },
   methods: {

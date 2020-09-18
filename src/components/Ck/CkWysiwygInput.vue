@@ -47,7 +47,7 @@ import {
   ListItem,
   Bold,
   Italic,
-  Link,
+  Link
 } from "tiptap-extensions";
 
 export default {
@@ -94,7 +94,7 @@ export default {
           new ListItem(),
           new Bold(),
           new Italic(),
-          new Link(),
+          new Link()
         ];
       }
     }

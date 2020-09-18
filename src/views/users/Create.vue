@@ -59,7 +59,7 @@ export default {
     async onSubmit() {
       const data = await this.form.post("/users", (config, data) => {
         // Strip spaces from the phone number.
-        data.phone = data.phone.replace(/\s/g, '')
+        data.phone = data.phone.replace(/\s/g, "");
 
         data.roles.forEach(role => {
           switch (role.role) {

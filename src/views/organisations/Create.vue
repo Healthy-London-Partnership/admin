@@ -18,6 +18,8 @@
             :url.sync="form.url"
             :email.sync="form.email"
             :phone.sync="form.phone"
+            :location_id.sync="form.location_id"
+            :social_medias.sync="form.social_medias"
             @update:logo_file_id="form.logo_file_id = $event"
             @clear="form.$errors.clear($event)"
           />
@@ -34,39 +36,41 @@
 </template>
 
 <script>
-import Form from "@/classes/Form";
-import OrganisationForm from "@/views/organisations/forms/OrganisationForm";
+import Form from '@/classes/Form';
+import OrganisationForm from '@/views/organisations/forms/OrganisationForm';
 
 export default {
-  name: "CreateOrganisation",
+  name: 'CreateOrganisation',
   components: { OrganisationForm },
   data() {
     return {
       form: new Form({
-        name: "",
-        slug: "",
-        description: "",
-        url: "",
-        email: "",
-        phone: "",
-        logo_file_id: null
-      })
+        name: '',
+        slug: '',
+        description: '',
+        url: '',
+        email: '',
+        phone: '',
+        logo_file_id: null,
+        social_medias: [],
+        location_id: null,
+      }),
     };
   },
   watch: {
-    ["form.name"](newName) {
+    ['form.name'](newName) {
       this.form.slug = this.slugify(newName);
-    }
+    },
   },
   methods: {
     async onSubmit() {
-      const response = await this.form.post("/organisations");
+      const response = await this.form.post('/organisations');
       const organisationId = response.data.id;
       this.$router.push({
-        name: "organisations-show",
-        params: { organisation: organisationId }
+        name: 'organisations-show',
+        params: { organisation: organisationId },
       });
-    }
-  }
+    },
+  },
 };
 </script>

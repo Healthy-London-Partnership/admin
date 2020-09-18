@@ -21,6 +21,8 @@
               :url.sync="form.url"
               :email.sync="form.email"
               :phone.sync="form.phone"
+              :location_id.sync="form.location_id"
+              :social_medias.sync="form.social_medias"
               @update:logo_file_id="form.logo_file_id = $event"
               @clear="form.$errors.clear($event)"
             />
@@ -40,18 +42,18 @@
 </template>
 
 <script>
-import http from "@/http";
-import Form from "@/classes/Form";
-import OrganisationForm from "@/views/organisations/forms/OrganisationForm";
+import http from '@/http';
+import Form from '@/classes/Form';
+import OrganisationForm from '@/views/organisations/forms/OrganisationForm';
 
 export default {
-  name: "EditOrganisation",
+  name: 'EditOrganisation',
   components: { OrganisationForm },
   data() {
     return {
       loading: false,
       organisation: null,
-      form: null
+      form: null,
     };
   },
   methods: {
@@ -66,10 +68,14 @@ export default {
         name: this.organisation.name,
         slug: this.organisation.slug,
         description: this.organisation.description,
-        url: this.organisation.url,
+        url: this.organisation.url || '',
         email: this.organisation.email || '',
         phone: this.organisation.phone || '',
-        logo_file_id: null
+        social_medias: this.organisation.social_medias,
+        location_id: this.organisation.location
+          ? this.organisation.location.id
+          : null,
+        logo_file_id: null,
       });
 
       this.loading = false;
@@ -88,14 +94,25 @@ export default {
           if (data.description === this.organisation.description) {
             delete data.description;
           }
-          if (data.url === this.organisation.url) {
+          if (data.url === (this.organisation.url || '')) {
             delete data.url;
           }
-          if (data.email === (this.organisation.email || '-')) {
+          if (data.email === (this.organisation.email || '')) {
             delete data.email;
           }
-          if (data.phone === (this.organisation.phone || '-')) {
+          if (data.phone === (this.organisation.phone || '')) {
             delete data.phone;
+          }
+
+          if (data.location_id === (this.organisation.location ? this.organisation.location.id : null)) {
+            delete data.location_id;
+          }
+
+          if (
+            JSON.stringify(data.social_medias) ===
+            JSON.stringify(this.organisation.social_medias)
+          ) {
+            delete data.social_medias;
           }
 
           // Remove the logo from the request if null, or delete if false.
@@ -107,13 +124,13 @@ export default {
         }
       );
       this.$router.push({
-        name: "organisations-updated",
-        params: { organisation: this.organisation.id }
+        name: 'organisations-updated',
+        params: { organisation: this.organisation.id },
       });
-    }
+    },
   },
   created() {
     this.fetchOrganisation();
-  }
+  },
 };
 </script>

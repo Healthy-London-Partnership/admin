@@ -59,6 +59,13 @@
       :error="errors.get('email')"
     />
 
+    <gov-heading size="m">Organisation Address</gov-heading>
+
+    <organisation-location-form
+      :location_id="location_id"
+      @update:location_id="onInput('location_id', $event)"
+    />
+
     <ck-image-input
       @input="onInput('logo_file_id', $event.file_id)"
       id="logo"
@@ -67,15 +74,23 @@
       :existing-url="id ? apiUrl(`/organisations/${id}/logo.png?v=${now}`) : undefined"
     />
 
+    <social-medias-input
+      :social-medias="social_medias"
+      @input="$emit('update:social_medias', $event)"
+      :errors="errors"
+    />
+
   </div>
 </template>
 
 <script>
 import CkImageInput from "@/components/Ck/CkImageInput";
+import SocialMediasInput from "@/views/services/inputs/SocialMediasInput";
+import OrganisationLocationForm from "@/views/organisations/forms/OrganisationLocationForm";
 
 export default {
   name: "OrganisationForm",
-  components: { CkImageInput },
+  components: { CkImageInput, OrganisationLocationForm, SocialMediasInput },
   props: {
     errors: {
       required: true,
@@ -94,20 +109,35 @@ export default {
       type: String
     },
     url: {
-      required: true,
-      type: String
+      required: false,
+      type: String,
+      default: ""
     },
     phone: {
-      required: true,
-      type: String
+      required: false,
+      type: String,
+      default: ""
     },
     email: {
-      required: true,
-      type: String
+      required: false,
+      type: String,
+      default: ""
     },
     id: {
       required: false,
       type: String
+    },
+    location_id: {
+      required: false,
+      type: String,
+      default: null
+    },
+    social_medias: {
+      required: false,
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
   methods: {

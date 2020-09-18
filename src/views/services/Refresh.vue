@@ -88,7 +88,7 @@ export default {
 
   computed: {
     token() {
-      return this.$route.query.token || '';
+      return this.$route.query.token || "";
     }
   },
 

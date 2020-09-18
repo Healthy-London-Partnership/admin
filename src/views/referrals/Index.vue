@@ -156,7 +156,10 @@ export default {
 
       let businessDays = 0;
       for (var i = 0; i < duration; i++) {
-        const day = start.clone().add(i, "days").isoWeekday();
+        const day = start
+          .clone()
+          .add(i, "days")
+          .isoWeekday();
 
         if (day < 6) {
           businessDays += 1;
@@ -170,9 +173,7 @@ export default {
         return "N/A";
       }
 
-      const workingDays = this.diffInBusinessDays(
-        referral.created_at
-      );
+      const workingDays = this.diffInBusinessDays(referral.created_at);
 
       return workingDays >= 10 ? "Due" : 10 - workingDays;
     }
