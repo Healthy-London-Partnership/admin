@@ -72,7 +72,9 @@ export default {
         email: this.organisation.email || '',
         phone: this.organisation.phone || '',
         social_medias: this.organisation.social_medias,
-        location_id: this.organisation.location.id,
+        location_id: this.organisation.location
+          ? this.organisation.location.id
+          : null,
         logo_file_id: null,
       });
 
@@ -92,7 +94,7 @@ export default {
           if (data.description === this.organisation.description) {
             delete data.description;
           }
-          if (data.url === this.organisation.url || '') {
+          if (data.url === (this.organisation.url || '')) {
             delete data.url;
           }
           if (data.email === (this.organisation.email || '')) {
@@ -102,7 +104,7 @@ export default {
             delete data.phone;
           }
 
-          if (data.location_id === this.organisation.location_id) {
+          if (data.location_id === this.organisation.location.id) {
             delete data.location_id;
           }
 
