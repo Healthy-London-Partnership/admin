@@ -104,7 +104,7 @@ export default {
             delete data.phone;
           }
 
-          if (data.location_id === this.organisation.location.id) {
+          if (data.location_id === (this.organisation.location ? this.organisation.location.id : null)) {
             delete data.location_id;
           }
 
