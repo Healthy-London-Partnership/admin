@@ -85,7 +85,7 @@ export default {
   },
 
   created() {
-  this.fetchOrganisationAdminInvites();
+    this.fetchOrganisationAdminInvites();
   }
 }
 </script>
