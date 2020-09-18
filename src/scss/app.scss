@@ -1,4 +1,5 @@
 $govuk-error-colour: #d23a49;
+$hlp-primary-colour: #485b7f;
 
 @import "node_modules/govuk-frontend/all";
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/solid.css");
@@ -7,7 +8,7 @@ $govuk-error-colour: #d23a49;
 
 // Overides
 .govuk-header {
-  background-color: #485b7f;
+  background-color: $hlp-primary-colour;
 
   &__link--homepage {
     margin-right: 1rem;
@@ -151,6 +152,10 @@ img {
   color: white;
 }
 
+.bg-primary {
+  background-color: $hlp-primary-colour;
+}
+
 .align-top {
   vertical-align: top;
 }
@@ -175,7 +180,7 @@ img {
 }
 
 .govuk-button {
-  background-color: #485b7f !important;
+  background-color: $hlp-primary-colour !important;
   box-shadow: 0 2px 0 #003618 !important;;
   -webkit-box-shadow: 0 2px 0 #003618 !important;;
 }

@@ -148,7 +148,7 @@ export default {
       this.loading = false;
     },
 
-    onSubmit() {
+    async onSubmit() {
       if (this.form.password !== this.form.password_confirmed) {
         this.form.onFail({
           errors: {
@@ -158,7 +158,14 @@ export default {
         return;
       }
 
-      alert('Submitted');
+      try {
+        await this.form.post(
+          `/organisation-admin-invites/${this.organisationAdminInvite.id}/submit`
+        );
+        this.$router.push({ name: 'organisation-admin-invites-submitted' });
+      } catch (exception) {
+        //
+      }
     }
   },
 

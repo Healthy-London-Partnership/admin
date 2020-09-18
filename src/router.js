@@ -510,6 +510,12 @@ let router = new Router({
       ]
     },
     {
+      path: "/organisation-admin-invites/submitted",
+      name: "organisation-admin-invites-submitted",
+      meta: { auth: false },
+      component: () => import("@/views/organisation-admin-invites/Submitted")
+    },
+    {
       path: "/organisation-admin-invites/:organisationAdminInvite",
       name: "organisation-admin-invites-start",
       meta: { auth: false },
