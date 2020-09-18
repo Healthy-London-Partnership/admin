@@ -65,7 +65,7 @@ export default {
   },
 
   methods: {
-    async fetchOrganisationAdminInvites() {
+    async fetchOrganisationAdminInvite() {
       this.loading = true;
 
       try {
@@ -85,7 +85,7 @@ export default {
   },
 
   created() {
-    this.fetchOrganisationAdminInvites();
+    this.fetchOrganisationAdminInvite();
   }
 }
 </script>

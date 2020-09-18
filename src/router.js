@@ -528,6 +528,12 @@ let router = new Router({
       component: () => import("@/views/organisation-admin-invites/CreateUser")
     },
     {
+      path: "/pending-organisation-admins/:pendingOrganisationAdmin/confirm",
+      name: "pending-organisation-admins-confirm",
+      meta: { auth: false },
+      component: () => import("@/views/pending-organisation-admins/Confirm")
+    },
+    {
       path: "*",
       name: "404",
       component: () => import("@/views/errors/404")
