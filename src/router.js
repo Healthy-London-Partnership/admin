@@ -510,6 +510,18 @@ let router = new Router({
       ]
     },
     {
+      path: "/organisation-admin-invites/:organisationAdminInvite",
+      name: "organisation-admin-invites-start",
+      meta: { auth: false },
+      component: () => import("@/views/organisation-admin-invites/Start")
+    },
+    {
+      path: "/organisation-admin-invites/:organisationAdminInvite/create-user",
+      name: "organisation-admin-invites-create-user",
+      meta: { auth: false },
+      component: () => import("@/views/organisation-admin-invites/CreateUser")
+    },
+    {
       path: "*",
       name: "404",
       component: () => import("@/views/errors/404")
