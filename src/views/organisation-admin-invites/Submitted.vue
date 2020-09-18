@@ -41,10 +41,23 @@
           <gov-heading size="l">Questions?</gov-heading>
 
           <gov-body>
-            If you have any questions, please refer to our FAQs.
+            If you have any questions, please refer to our <gov-link
+              :href="faqsLink"
+              external
+            >FAQs</gov-link>.
           </gov-body>
         </gov-grid-column>
       </gov-grid-row>
     </gov-main-wrapper>
   </gov-width-container>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      faqsLink: `${process.env.VUE_APP_FRONTEND_URI}/about`
+    }
+  }
+}
+</script>

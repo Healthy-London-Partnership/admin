@@ -1,11 +1,22 @@
 <template>
   <!-- For links to internal pages -->
-  <router-link v-if="to" :to="to" class="govuk-link govuk-link--no-visited-state">
+  <router-link
+    v-if="to"
+    :to="to"
+    class="govuk-link govuk-link--no-visited-state"
+  >
     <slot />
   </router-link>
 
   <!-- For dummy links that are handled by JavaScript -->
-  <a v-else :href="href || 'javascript:;'" class="govuk-link govuk-link--no-visited-state" @click="onClick">
+  <a
+    v-else
+    :href="href || 'javascript:;'"
+    class="govuk-link govuk-link--no-visited-state"
+    @click="onClick"
+    :rel="external ? 'noreferrer noopener' : null"
+    :target="external ? '_blank' : null"
+  >
     <slot />
   </a>
 </template>
@@ -19,6 +30,11 @@ export default {
     },
     href: {
       required: false
+    },
+    external: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   methods: {
