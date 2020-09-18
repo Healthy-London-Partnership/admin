@@ -23,7 +23,7 @@
             </gov-grid-column>
           </gov-grid-row>
 
-          <div class="text-right">
+          <div v-if="auth.isSuperAdmin" class="text-right">
             <gov-button @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2" :disabled="inviting">
               Select/deselect all
             </gov-button>
@@ -40,13 +40,7 @@
             uri="/organisations"
             :params="params"
             default-sort="name"
-            :columns="[
-              { heading: 'Organisation name', sort: 'name' },
-              { heading: 'Web address URL' },
-              { heading: 'Phone number' },
-              { heading: 'Email' },
-              { heading: 'Invite' },
-            ]"
+            :columns="columns"
             :view-route="(organisation) => {
               return {
                 name: 'organisations-show',
@@ -66,7 +60,11 @@
             <template slot="cell:3" slot-scope="{ resource: organisation }">
               {{ organisation.email || '-' }}
             </template>
-            <template slot="cell:4" slot-scope="{ resource: organisation }">
+            <template
+              v-if="auth.isSuperAdmin"
+              slot="cell:4"
+              slot-scope="{ resource: organisation }"
+            >
               <gov-checkbox
                 @input="onInviteOrganisation(organisation.id)"
                 :value="organisationInviteSelected(organisation.id)"
@@ -111,6 +109,25 @@ export default {
       }
 
       return params;
+    },
+
+    columns() {
+      if (this.auth.isSuperAdmin) {
+        return [
+          { heading: 'Organisation name', sort: 'name' },
+          { heading: 'Web address URL' },
+          { heading: 'Phone number' },
+          { heading: 'Email' },
+          { heading: 'Invite' }
+        ];
+      }
+
+      return [
+          { heading: 'Organisation name', sort: 'name' },
+          { heading: 'Web address URL' },
+          { heading: 'Phone number' },
+          { heading: 'Email' }
+        ];
     }
   },
   methods: {
