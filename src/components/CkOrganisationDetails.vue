@@ -30,7 +30,7 @@
       <gov-table-row v-if="auth.isSuperAdmin">
         <gov-table-header top scope="row">Organisation admin invite URL</gov-table-header>
         <gov-table-cell>
-          <gov-link :to="inviteUrl" v-if="inviteUrl">{{ inviteUrl }}</gov-link>
+          <gov-link :to="inviteUrl.relative" v-if="inviteUrl">{{ inviteUrl.absolute }}</gov-link>
           <template v-else-if="generatingInviteUrl">Generating URL...</template>
           <gov-link v-else @click="onGenerateInviteUrl">Generate URL</gov-link>
         </gov-table-cell>
@@ -69,8 +69,11 @@ export default {
         ]
       });
 
-      // TODO:https://stackoverflow.com/a/49808270/5745438
-      this.inviteUrl = `/organisation-admin-invites/${data[0].id}`;
+      console.log();
+      this.inviteUrl = {
+        relative: `/organisation-admin-invites/${data[0].id}`,
+        absolute: `${window.location.protocol}//${window.location.host}/organisation-admin-invites/${data[0].id}`
+      };
 
       this.generatingInviteUrl = false;
     }
