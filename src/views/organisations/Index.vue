@@ -20,6 +20,7 @@
             </gov-grid-column>
             <gov-grid-column v-if="auth.isGlobalAdmin" width="one-third">
               <gov-button @click="onAddOrganisation" type="submit" success expand>Add organisation</gov-button>
+              <gov-button :to="{name: 'organisations-import'}" type="submit" success expand>Bulk import</gov-button>
             </gov-grid-column>
           </gov-grid-row>
 
