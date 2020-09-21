@@ -59,16 +59,16 @@
               }
             }"
           >
-            <template slot="cell:0" scope="{ resource: service }">
+            <template slot="cell:0" slot-scope="{ resource: service }">
               {{ service.name }}
             </template>
-            <template slot="cell:1" scope="{ resource: service }">
+            <template slot="cell:1" slot-scope="{ resource: service }">
               {{ service.organisation.name }}
             </template>
-            <template slot="cell:2" scope="{ resource: service }">
+            <template slot="cell:2" slot-scope="{ resource: service }">
               {{ displayStatus(service.status) }}
             </template>
-            <template slot="cell:3" scope="{ resource: service }">
+            <template slot="cell:3" slot-scope="{ resource: service }">
               {{ displayReferralMethod(service.referral_method) }}
             </template>
           </ck-resource-listing-table>

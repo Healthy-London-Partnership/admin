@@ -14,16 +14,16 @@
       action-text="Download"
       @action="onDownload"
     >
-      <template slot="cell:0" scope="{ resource: report }">
+      <template slot="cell:0" slot-scope="{ resource: report }">
         {{ report.report_type }}
       </template>
-      <template slot="cell:1" scope="{ resource: report }">
+      <template slot="cell:1" slot-scope="{ resource: report }">
         {{ report.starts_at ? formatDate(report.starts_at) : 'N/A' }}
       </template>
-      <template slot="cell:2" scope="{ resource: report }">
+      <template slot="cell:2" slot-scope="{ resource: report }">
         {{ report.ends_at ? formatDate(report.ends_at) : 'N/A' }}
       </template>
-      <template slot="cell:3" scope="{ resource: report }">
+      <template slot="cell:3" slot-scope="{ resource: report }">
         {{ formatDateTime(report.created_at) }}
       </template>
     </ck-resource-listing-table>

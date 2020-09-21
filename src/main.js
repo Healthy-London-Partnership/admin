@@ -111,6 +111,7 @@ Vue.component("GovList", () => import("@/components/Gov/GovList"));
 Vue.component("GovMainWrapper", () =>
   import("@/components/Gov/GovMainWrapper")
 );
+Vue.component("GovPanel", () => import("@/components/Gov/GovPanel"));
 Vue.component("GovRadio", () => import("@/components/Gov/GovRadio"));
 Vue.component("GovRadios", () => import("@/components/Gov/GovRadios"));
 Vue.component("GovSectionBreak", () =>

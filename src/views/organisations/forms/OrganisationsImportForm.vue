@@ -13,29 +13,29 @@
 
 <script>
 export default {
-  name: 'OrganisationsImportForm',
+  name: "OrganisationsImportForm",
 
   props: {
     errors: {
       required: true,
-      type: Object,
+      type: Object
     },
 
     spreadsheet: {
-      required: true,
+      required: true
     },
 
     feedback: {
       type: String,
-      default: null,
-    },
+      default: null
+    }
   },
 
   methods: {
     onInput(field, value) {
       this.$emit(`update:${field}`, value);
-      this.$emit('clear', field);
-    },
-  },
+      this.$emit("clear", field);
+    }
+  }
 };
 </script>

@@ -53,13 +53,13 @@
               }
             }"
           >
-            <template slot="cell:0" scope="{ resource: location }">
+            <template slot="cell:0" slot-scope="{ resource: location }">
               {{ location.address_line_1 }}
             </template>
-            <template slot="cell:1" scope="{ resource: location }">
+            <template slot="cell:1" slot-scope="{ resource: location }">
               {{ location.city }}
             </template>
-            <template slot="cell:2" scope="{ resource: location }">
+            <template slot="cell:2" slot-scope="{ resource: location }">
               {{ location.postcode }}
             </template>
           </ck-resource-listing-table>

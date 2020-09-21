@@ -79,16 +79,16 @@
               }
             }"
           >
-            <template slot="cell:0" scope="{ resource: user }">
+            <template slot="cell:0" slot-scope="{ resource: user }">
               {{ user.first_name }}
             </template>
-            <template slot="cell:1" scope="{ resource: user }">
+            <template slot="cell:1" slot-scope="{ resource: user }">
               {{ user.last_name }}
             </template>
-            <template slot="cell:2" scope="{ resource: user }">
+            <template slot="cell:2" slot-scope="{ resource: user }">
               {{ displayHighestRole(user.roles) }}
             </template>
-            <template slot="cell:3" scope="{ resource: user }">
+            <template slot="cell:3" slot-scope="{ resource: user }">
               {{ user.phone }}
             </template>
           </ck-resource-listing-table>

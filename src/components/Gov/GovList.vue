@@ -2,7 +2,7 @@
   <ul v-if="type === 'unordered'" class="govuk-list" :class="{ 'govuk-list--bullet': bullet }">
     <slot />
   </ul>
-  <ol v-else-if="type === 'unordered'" class="govuk-list">
+  <ol v-else class="govuk-list" :class="{ 'govuk-list--number': number }">
     <slot />
   </ol>
 </template>
@@ -17,6 +17,11 @@ export default {
       default: "unordered"
     },
     bullet: {
+      required: false,
+      type: Boolean,
+      default: false
+    },
+    number: {
       required: false,
       type: Boolean,
       default: false
