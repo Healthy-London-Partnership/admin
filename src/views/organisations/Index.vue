@@ -20,7 +20,7 @@
             </gov-grid-column>
             <gov-grid-column v-if="auth.isGlobalAdmin" width="one-third">
               <gov-button @click="onAddOrganisation" type="submit" success expand>Add organisation</gov-button>
-              <gov-button :to="{name: 'organisations-import'}" type="submit" success expand>Bulk import</gov-button>
+              <gov-button v-if="auth.isSuperAdmin" :to="{name: 'organisations-import'}" type="submit" success expand>Bulk import</gov-button>
             </gov-grid-column>
           </gov-grid-row>
 
@@ -62,31 +62,31 @@
 </template>
 
 <script>
-import CkResourceListingTable from "@/components/Ck/CkResourceListingTable.vue";
-import CkTableFilters from "@/components/Ck/CkTableFilters.vue";
+import CkResourceListingTable from '@/components/Ck/CkResourceListingTable.vue';
+import CkTableFilters from '@/components/Ck/CkTableFilters.vue';
 
 export default {
-  name: "ListOrganisations",
+  name: 'ListOrganisations',
   components: { CkResourceListingTable, CkTableFilters },
   data() {
     return {
       filters: {
-        name: ""
-      }
+        name: '',
+      },
     };
   },
   computed: {
     params() {
       const params = {
-        "filter[has_permission]": true
+        'filter[has_permission]': true,
       };
 
-      if (this.filters.name !== "") {
-        params["filter[name]"] = this.filters.name;
+      if (this.filters.name !== '') {
+        params['filter[name]'] = this.filters.name;
       }
 
       return params;
-    }
+    },
   },
   methods: {
     onSearch() {
@@ -94,8 +94,8 @@ export default {
       this.$refs.organisationsTable.fetchResources();
     },
     onAddOrganisation() {
-      this.$router.push({ name: "organisations-create" });
-    }
-  }
+      this.$router.push({ name: 'organisations-create' });
+    },
+  },
 };
 </script>
