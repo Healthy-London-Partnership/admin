@@ -9,7 +9,7 @@
             <template slot="title">Account created</template>
 
             <template slot="body">
-              Email with a confirmation link sent to xxx.
+              Email with a confirmation link has been sent.
             </template>
           </gov-panel>
 
