@@ -23,7 +23,7 @@
             </gov-grid-column>
           </gov-grid-row>
 
-          <gov-tabs :tabs="tabs">
+          <gov-tabs :tabs="allowedTabs">
             <router-view :service="service" />
           </gov-tabs>
 
@@ -46,27 +46,42 @@
 </template>
 
 <script>
-import http from "@/http";
+import http from '@/http';
 
 export default {
-  name: "ShowService",
+  name: 'ShowService',
   data() {
     return {
       loading: false,
       service: null,
       tabs: [
-        { heading: "Details", to: { name: "services-show" } },
+        { heading: 'Details', to: { name: 'services-show' } },
         {
-          heading: "Additional info",
-          to: { name: "services-show-additional-info" }
+          heading: 'Additional info',
+          to: { name: 'services-show-additional-info' },
         },
-        { heading: "Good to know", to: { name: "services-show-useful-info" } },
-        { heading: "Contact info", to: { name: "services-show-contact-info" } },
-        { heading: "Who is it for?", to: { name: "services-show-who-for" } },
-        { heading: "Locations", to: { name: "services-show-locations" } },
-        { heading: "Referral", to: { name: "services-show-referral" } }
-      ]
+        { heading: 'Good to know', to: { name: 'services-show-useful-info' } },
+        { heading: 'Contact info', to: { name: 'services-show-contact-info' } },
+        { heading: 'Who is it for?', to: { name: 'services-show-who-for' } },
+        { heading: 'Locations', to: { name: 'services-show-locations' } },
+        { heading: 'Referral', to: { name: 'services-show-referral' } },
+      ],
     };
+  },
+  computed: {
+    allowedTabs() {
+      if (this.service.is_national) {
+        const locationsTabIndex = this.tabs.findIndex(
+          (tab) => tab.heading === 'Locations'
+        );
+        const tabs = this.tabs.slice();
+        tabs.splice(locationsTabIndex, 1);
+
+        return tabs;
+      }
+
+      return this.tabs;
+    },
   },
   methods: {
     async fetchService() {
@@ -75,28 +90,28 @@ export default {
       // Fetch the services.
       const servicesResponse = await http.get(
         `/services/${this.$route.params.service}`,
-        { params: { include: "organisation" } }
+        { params: { include: 'organisation' } }
       );
       this.service = servicesResponse.data.data;
 
       // Fetch the service locations.
-      const serviceLocations = await this.fetchAll("/service-locations", {
-        "filter[service_id]": this.$route.params.service,
-        include: "location"
+      const serviceLocations = await this.fetchAll('/service-locations', {
+        'filter[service_id]': this.$route.params.service,
+        include: 'location',
       });
       this.service.service_locations = serviceLocations;
 
       this.loading = false;
     },
     onEdit() {
-      alert("Edit");
+      alert('Edit');
     },
     onDelete() {
-      this.$router.push({ name: "services-index" });
-    }
+      this.$router.push({ name: 'services-index' });
+    },
   },
   created() {
     this.fetchService();
-  }
+  },
 };
 </script>
