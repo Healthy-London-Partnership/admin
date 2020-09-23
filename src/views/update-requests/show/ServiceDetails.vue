@@ -356,37 +356,37 @@
 </template>
 
 <script>
-import http from '@/http';
-import CkCarousel from '@/components/Ck/CkCarousel';
+import http from "@/http";
+import CkCarousel from "@/components/Ck/CkCarousel";
 
 export default {
-  name: 'ServiceDetails',
+  name: "ServiceDetails",
 
   props: {
     updateRequestId: {
       required: true,
-      type: String,
+      type: String
     },
 
     requestedAt: {
       required: true,
-      type: String,
+      type: String
     },
 
     service: {
       required: true,
-      type: Object,
+      type: Object
     },
 
     logoDataUri: {
       required: false,
-      type: String,
+      type: String
     },
 
     galleryItemsDataUris: {
       required: false,
-      type: Array,
-    },
+      type: Array
+    }
   },
 
   components: { CkCarousel },
@@ -396,7 +396,7 @@ export default {
       loading: false,
       original: null,
       taxonomies: [],
-      flattenedTaxonomies: [],
+      flattenedTaxonomies: []
     };
   },
 
@@ -405,7 +405,7 @@ export default {
       let name = taxonomy.name;
 
       if (taxonomy.parent_id !== null) {
-        const parent = this.flattenedTaxonomies.find((flattenedTaxonomy) => {
+        const parent = this.flattenedTaxonomies.find(flattenedTaxonomy => {
           return flattenedTaxonomy.id === taxonomy.parent_id;
         });
         name = `${this.taxonomyName(parent)} / ${name}`;
@@ -425,17 +425,17 @@ export default {
 
     async fetchOriginal() {
       const {
-        data: { data: original },
+        data: { data: original }
       } = await http.get(`/services/${this.service.id}`, {
-        params: { include: 'organisation' },
+        params: { include: "organisation" }
       });
       this.original = original;
     },
 
     async fetchTaxonomies() {
       const {
-        data: { data: taxonomies },
-      } = await http.get('/taxonomies/categories');
+        data: { data: taxonomies }
+      } = await http.get("/taxonomies/categories");
       this.taxonomies = taxonomies;
       this.setFlattenedTaxonomies();
     },
@@ -446,7 +446,7 @@ export default {
         taxonomies = this.taxonomies;
       }
 
-      taxonomies.forEach((taxonomy) => {
+      taxonomies.forEach(taxonomy => {
         this.flattenedTaxonomies.push(taxonomy);
 
         if (taxonomy.children.length > 0) {
@@ -456,12 +456,12 @@ export default {
     },
 
     findTaxonomy(id) {
-      return this.flattenedTaxonomies.find((taxonomy) => taxonomy.id === id);
+      return this.flattenedTaxonomies.find(taxonomy => taxonomy.id === id);
     },
 
     imageUrls(service) {
-      return service.gallery_items.map((galleryItem) => {
-        if (galleryItem.hasOwnProperty('url')) {
+      return service.gallery_items.map(galleryItem => {
+        if (galleryItem.hasOwnProperty("url")) {
           return galleryItem.url;
         }
 
@@ -471,34 +471,34 @@ export default {
           }?update_request_id=${this.updateRequestId}`
         );
       });
-    },
+    }
   },
 
   filters: {
     status(status) {
-      return status === 'active' ? 'Enabled' : 'Disabled';
+      return status === "active" ? "Enabled" : "Disabled";
     },
 
     isFree(isFree) {
-      return isFree ? 'Yes' : 'No';
+      return isFree ? "Yes" : "No";
     },
 
     isNational(isNational) {
-      return isNational ? 'Yes' : 'No';
+      return isNational ? "Yes" : "No";
     },
 
     socialMediaType(type) {
       switch (type) {
-        case 'twitter':
-          return 'Twitter';
-        case 'facebook':
-          return 'Facebook';
-        case 'instagram':
-          return 'Instagram';
-        case 'youtube':
-          return 'YouTube';
-        case 'other':
-          return 'Other';
+        case "twitter":
+          return "Twitter";
+        case "facebook":
+          return "Facebook";
+        case "instagram":
+          return "Instagram";
+        case "youtube":
+          return "YouTube";
+        case "other":
+          return "Other";
       }
     },
 
@@ -507,12 +507,12 @@ export default {
     },
 
     showReferralDisclaimer(showReferralDisclaimer) {
-      return showReferralDisclaimer ? 'Show' : 'Hide';
-    },
+      return showReferralDisclaimer ? "Show" : "Hide";
+    }
   },
 
   created() {
     this.fetchAll();
-  },
+  }
 };
 </script>

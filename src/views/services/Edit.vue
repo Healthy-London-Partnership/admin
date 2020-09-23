@@ -179,19 +179,19 @@
 </template>
 
 <script>
-import Form from '@/classes/Form';
-import http from '@/http';
-import DetailsTab from '@/views/services/forms/DetailsTab';
-import DescriptionTab from '@/views/services/forms/DescriptionTab';
-import AdditionalInfoTab from '@/views/services/forms/AdditionalInfoTab';
-import UsefulInfoTab from '@/views/services/forms/UsefulInfoTab';
-import WhoForTab from '@/views/services/forms/WhoForTab';
-import ReferralTab from '@/views/services/forms/ReferralTab';
-import TaxonomiesTab from '@/views/services/forms/TaxonomiesTab';
-import ServiceDetails from '@/views/update-requests/show/ServiceDetails';
+import Form from "@/classes/Form";
+import http from "@/http";
+import DetailsTab from "@/views/services/forms/DetailsTab";
+import DescriptionTab from "@/views/services/forms/DescriptionTab";
+import AdditionalInfoTab from "@/views/services/forms/AdditionalInfoTab";
+import UsefulInfoTab from "@/views/services/forms/UsefulInfoTab";
+import WhoForTab from "@/views/services/forms/WhoForTab";
+import ReferralTab from "@/views/services/forms/ReferralTab";
+import TaxonomiesTab from "@/views/services/forms/TaxonomiesTab";
+import ServiceDetails from "@/views/update-requests/show/ServiceDetails";
 
 export default {
-  name: 'EditService',
+  name: "EditService",
   components: {
     DetailsTab,
     DescriptionTab,
@@ -200,31 +200,31 @@ export default {
     WhoForTab,
     ReferralTab,
     TaxonomiesTab,
-    ServiceDetails,
+    ServiceDetails
   },
   data() {
     return {
       form: null,
       tabs: [
-        { id: 'details', heading: 'Details', active: true },
-        { id: 'additional-info', heading: 'Additional info', active: false },
-        { id: 'useful-info', heading: 'Good to know', active: false },
-        { id: 'who-for', heading: 'Who is it for?', active: false },
-        { id: 'taxonomies', heading: 'Taxonomies', active: false },
-        { id: 'description', heading: 'Description', active: false },
-        { id: 'referral', heading: 'Referral', active: false },
+        { id: "details", heading: "Details", active: true },
+        { id: "additional-info", heading: "Additional info", active: false },
+        { id: "useful-info", heading: "Good to know", active: false },
+        { id: "who-for", heading: "Who is it for?", active: false },
+        { id: "taxonomies", heading: "Taxonomies", active: false },
+        { id: "description", heading: "Description", active: false },
+        { id: "referral", heading: "Referral", active: false }
       ],
       errors: {},
       service: null,
       loading: false,
-      updateRequest: null,
+      updateRequest: null
     };
   },
   computed: {
     allowedTabs() {
       if (!this.auth.isGlobalAdmin) {
         const taxonomiesTabIndex = this.tabs.findIndex(
-          (tab) => tab.id === 'taxonomies'
+          tab => tab.id === "taxonomies"
         );
         const tabs = this.tabs.slice();
         tabs.splice(taxonomiesTabIndex, 1);
@@ -233,7 +233,7 @@ export default {
       }
 
       return this.tabs;
-    },
+    }
   },
   methods: {
     async fetchService() {
@@ -254,41 +254,41 @@ export default {
         description: this.service.description,
         wait_time: this.service.wait_time,
         is_free: this.service.is_free,
-        fees_text: this.service.fees_text || '',
-        fees_url: this.service.fees_url || '',
-        testimonial: this.service.testimonial || '',
-        video_embed: this.service.video_embed || '',
+        fees_text: this.service.fees_text || "",
+        fees_url: this.service.fees_url || "",
+        testimonial: this.service.testimonial || "",
+        video_embed: this.service.video_embed || "",
         url: this.service.url,
-        contact_name: this.service.contact_name || '',
-        contact_phone: this.service.contact_phone || '',
-        contact_email: this.service.contact_email || '',
+        contact_name: this.service.contact_name || "",
+        contact_phone: this.service.contact_phone || "",
+        contact_email: this.service.contact_email || "",
         show_referral_disclaimer: this.service.show_referral_disclaimer,
         referral_method: this.service.referral_method,
-        referral_button_text: this.service.referral_button_text || '',
-        referral_email: this.service.referral_email || '',
-        referral_url: this.service.referral_url || '',
+        referral_button_text: this.service.referral_button_text || "",
+        referral_email: this.service.referral_email || "",
+        referral_url: this.service.referral_url || "",
         criteria: {
-          age_group: this.service.criteria.age_group || '',
-          disability: this.service.criteria.disability || '',
-          employment: this.service.criteria.employment || '',
-          gender: this.service.criteria.gender || '',
-          housing: this.service.criteria.housing || '',
-          income: this.service.criteria.income || '',
-          language: this.service.criteria.language || '',
-          other: this.service.criteria.other || '',
+          age_group: this.service.criteria.age_group || "",
+          disability: this.service.criteria.disability || "",
+          employment: this.service.criteria.employment || "",
+          gender: this.service.criteria.gender || "",
+          housing: this.service.criteria.housing || "",
+          income: this.service.criteria.income || "",
+          language: this.service.criteria.language || "",
+          other: this.service.criteria.other || ""
         },
         useful_infos: this.service.useful_infos,
         offerings: this.service.offerings,
         social_medias: this.service.social_medias,
-        gallery_items: this.service.gallery_items.map((galleryItem) => ({
+        gallery_items: this.service.gallery_items.map(galleryItem => ({
           file_id: galleryItem.file_id,
-          image: null,
+          image: null
         })),
         category_taxonomies: this.service.category_taxonomies.map(
-          (taxonomy) => taxonomy.id
+          taxonomy => taxonomy.id
         ),
         logo_file_id: null,
-        logo: null,
+        logo: null
       });
 
       this.loading = false;
@@ -331,28 +331,28 @@ export default {
           if (data.is_free === this.service.is_free) {
             delete data.is_free;
           }
-          if (data.fees_text === (this.service.fees_text || '')) {
+          if (data.fees_text === (this.service.fees_text || "")) {
             delete data.fees_text;
           }
-          if (data.fees_url === (this.service.fees_url || '')) {
+          if (data.fees_url === (this.service.fees_url || "")) {
             delete data.fees_url;
           }
-          if (data.testimonial === (this.service.testimonial || '')) {
+          if (data.testimonial === (this.service.testimonial || "")) {
             delete data.testimonial;
           }
-          if (data.video_embed === (this.service.video_embed || '')) {
+          if (data.video_embed === (this.service.video_embed || "")) {
             delete data.video_embed;
           }
           if (data.url === this.service.url) {
             delete data.url;
           }
-          if (data.contact_name === (this.service.contact_name || '')) {
+          if (data.contact_name === (this.service.contact_name || "")) {
             delete data.contact_name;
           }
-          if (data.contact_phone === (this.service.contact_phone || '')) {
+          if (data.contact_phone === (this.service.contact_phone || "")) {
             delete data.contact_phone;
           }
-          if (data.contact_email === (this.service.contact_email || '')) {
+          if (data.contact_email === (this.service.contact_email || "")) {
             delete data.contact_email;
           }
           if (
@@ -366,48 +366,48 @@ export default {
           }
           if (
             data.referral_button_text ===
-            (this.service.referral_button_text || '')
+            (this.service.referral_button_text || "")
           ) {
             delete data.referral_button_text;
           }
-          if (data.referral_email === (this.service.referral_email || '')) {
+          if (data.referral_email === (this.service.referral_email || "")) {
             delete data.referral_email;
           }
-          if (data.referral_url === (this.service.referral_url || '')) {
+          if (data.referral_url === (this.service.referral_url || "")) {
             delete data.referral_url;
           }
           if (
-            data.criteria.age_group === (this.service.criteria.age_group || '')
+            data.criteria.age_group === (this.service.criteria.age_group || "")
           ) {
             delete data.criteria.age_group;
           }
           if (
             data.criteria.disability ===
-            (this.service.criteria.disability || '')
+            (this.service.criteria.disability || "")
           ) {
             delete data.criteria.disability;
           }
           if (
             data.criteria.employment ===
-            (this.service.criteria.employment || '')
+            (this.service.criteria.employment || "")
           ) {
             delete data.criteria.employment;
           }
-          if (data.criteria.gender === (this.service.criteria.gender || '')) {
+          if (data.criteria.gender === (this.service.criteria.gender || "")) {
             delete data.criteria.gender;
           }
-          if (data.criteria.housing === (this.service.criteria.housing || '')) {
+          if (data.criteria.housing === (this.service.criteria.housing || "")) {
             delete data.criteria.housing;
           }
-          if (data.criteria.income === (this.service.criteria.income || '')) {
+          if (data.criteria.income === (this.service.criteria.income || "")) {
             delete data.criteria.income;
           }
           if (
-            data.criteria.language === (this.service.criteria.language || '')
+            data.criteria.language === (this.service.criteria.language || "")
           ) {
             delete data.criteria.language;
           }
-          if (data.criteria.other === (this.service.criteria.other || '')) {
+          if (data.criteria.other === (this.service.criteria.other || "")) {
             delete data.criteria.other;
           }
           if (Object.keys(data.criteria).length === 0) {
@@ -434,7 +434,7 @@ export default {
           if (
             JSON.stringify(data.category_taxonomies) ===
             JSON.stringify(
-              this.service.category_taxonomies.map((taxonomy) => taxonomy.id)
+              this.service.category_taxonomies.map(taxonomy => taxonomy.id)
             )
           ) {
             delete data.category_taxonomies;
@@ -450,13 +450,13 @@ export default {
           // Remove the gallery items from the request if null, or delete if false.
           if (
             JSON.stringify(
-              data.gallery_items.map((galleryItem) => ({
-                file_id: galleryItem.file_id,
+              data.gallery_items.map(galleryItem => ({
+                file_id: galleryItem.file_id
               }))
             ) ===
             JSON.stringify(
-              this.service.gallery_items.map((galleryItem) => ({
-                file_id: galleryItem.file_id,
+              this.service.gallery_items.map(galleryItem => ({
+                file_id: galleryItem.file_id
               }))
             )
           ) {
@@ -473,38 +473,38 @@ export default {
 
       // Otherwise, forward the user to the service page.
       this.$router.push({
-        name: 'services-updated',
-        params: { service: this.service.id },
+        name: "services-updated",
+        params: { service: this.service.id }
       });
     },
     async onPreview() {
       this.updateRequest = await this.onSubmit(true);
     },
     onTabChange({ index }) {
-      this.tabs.forEach((tab) => (tab.active = false));
+      this.tabs.forEach(tab => (tab.active = false));
       const tabId = this.allowedTabs[index].id;
-      this.tabs.find((tab) => tab.id === tabId).active = true;
+      this.tabs.find(tab => tab.id === tabId).active = true;
     },
     onNext() {
       const currentTabIndex = this.allowedTabs.findIndex(
-        (tab) => tab.active === true
+        tab => tab.active === true
       );
-      this.tabs.forEach((tab) => (tab.active = false));
+      this.tabs.forEach(tab => (tab.active = false));
       const newTabId = this.allowedTabs[currentTabIndex + 1].id;
-      this.tabs.find((tab) => tab.id === newTabId).active = true;
+      this.tabs.find(tab => tab.id === newTabId).active = true;
       this.scrollToTop();
     },
     scrollToTop() {
-      document.getElementById('main-content').scrollIntoView();
+      document.getElementById("main-content").scrollIntoView();
     },
     isTabActive(id) {
-      const tab = this.allowedTabs.find((tab) => tab.id === id);
+      const tab = this.allowedTabs.find(tab => tab.id === id);
 
       return tab === undefined ? false : tab.active;
-    },
+    }
   },
   created() {
     this.fetchService();
-  },
+  }
 };
 </script>

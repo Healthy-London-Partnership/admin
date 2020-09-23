@@ -42,18 +42,18 @@
 </template>
 
 <script>
-import http from '@/http';
-import Form from '@/classes/Form';
-import OrganisationForm from '@/views/organisations/forms/OrganisationForm';
+import http from "@/http";
+import Form from "@/classes/Form";
+import OrganisationForm from "@/views/organisations/forms/OrganisationForm";
 
 export default {
-  name: 'EditOrganisation',
+  name: "EditOrganisation",
   components: { OrganisationForm },
   data() {
     return {
       loading: false,
       organisation: null,
-      form: null,
+      form: null
     };
   },
   methods: {
@@ -68,14 +68,14 @@ export default {
         name: this.organisation.name,
         slug: this.organisation.slug,
         description: this.organisation.description,
-        url: this.organisation.url || '',
-        email: this.organisation.email || '',
-        phone: this.organisation.phone || '',
+        url: this.organisation.url || "",
+        email: this.organisation.email || "",
+        phone: this.organisation.phone || "",
         social_medias: this.organisation.social_medias,
         location_id: this.organisation.location
           ? this.organisation.location.id
           : null,
-        logo_file_id: null,
+        logo_file_id: null
       });
 
       this.loading = false;
@@ -94,17 +94,20 @@ export default {
           if (data.description === this.organisation.description) {
             delete data.description;
           }
-          if (data.url === (this.organisation.url || '')) {
+          if (data.url === (this.organisation.url || "")) {
             delete data.url;
           }
-          if (data.email === (this.organisation.email || '')) {
+          if (data.email === (this.organisation.email || "")) {
             delete data.email;
           }
-          if (data.phone === (this.organisation.phone || '')) {
+          if (data.phone === (this.organisation.phone || "")) {
             delete data.phone;
           }
 
-          if (data.location_id === (this.organisation.location ? this.organisation.location.id : null)) {
+          if (
+            data.location_id ===
+            (this.organisation.location ? this.organisation.location.id : null)
+          ) {
             delete data.location_id;
           }
 
@@ -124,13 +127,13 @@ export default {
         }
       );
       this.$router.push({
-        name: 'organisations-updated',
-        params: { organisation: this.organisation.id },
+        name: "organisations-updated",
+        params: { organisation: this.organisation.id }
       });
-    },
+    }
   },
   created() {
     this.fetchOrganisation();
-  },
+  }
 };
 </script>

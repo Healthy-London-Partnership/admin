@@ -61,7 +61,7 @@ export default {
     return {
       loading: false,
       organisationAdminInvite: null
-    }
+    };
   },
 
   methods: {
@@ -70,12 +70,14 @@ export default {
 
       try {
         const {
-          data: {
-            data: organisationAdminInvite
-          }
-        } = await http.get(`/organisation-admin-invites/${this.$route.params.organisationAdminInvite}`)
+          data: { data: organisationAdminInvite }
+        } = await http.get(
+          `/organisation-admin-invites/${
+            this.$route.params.organisationAdminInvite
+          }`
+        );
 
-        this.organisationAdminInvite = organisationAdminInvite
+        this.organisationAdminInvite = organisationAdminInvite;
       } catch (e) {
         this.$router.push("/404");
       }
@@ -87,5 +89,5 @@ export default {
   created() {
     this.fetchOrganisationAdminInvite();
   }
-}
+};
 </script>

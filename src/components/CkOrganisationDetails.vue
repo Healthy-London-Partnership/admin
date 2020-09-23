@@ -64,7 +64,7 @@
 import http from "@/http";
 
 export default {
-  name: 'CkOrganisationDetails',
+  name: "CkOrganisationDetails",
   props: {
     organisation: {
       type: Object,
@@ -76,14 +76,16 @@ export default {
     return {
       inviteUrl: null,
       generatingInviteUrl: false
-    }
+    };
   },
 
   methods: {
     async onGenerateInviteUrl() {
       this.generatingInviteUrl = true;
 
-      const { data: { data } } = await http.post("/organisation-admin-invites", {
+      const {
+        data: { data }
+      } = await http.post("/organisation-admin-invites", {
         organisations: [
           {
             organisation_id: this.organisation.id,
@@ -95,7 +97,9 @@ export default {
       console.log();
       this.inviteUrl = {
         relative: `/organisation-admin-invites/${data[0].id}`,
-        absolute: `${window.location.protocol}//${window.location.host}/organisation-admin-invites/${data[0].id}`
+        absolute: `${window.location.protocol}//${
+          window.location.host
+        }/organisation-admin-invites/${data[0].id}`
       };
 
       this.generatingInviteUrl = false;
@@ -103,16 +107,16 @@ export default {
 
     humanReadableSocialMedia(type) {
       switch (type) {
-        case 'twitter':
-          return 'Twitter';
-        case 'facebook':
-          return 'Facebook';
-        case 'instagram':
-          return 'Instagram';
-        case 'youtube':
-          return 'YouTube';
-        case 'other':
-          return 'Other';
+        case "twitter":
+          return "Twitter";
+        case "facebook":
+          return "Facebook";
+        case "instagram":
+          return "Instagram";
+        case "youtube":
+          return "YouTube";
+        case "other":
+          return "Other";
       }
     }
   },
@@ -122,9 +126,9 @@ export default {
       return [
         this.organisation.location.address_line_1,
         this.organisation.location.city,
-        this.organisation.location.postcode,
-      ].join(', ');
-    },
+        this.organisation.location.postcode
+      ].join(", ");
+    }
   }
 };
 </script>

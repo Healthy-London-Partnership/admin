@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import Form from "@/classes/Form"
+import Form from "@/classes/Form";
 import axios from "axios";
 
 const http = axios.create({
@@ -118,15 +118,19 @@ export default {
     return {
       loading: false,
       organisationAdminInvite: null,
-      form: new Form({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        password: "",
-        password_confirmed: ""
-      }, {}, http)
-    }
+      form: new Form(
+        {
+          first_name: "",
+          last_name: "",
+          email: "",
+          phone: "",
+          password: "",
+          password_confirmed: ""
+        },
+        {},
+        http
+      )
+    };
   },
 
   methods: {
@@ -135,12 +139,14 @@ export default {
 
       try {
         const {
-          data: {
-            data: organisationAdminInvite
-          }
-        } = await http.get(`/organisation-admin-invites/${this.$route.params.organisationAdminInvite}`)
+          data: { data: organisationAdminInvite }
+        } = await http.get(
+          `/organisation-admin-invites/${
+            this.$route.params.organisationAdminInvite
+          }`
+        );
 
-        this.organisationAdminInvite = organisationAdminInvite
+        this.organisationAdminInvite = organisationAdminInvite;
       } catch (e) {
         this.$router.push("/404");
       }
@@ -160,9 +166,11 @@ export default {
 
       try {
         await this.form.post(
-          `/organisation-admin-invites/${this.organisationAdminInvite.id}/submit`
+          `/organisation-admin-invites/${
+            this.organisationAdminInvite.id
+          }/submit`
         );
-        this.$router.push({ name: 'organisation-admin-invites-submitted' });
+        this.$router.push({ name: "organisation-admin-invites-submitted" });
       } catch (exception) {
         //
       }
@@ -172,5 +180,5 @@ export default {
   created() {
     this.fetchOrganisationAdminInvites();
   }
-}
+};
 </script>

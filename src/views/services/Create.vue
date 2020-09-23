@@ -145,17 +145,17 @@
 </template>
 
 <script>
-import Form from '@/classes/Form';
-import DetailsTab from '@/views/services/forms/DetailsTab';
-import DescriptionTab from '@/views/services/forms/DescriptionTab';
-import AdditionalInfoTab from '@/views/services/forms/AdditionalInfoTab';
-import UsefulInfoTab from '@/views/services/forms/UsefulInfoTab';
-import WhoForTab from '@/views/services/forms/WhoForTab';
-import ReferralTab from '@/views/services/forms/ReferralTab';
-import TaxonomiesTab from '@/views/services/forms/TaxonomiesTab';
+import Form from "@/classes/Form";
+import DetailsTab from "@/views/services/forms/DetailsTab";
+import DescriptionTab from "@/views/services/forms/DescriptionTab";
+import AdditionalInfoTab from "@/views/services/forms/AdditionalInfoTab";
+import UsefulInfoTab from "@/views/services/forms/UsefulInfoTab";
+import WhoForTab from "@/views/services/forms/WhoForTab";
+import ReferralTab from "@/views/services/forms/ReferralTab";
+import TaxonomiesTab from "@/views/services/forms/TaxonomiesTab";
 
 export default {
-  name: 'CreateService',
+  name: "CreateService",
   components: {
     DetailsTab,
     DescriptionTab,
@@ -163,75 +163,75 @@ export default {
     UsefulInfoTab,
     WhoForTab,
     ReferralTab,
-    TaxonomiesTab,
+    TaxonomiesTab
   },
   data() {
     return {
       form: new Form({
         id: null,
         organisation_id: null,
-        name: '',
-        slug: '',
-        type: 'service',
-        status: 'inactive',
+        name: "",
+        slug: "",
+        type: "service",
+        status: "inactive",
         is_national: true,
-        intro: '',
-        description: '',
+        intro: "",
+        description: "",
         wait_time: null,
         is_free: null,
-        fees_text: '',
-        fees_url: '',
-        testimonial: '',
-        video_embed: '',
-        url: '',
-        contact_name: '',
-        contact_phone: '',
-        contact_email: '',
+        fees_text: "",
+        fees_url: "",
+        testimonial: "",
+        video_embed: "",
+        url: "",
+        contact_name: "",
+        contact_phone: "",
+        contact_email: "",
         show_referral_disclaimer: false,
-        referral_method: 'none',
-        referral_button_text: '',
-        referral_email: '',
-        referral_url: '',
+        referral_method: "none",
+        referral_button_text: "",
+        referral_email: "",
+        referral_url: "",
         criteria: {
-          age_group: '',
-          disability: '',
-          employment: '',
-          gender: '',
-          housing: '',
-          income: '',
-          language: '',
-          other: '',
+          age_group: "",
+          disability: "",
+          employment: "",
+          gender: "",
+          housing: "",
+          income: "",
+          language: "",
+          other: ""
         },
         useful_infos: [
           {
-            title: '',
-            description: '',
-            order: 1,
-          },
+            title: "",
+            description: "",
+            order: 1
+          }
         ],
         offerings: [],
         social_medias: [],
         gallery_items: [],
         category_taxonomies: [],
-        logo_file_id: null,
+        logo_file_id: null
       }),
       errors: {},
       tabs: [
-        { id: 'details', heading: 'Details', active: true },
-        { id: 'additional-info', heading: 'Additional info', active: false },
-        { id: 'useful-info', heading: 'Good to know', active: false },
-        { id: 'who-for', heading: 'Who is it for?', active: false },
-        { id: 'taxonomies', heading: 'Taxonomies', active: false },
-        { id: 'description', heading: 'Description', active: false },
-        { id: 'referral', heading: 'Referral', active: false },
-      ],
+        { id: "details", heading: "Details", active: true },
+        { id: "additional-info", heading: "Additional info", active: false },
+        { id: "useful-info", heading: "Good to know", active: false },
+        { id: "who-for", heading: "Who is it for?", active: false },
+        { id: "taxonomies", heading: "Taxonomies", active: false },
+        { id: "description", heading: "Description", active: false },
+        { id: "referral", heading: "Referral", active: false }
+      ]
     };
   },
   computed: {
     allowedTabs() {
       if (!this.auth.isGlobalAdmin) {
         const taxonomiesTabIndex = this.tabs.findIndex(
-          (tab) => tab.id === 'taxonomies'
+          tab => tab.id === "taxonomies"
         );
         const tabs = this.tabs.slice();
         tabs.splice(taxonomiesTabIndex, 1);
@@ -240,16 +240,16 @@ export default {
       }
 
       return this.tabs;
-    },
+    }
   },
   methods: {
     async onSubmit() {
-      const data = await this.form.post('/services', (config, data) => {
+      const data = await this.form.post("/services", (config, data) => {
         // Remove useful info if only item and empty.
         if (
           data.useful_infos.length === 1 &&
-          data.useful_infos[0].title === '' &&
-          data.useful_infos[0].description === ''
+          data.useful_infos[0].title === "" &&
+          data.useful_infos[0].description === ""
         ) {
           data.useful_infos = [];
         }
@@ -260,32 +260,32 @@ export default {
       await this.auth.fetchUser();
 
       this.$router.push({
-        name: 'services-post-create',
-        params: { service: serviceId },
+        name: "services-post-create",
+        params: { service: serviceId }
       });
     },
     onTabChange({ index }) {
-      this.tabs.forEach((tab) => (tab.active = false));
+      this.tabs.forEach(tab => (tab.active = false));
       const tabId = this.allowedTabs[index].id;
-      this.tabs.find((tab) => tab.id === tabId).active = true;
+      this.tabs.find(tab => tab.id === tabId).active = true;
     },
     onNext() {
       const currentTabIndex = this.allowedTabs.findIndex(
-        (tab) => tab.active === true
+        tab => tab.active === true
       );
-      this.tabs.forEach((tab) => (tab.active = false));
+      this.tabs.forEach(tab => (tab.active = false));
       const newTabId = this.allowedTabs[currentTabIndex + 1].id;
-      this.tabs.find((tab) => tab.id === newTabId).active = true;
+      this.tabs.find(tab => tab.id === newTabId).active = true;
       this.scrollToTop();
     },
     scrollToTop() {
-      document.getElementById('main-content').scrollIntoView();
+      document.getElementById("main-content").scrollIntoView();
     },
     isTabActive(id) {
-      const tab = this.allowedTabs.find((tab) => tab.id === id);
+      const tab = this.allowedTabs.find(tab => tab.id === id);
 
       return tab === undefined ? false : tab.active;
-    },
-  },
+    }
+  }
 };
 </script>

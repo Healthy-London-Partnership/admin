@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       confirming: false
-    }
+    };
   },
 
   methods: {
@@ -72,7 +72,11 @@ export default {
       this.confirming = true;
 
       try {
-        await http.post(`/pending-organisation-admins/${this.$route.params.pendingOrganisationAdmin}/confirm`);
+        await http.post(
+          `/pending-organisation-admins/${
+            this.$route.params.pendingOrganisationAdmin
+          }/confirm`
+        );
       } catch (e) {
         this.$router.push("/404");
       }
@@ -84,5 +88,5 @@ export default {
   created() {
     this.confirmPendingOrganisationAdmin();
   }
-}
+};
 </script>

@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       faqsLink: `${process.env.VUE_APP_FRONTEND_URI}/about`
-    }
+    };
   }
-}
+};
 </script>
