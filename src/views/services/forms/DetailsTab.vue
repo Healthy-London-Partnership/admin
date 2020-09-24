@@ -120,98 +120,99 @@
 </template>
 
 <script>
-import CkImageInput from "@/components/Ck/CkImageInput";
-import CkGalleryItemsInput from "@/views/services/inputs/GalleryItemsInput";
+import CkImageInput from '@/components/Ck/CkImageInput';
+import CkGalleryItemsInput from '@/views/services/inputs/GalleryItemsInput';
 
 export default {
-  name: "DetailsTab",
+  name: 'DetailsTab',
   components: { CkImageInput, CkGalleryItemsInput },
   props: {
     errors: {
-      required: true
+      required: true,
     },
     isNew: {
       required: false,
       type: Boolean,
-      default: false
+      default: false,
     },
     name: {
-      required: true
+      required: true,
     },
     slug: {
-      required: true
+      required: true,
     },
     type: {
-      required: true
+      required: true,
     },
     organisation_id: {
-      required: false
+      required: false,
     },
     url: {
-      required: true
+      required: true,
     },
     status: {
-      required: true
+      required: true,
     },
     gallery_items: {
-      required: true
+      required: true,
     },
     id: {
       required: false,
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
-      organisations: [{ text: "Please select", value: null, disabled: true }],
+      organisations: [{ text: 'Please select', value: null, disabled: true }],
       loading: false,
       typeOptions: [
-        { text: "It is a Service", value: "service" },
-        { text: "It is an Activity", value: "activity" },
-        { text: "It is a Club", value: "club" },
-        { text: "It is a Group", value: "group" },
-        { text: "It is a Helpline", value: "helpline" },
-        { text: "It is an Information", value: "information" },
-        { text: "It is an App", value: "app" }
+        { text: 'It is a Service', value: 'service' },
+        { text: 'It is an Activity', value: 'activity' },
+        { text: 'It is a Club', value: 'club' },
+        { text: 'It is a Group', value: 'group' },
+        { text: 'It is a Helpline', value: 'helpline' },
+        { text: 'It is an Information', value: 'information' },
+        { text: 'It is an App', value: 'app' },
+        { text: 'It is an Advice', value: 'advice' },
       ],
       statusOptions: [
-        { label: "Enabled", value: "active" },
-        { label: "Disabled", value: "inactive" }
-      ]
+        { label: 'Enabled', value: 'active' },
+        { label: 'Disabled', value: 'inactive' },
+      ],
     };
   },
   computed: {
     logoHelpHref() {
-      const to = "info@connectedtogether.org.uk";
-      const subject = "Help uploading service logo";
+      const to = 'info@connectedtogether.org.uk';
+      const subject = 'Help uploading service logo';
 
       return `mailto:${to}?subject=${encodeURIComponent(subject)}`;
-    }
+    },
   },
   methods: {
     async fetchOrganisations() {
       this.loading = true;
-      let fetchedOrganisations = await this.fetchAll("/organisations", {
-        "filter[has_permission]": true
+      let fetchedOrganisations = await this.fetchAll('/organisations', {
+        'filter[has_permission]': true,
       });
-      fetchedOrganisations = fetchedOrganisations.map(organisation => {
+      fetchedOrganisations = fetchedOrganisations.map((organisation) => {
         return { text: organisation.name, value: organisation.id };
       });
       this.organisations = [...this.organisations, ...fetchedOrganisations];
       this.loading = false;
     },
     onNameInput(name) {
-      this.$emit("update:name", name);
-      this.$emit("clear", "name");
+      this.$emit('update:name', name);
+      this.$emit('clear', 'name');
 
       if (this.auth.isGlobalAdmin || this.isNew) {
-        this.$emit("update:slug", this.slugify(name));
-        this.$emit("clear", "slug");
+        this.$emit('update:slug', this.slugify(name));
+        this.$emit('clear', 'slug');
       }
-    }
+    },
   },
   created() {
     this.fetchOrganisations();
-  }
+  },
 };
 </script>
