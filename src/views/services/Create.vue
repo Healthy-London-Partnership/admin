@@ -259,10 +259,16 @@ export default {
       // Refetch the user as new permissions added for the new service.
       await this.auth.fetchUser();
 
-      this.$router.push({
-        name: "services-post-create",
-        params: { service: serviceId }
-      });
+      if (data.data.is_national) {
+        // Cannot add locations so go direct to Service view
+        this.$router.push({ path: `/services/${serviceId}` });
+      } else {
+        // Add locations if required
+        this.$router.push({
+          name: "services-post-create",
+          params: { service: serviceId }
+        });
+      }
     },
     onTabChange({ index }) {
       this.tabs.forEach(tab => (tab.active = false));
