@@ -68,6 +68,12 @@
           <gov-table-cell>{{ service.intro }}</gov-table-cell>
         </gov-table-row>
 
+        <gov-table-row v-if="service.hasOwnProperty('is_national')">
+          <gov-table-header top scope="row">Is national</gov-table-header>
+          <gov-table-cell>{{ original.is_national | isNational }}</gov-table-cell>
+          <gov-table-cell>{{ service.is_national | isNational }}</gov-table-cell>
+        </gov-table-row>
+
         <gov-table-row v-if="service.hasOwnProperty('status')">
           <gov-table-header top scope="row">Status</gov-table-header>
           <gov-table-cell>{{ original.status | status }}</gov-table-cell>
@@ -475,6 +481,10 @@ export default {
 
     isFree(isFree) {
       return isFree ? "Yes" : "No";
+    },
+
+    isNational(isNational) {
+      return isNational ? "Yes" : "No";
     },
 
     socialMediaType(type) {

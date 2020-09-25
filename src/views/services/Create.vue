@@ -43,6 +43,7 @@
               :organisation_id.sync="form.organisation_id"
               :url.sync="form.url"
               @update:logo_file_id="form.logo_file_id = $event"
+              :is_national.sync="form.is_national"
               :status.sync="form.status"
               :gallery_items.sync="form.gallery_items"
             >
@@ -173,6 +174,7 @@ export default {
         slug: "",
         type: "service",
         status: "inactive",
+        is_national: true,
         intro: "",
         description: "",
         wait_time: null,
@@ -257,10 +259,16 @@ export default {
       // Refetch the user as new permissions added for the new service.
       await this.auth.fetchUser();
 
-      this.$router.push({
-        name: "services-post-create",
-        params: { service: serviceId }
-      });
+      if (data.data.is_national) {
+        // Cannot add locations so go direct to Service view
+        this.$router.push({ path: `/services/${serviceId}` });
+      } else {
+        // Add locations if required
+        this.$router.push({
+          name: "services-post-create",
+          params: { service: serviceId }
+        });
+      }
     },
     onTabChange({ index }) {
       this.tabs.forEach(tab => (tab.active = false));

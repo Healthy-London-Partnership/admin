@@ -33,6 +33,7 @@
                   :url.sync="form.url"
                   @update:logo_file_id="form.logo_file_id = $event"
                   @update:logo="form.logo = $event"
+                  :is_national.sync="form.is_national"
                   :status.sync="form.status"
                   :gallery_items.sync="form.gallery_items"
                   :id="service.id"
@@ -248,6 +249,7 @@ export default {
         slug: this.service.slug,
         type: this.service.type,
         status: this.service.status,
+        is_national: this.service.is_national,
         intro: this.service.intro,
         description: this.service.description,
         wait_time: this.service.wait_time,
@@ -310,6 +312,9 @@ export default {
           }
           if (data.type === this.service.type) {
             delete data.type;
+          }
+          if (data.is_national === this.service.is_national) {
+            delete data.is_national;
           }
           if (data.status === this.service.status) {
             delete data.status;

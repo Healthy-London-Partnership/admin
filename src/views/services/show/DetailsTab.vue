@@ -48,6 +48,10 @@
           <gov-table-cell v-html="service.status === 'active' ? 'Enabled' : 'Disabled'" />
         </gov-table-row>
         <gov-table-row>
+          <gov-table-header top scope="row">National?</gov-table-header>
+          <gov-table-cell v-html="service.is_national ? 'Yes' : 'No'" />
+        </gov-table-row>
+        <gov-table-row>
           <gov-table-header top scope="row">Gallery items ({{ imageUrls.length }})</gov-table-header>
           <gov-table-cell style="width: 50%;">
             <ck-carousel v-if="imageUrls.length > 0" :image-urls="imageUrls"/>
