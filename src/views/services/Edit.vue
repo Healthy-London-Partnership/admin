@@ -153,7 +153,6 @@ import UsefulInfoTab from "@/views/services/forms/UsefulInfoTab";
 import WhoForTab from "@/views/services/forms/WhoForTab";
 import ReferralTab from "@/views/services/forms/ReferralTab";
 import TaxonomiesTab from "@/views/services/forms/TaxonomiesTab";
-import ServiceDetails from "@/views/update-requests/show/ServiceDetails";
 
 export default {
   name: "EditService",
@@ -164,8 +163,7 @@ export default {
     UsefulInfoTab,
     WhoForTab,
     ReferralTab,
-    TaxonomiesTab,
-    ServiceDetails
+    TaxonomiesTab
   },
   data() {
     return {
