@@ -5,7 +5,7 @@
       <vue-headful :title="`${appName} - Edit Service: ${service.name}`" />
 
       <!-- Edit form -->
-      <div v-show="updateRequest === null">
+      <div>
         <gov-back-link :to="{ name: 'services-show', params: { service: service.id } }">Back to {{ service.type }}</gov-back-link>
         <gov-main-wrapper>
           <gov-grid-row>
@@ -132,48 +132,13 @@
 
           <gov-grid-row>
             <gov-grid-column width="two-thirds">
-              <gov-warning-text>
-                You will be able to preview your changes before you submit them
-                as an update request.
-              </gov-warning-text>
-
-              <gov-button v-if="form.$submitting" disabled type="submit">Validating...</gov-button>
-              <gov-button v-else @click="onPreview" type="submit">Review changes</gov-button>
+              <gov-button v-if="form.$submitting" disabled type="submit">Updating...</gov-button>
+              <gov-button v-else @click="onSubmit" type="submit">Update</gov-button>
               <ck-submit-error v-if="form.$errors.any()" />
             </gov-grid-column>
           </gov-grid-row>
         </gov-main-wrapper>
       </div>
-
-      <!-- Preview changes -->
-      <template v-if="updateRequest !== null">
-        <gov-back-link @click="updateRequest = null">Edit {{ service.type }}</gov-back-link>
-        <gov-main-wrapper>
-          <gov-grid-row>
-            <gov-grid-column width="full">
-              <gov-heading size="xl">Services</gov-heading>
-
-              <gov-heading size="m">Preview changes</gov-heading>
-
-              <service-details
-                update-request-id="PREVIEW"
-                requested-at="PREVIEW"
-                :service="updateRequest.data"
-                :logo-data-uri="form.logo"
-                :gallery-items-data-uris="form.gallery_items.map(galleryItem => galleryItem.image)"
-              />
-
-              <gov-warning-text>
-                Please be aware, by submitting these changes, any pending
-                updates may be overwritten.
-              </gov-warning-text>
-
-              <gov-button v-if="form.$submitting" disabled type="submit">Requesting...</gov-button>
-              <gov-button v-else @click="onSubmit" type="submit">Request update</gov-button>
-            </gov-grid-column>
-          </gov-grid-row>
-        </gov-main-wrapper>
-      </template>
     </template>
   </gov-width-container>
 </template>
@@ -216,8 +181,7 @@ export default {
       ],
       errors: {},
       service: null,
-      loading: false,
-      updateRequest: null
+      loading: false
     };
   },
   computed: {
@@ -293,13 +257,10 @@ export default {
 
       this.loading = false;
     },
-    async onSubmit(preview = false) {
-      const response = await this.form.put(
+    async onSubmit() {
+      await this.form.put(
         `/services/${this.service.id}`,
         (config, data) => {
-          // Append preview mode if enabled.
-          data.preview = preview;
-
           // Remove any unchanged values.
           if (data.organisation_id === this.service.organisation_id) {
             delete data.organisation_id;
@@ -465,20 +426,11 @@ export default {
         }
       );
 
-      // Return the response if only a preview.
-      if (preview) {
-        response.data.id = this.service.id;
-        return response;
-      }
-
       // Otherwise, forward the user to the service page.
       this.$router.push({
-        name: "services-updated",
+        name: "services-show",
         params: { service: this.service.id }
       });
-    },
-    async onPreview() {
-      this.updateRequest = await this.onSubmit(true);
     },
     onTabChange({ index }) {
       this.tabs.forEach(tab => (tab.active = false));
