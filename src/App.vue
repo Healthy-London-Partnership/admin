@@ -62,11 +62,6 @@ export default {
           text: "Admin",
           to: { name: "admin-index" },
           hide: !Auth.isGlobalAdmin
-        },
-        {
-          text: "Update requests",
-          to: { name: "update-requests-index" },
-          hide: !Auth.isGlobalAdmin
         }
       ];
     },

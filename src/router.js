@@ -241,18 +241,6 @@ let router = new Router({
       meta: { auth: true }
     },
     {
-      path: "/update-requests",
-      name: "update-requests-index",
-      component: () => import("@/views/update-requests/Index"),
-      meta: { auth: true }
-    },
-    {
-      path: "/update-requests/:updateRequest",
-      name: "update-requests-show",
-      component: () => import("@/views/update-requests/Show"),
-      meta: { auth: true }
-    },
-    {
       path: "/reports",
       component: () => import("@/views/reports/Index"),
       meta: { auth: true },

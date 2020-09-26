@@ -85,14 +85,6 @@
             Go to admin
           </gov-button>
         </gov-grid-column>
-
-        <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin">
-          <gov-heading size="l">Update Requests</gov-heading>
-          <gov-body>View, approve and reject update requests.</gov-body>
-          <gov-button start :to="{ name: 'update-requests-index' }">
-            Go to update requests
-          </gov-button>
-        </gov-grid-column>
       </gov-grid-row>
     </gov-main-wrapper>
   </gov-width-container>
