@@ -168,7 +168,9 @@ export default {
       }
 
       if (this.filters.has_category_taxonomies !== "") {
-        params["filter[has_category_taxonomies]"] = this.filters.has_category_taxonomies;
+        params[
+          "filter[has_category_taxonomies]"
+        ] = this.filters.has_category_taxonomies;
       }
 
       return params;
