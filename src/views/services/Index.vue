@@ -38,6 +38,18 @@
                     <gov-label for="filter[is_national]">National</gov-label>
                     <gov-select v-model="filters.is_national" id="filter[is_national]" name="filter[is_national]" :options="nationalOptions"/>
                   </gov-form-group>
+
+                  <gov-form-group>
+                    <gov-label for="filter[has_category_taxonomies]">
+                      Has Taxonomies
+                    </gov-label>
+                    <gov-select
+                      v-model="filters.has_category_taxonomies"
+                      id="filter[has_category_taxonomies]"
+                      name="filter[has_category_taxonomies]"
+                      :options="hasCategoryTaxonomiesOptions"
+                    />
+                  </gov-form-group>
                 </template>
               </ck-table-filters>
             </gov-grid-column>
@@ -102,7 +114,8 @@ export default {
         organisation_name: "",
         status: "",
         referral_method: "",
-        is_national: ""
+        is_national: "",
+        has_category_taxonomies: ""
       },
       statuses: [
         { value: "", text: "All" },
@@ -119,6 +132,11 @@ export default {
         { value: "", text: "All" },
         { value: true, text: "National" },
         { value: false, text: "Local" }
+      ],
+      hasCategoryTaxonomiesOptions: [
+        { value: "", text: "All" },
+        { value: true, text: "Yes" },
+        { value: false, text: "No" }
       ]
     };
   },
@@ -147,6 +165,12 @@ export default {
 
       if (this.filters.is_national !== "") {
         params["filter[is_national]"] = this.filters.is_national;
+      }
+
+      if (this.filters.has_category_taxonomies !== "") {
+        params[
+          "filter[has_category_taxonomies]"
+        ] = this.filters.has_category_taxonomies;
       }
 
       return params;

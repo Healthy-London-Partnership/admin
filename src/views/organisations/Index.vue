@@ -11,13 +11,58 @@
 
           <gov-grid-row>
             <gov-grid-column width="two-thirds">
-              <ck-table-filters @search="onSearch" hide-extra>
+              <ck-table-filters @search="onSearch">
                 <gov-form-group>
                   <gov-label for="filter[name]">Organisation name</gov-label>
                   <gov-input v-model="filters.name" id="filter[name]" name="filter[name]" type="search"/>
                 </gov-form-group>
+
+                <template slot="extra-filters">
+                  <gov-form-group>
+                    <gov-label for="filter[has_email]">Has email</gov-label>
+                    <gov-select
+                      v-model="filters.has_email"
+                      id="filter[has_email]"
+                      name="filter[has_email]"
+                      :options="hasEmailOptions"
+                    />
+                  </gov-form-group>
+
+                  <gov-form-group>
+                    <gov-label for="filter[has_social_medias]">
+                      Has social medias
+                    </gov-label>
+                    <gov-select
+                      v-model="filters.has_social_medias"
+                      id="filter[has_social_medias]"
+                      name="filter[has_social_medias]"
+                      :options="hasSocialMediasOptions"
+                    />
+                  </gov-form-group>
+
+                  <gov-form-group>
+                    <gov-label for="filter[has_phone]">Has phone</gov-label>
+                    <gov-select
+                      v-model="filters.has_phone"
+                      id="filter[has_phone]"
+                      name="filter[has_phone]"
+                      :options="hasPhoneOptions"
+                    />
+                  </gov-form-group>
+
+                  <gov-form-group>
+                    <gov-label for="filter[has_services]">Has services</gov-label>
+                    <gov-select
+                      v-model="filters.has_services"
+                      id="filter[has_services]"
+                      name="filter[has_services]"
+                      :options="hasServicesOptions"
+                    />
+                  </gov-form-group>
+                </template>
               </ck-table-filters>
             </gov-grid-column>
+
             <gov-grid-column v-if="auth.isGlobalAdmin" width="one-third">
               <gov-button @click="onAddOrganisation" type="submit" success expand>Add organisation</gov-button>
               <gov-button v-if="auth.isSuperAdmin" :to="{name: 'organisations-import'}" type="submit" success expand>Bulk import</gov-button>
@@ -93,10 +138,34 @@ export default {
   data() {
     return {
       filters: {
-        name: ""
+        name: "",
+        has_email: "",
+        has_social_medias: "",
+        has_phone: "",
+        has_services: ""
       },
       organisationInvites: [],
-      inviting: false
+      inviting: false,
+      hasEmailOptions: [
+        { value: "", text: "All" },
+        { value: true, text: "Yes" },
+        { value: false, text: "No" }
+      ],
+      hasSocialMediasOptions: [
+        { value: "", text: "All" },
+        { value: true, text: "Yes" },
+        { value: false, text: "No" }
+      ],
+      hasPhoneOptions: [
+        { value: "", text: "All" },
+        { value: true, text: "Yes" },
+        { value: false, text: "No" }
+      ],
+      hasServicesOptions: [
+        { value: "", text: "All" },
+        { value: true, text: "Yes" },
+        { value: false, text: "No" }
+      ]
     };
   },
   computed: {
@@ -107,6 +176,22 @@ export default {
 
       if (this.filters.name !== "") {
         params["filter[name]"] = this.filters.name;
+      }
+
+      if (this.filters.has_email !== "") {
+        params["filter[has_email]"] = this.filters.has_email;
+      }
+
+      if (this.filters.has_social_medias !== "") {
+        params["filter[has_social_medias]"] = this.filters.has_social_medias;
+      }
+
+      if (this.filters.has_phone !== "") {
+        params["filter[has_phone]"] = this.filters.has_phone;
+      }
+
+      if (this.filters.has_services !== "") {
+        params["filter[has_services]"] = this.filters.has_services;
       }
 
       return params;
