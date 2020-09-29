@@ -12,7 +12,7 @@
           <gov-heading size="xl">Add a new Service Page</gov-heading>
 
           <gov-body>
-            You’re about to add a service/club/activity/group/helpline/information/app
+            You’re about to add a service/club/activity/group/helpline/information/app/advice
             to {{appName}}. Here are some things you should know:
           </gov-body>
 
