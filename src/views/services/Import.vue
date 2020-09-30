@@ -1,15 +1,15 @@
 <template>
     <gov-width-container>
-        <vue-headful :title="`${appName} - List Organisations`" />
+        <vue-headful :title="`${appName} - Import Services`" />
 
         <gov-back-link :to="{ name: 'dashboard' }">Back to dashboard</gov-back-link>
         <gov-main-wrapper>
         <gov-grid-row>
             <gov-grid-column width="full">
 
-                <gov-heading size="xl">Bulk upload organisations</gov-heading>
+                <gov-heading size="xl">Bulk upload services</gov-heading>
                 <gov-body>
-                    <p>This tool allows you to upload the details of more than one organisation into the platform. You can add up to 5000 organisations in a single document.</p>
+                    <p>This tool allows you to upload the details of more than one service into the platform. You can add up to 5000 services in a single document.</p>
 
                     <p>The import tool requires all documents to be either in the .xls or .xlsx format. Please note that .csv files are not supported.</p>
 
@@ -38,20 +38,20 @@
                     <gov-table-row>
                       <gov-table-header
                         v-for="(field, index) in fields"
-                        :key="`OrganisiationImportErrorHeader-${index}`"
+                        :key="`ServiceImportErrorHeader-${index}`"
                       >
                         {{ field }}
                       </gov-table-header>
                     </gov-table-row>
                   </template>
                   <template slot="body">
-                    <gov-table-row v-for="(error, index) in invalidRows" :key="`OrganisiationImportErrorRow-${index}`">
+                    <gov-table-row v-for="(error, index) in invalidRows" :key="`ServiceImportErrorRow-${index}`">
                       <gov-table-cell
                         v-for="(field, index) in fields"
-                        :key="`OrganisiationImportErrorField-${index}`">{{error.row[index]}}
+                        :key="`ServiceImportErrorField-${index}`">{{error.row[index]}}
                         <gov-error-message
                           v-if="error.errors[index]"
-                          :for="`OrganisiationImportErrorField-${index}`">{{error.errors[index][0]}}</gov-error-message>
+                          :for="`ServiceImportErrorField-${index}`">{{error.errors[index][0]}}</gov-error-message>
                       </gov-table-cell>
                     </gov-table-row>
                   </template>
@@ -100,13 +100,13 @@ export default {
       return this.uploadRows
         ? 'Imported ' +
             this.uploadRows +
-            (this.uploadRows === 1 ? ' Organisation' : ' Organisations')
+            (this.uploadRows === 1 ? ' Service' : ' Services')
         : null;
     },
     exampleSpreadsheetDownloadLink() {
       return `${
         process.env.VUE_APP_API_URI
-      }/downloads/organisations_import_example.xls`;
+      }/downloads/services_import_example.xls`;
     },
   },
 
@@ -120,7 +120,7 @@ export default {
       this.form.spreadsheet = this.file;
 
       this.form
-        .post('/organisations/import')
+        .post('/services/import')
         .then((response) => {
           this.uploadRows = response.data.imported_row_count;
           this.file = null;

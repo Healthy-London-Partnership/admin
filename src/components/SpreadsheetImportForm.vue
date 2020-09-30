@@ -2,8 +2,8 @@
   <ck-file-input
     :value="spreadsheet"
     @input="onInput('spreadsheet', $event === null ? null : $event.content)"
-    id="organisations"
-    label="Upload Organisations Spreadsheet (.xls or .xlsx)"
+    id="spreadsheet"
+    label="Upload Spreadsheet (.xls or .xlsx)"
     accept="*"
     :error="errors.get('invalidRows')"
     :hint="feedback"
@@ -13,29 +13,29 @@
 
 <script>
 export default {
-  name: "OrganisationsImportForm",
+  name: 'SpreadsheetImportForm',
 
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
     },
 
     spreadsheet: {
-      required: true
+      required: true,
     },
 
     feedback: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
 
   methods: {
     onInput(field, value) {
       this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
-    }
-  }
+      this.$emit('clear', field);
+    },
+  },
 };
 </script>

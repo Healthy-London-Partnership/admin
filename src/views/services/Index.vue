@@ -38,6 +38,7 @@
             </gov-grid-column>
             <gov-grid-column v-if="auth.isOrganisationAdmin()" width="one-third">
               <gov-button @click="onAddService" type="submit" success expand>Add service</gov-button>
+              <gov-button v-if="auth.isSuperAdmin" :to="{name: 'services-import'}" type="submit" success expand>Bulk import</gov-button>
             </gov-grid-column>
           </gov-grid-row>
 
@@ -80,58 +81,58 @@
 </template>
 
 <script>
-import CkResourceListingTable from "@/components/Ck/CkResourceListingTable.vue";
-import CkTableFilters from "@/components/Ck/CkTableFilters.vue";
+import CkResourceListingTable from '@/components/Ck/CkResourceListingTable.vue';
+import CkTableFilters from '@/components/Ck/CkTableFilters.vue';
 
 export default {
-  name: "ListServices",
+  name: 'ListServices',
   components: { CkResourceListingTable, CkTableFilters },
   data() {
     return {
       filters: {
-        name: "",
-        organisation_name: "",
-        status: "",
-        referral_method: ""
+        name: '',
+        organisation_name: '',
+        status: '',
+        referral_method: '',
       },
       statuses: [
-        { value: "", text: "All" },
-        { value: "active", text: "Enabled" },
-        { value: "inactive", text: "Disabled" }
+        { value: '', text: 'All' },
+        { value: 'active', text: 'Enabled' },
+        { value: 'inactive', text: 'Disabled' },
       ],
       referralMethods: [
-        { value: "", text: "All" },
-        { value: "internal", text: "Internal" },
-        { value: "external", text: "External" },
-        { value: "none", text: "None" }
-      ]
+        { value: '', text: 'All' },
+        { value: 'internal', text: 'Internal' },
+        { value: 'external', text: 'External' },
+        { value: 'none', text: 'None' },
+      ],
     };
   },
   computed: {
     params() {
       const params = {
-        include: "organisation",
-        "filter[has_permission]": true
+        include: 'organisation',
+        'filter[has_permission]': true,
       };
 
-      if (this.filters.name !== "") {
-        params["filter[name]"] = this.filters.name;
+      if (this.filters.name !== '') {
+        params['filter[name]'] = this.filters.name;
       }
 
-      if (this.filters.organisation_name !== "") {
-        params["filter[organisation_name]"] = this.filters.organisation_name;
+      if (this.filters.organisation_name !== '') {
+        params['filter[organisation_name]'] = this.filters.organisation_name;
       }
 
-      if (this.filters.status !== "") {
-        params["filter[status]"] = this.filters.status;
+      if (this.filters.status !== '') {
+        params['filter[status]'] = this.filters.status;
       }
 
-      if (this.filters.referral_method !== "") {
-        params["filter[referral_method]"] = this.filters.referral_method;
+      if (this.filters.referral_method !== '') {
+        params['filter[referral_method]'] = this.filters.referral_method;
       }
 
       return params;
-    }
+    },
   },
   methods: {
     onSearch() {
@@ -139,21 +140,21 @@ export default {
       this.$refs.servicesTable.fetchResources();
     },
     onAddService() {
-      this.$router.push({ name: "services-pre-create" });
+      this.$router.push({ name: 'services-pre-create' });
     },
     displayStatus(status) {
       switch (status) {
-        case "active":
-          return "Enabled";
-        case "inactive":
-          return "Disabled";
+        case 'active':
+          return 'Enabled';
+        case 'inactive':
+          return 'Disabled';
         default:
           return status;
       }
     },
     displayReferralMethod(referralMethod) {
       return referralMethod.charAt(0).toUpperCase() + referralMethod.substr(1);
-    }
-  }
+    },
+  },
 };
 </script>
