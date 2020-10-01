@@ -32,30 +32,10 @@
             </gov-grid-row>
             <gov-grid-row v-if="invalidRows">
               <gov-grid-column width="full">
-                <gov-heading size="m">Invalid rows</gov-heading>
-                <gov-table>
-                  <template slot="header">
-                    <gov-table-row>
-                      <gov-table-header
-                        v-for="(field, index) in fields"
-                        :key="`OrganisiationImportErrorHeader-${index}`"
-                      >
-                        {{ field }}
-                      </gov-table-header>
-                    </gov-table-row>
-                  </template>
-                  <template slot="body">
-                    <gov-table-row v-for="(error, index) in invalidRows" :key="`OrganisiationImportErrorRow-${index}`">
-                      <gov-table-cell
-                        v-for="(field, index) in fields"
-                        :key="`OrganisiationImportErrorField-${index}`">{{error.row[index]}}
-                        <gov-error-message
-                          v-if="error.errors[index]"
-                          :for="`OrganisiationImportErrorField-${index}`">{{error.errors[index][0]}}</gov-error-message>
-                      </gov-table-cell>
-                    </gov-table-row>
-                  </template>
-                </gov-table>
+                <spreadsheet-import-errors
+                  :fields="fields"
+                  :invalidRows="invalidRows"
+                />
               </gov-grid-column>
             </gov-grid-row>
         </gov-main-wrapper>
@@ -64,12 +44,14 @@
 <script>
 import Form from '@/classes/Form';
 import SpreadsheetImportForm from '@/components/SpreadsheetImportForm';
+import SpreadsheetImportErrors from '@/components/SpreadsheetImportErrors';
 
 export default {
   name: 'OrganisationsImport',
   components: {
     Form,
     SpreadsheetImportForm,
+    SpreadsheetImportErrors,
   },
 
   data() {

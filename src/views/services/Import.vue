@@ -18,6 +18,12 @@
                     <p>Upon import, the tool will check the data you have provided to make sure it is valid. If there are any errors with the data, none of the data will be imported and you will be informed of the specific rows and data that are invalid.</p>
                 </gov-body>
 
+                <organisation-select-form
+                  filter="is_admin"
+                  label="Select the Organisation to assign the Services to"
+                  v-model="organisationId"
+                />
+
                 <spreadsheet-import-form
                     :errors="form.$errors"
                     :spreadsheet.sync="file"
@@ -27,35 +33,16 @@
 
                 <gov-button v-if="form.$submitting" disabled type="submit">Uploading...</gov-button>
                 <gov-button v-else @click="onSubmit" type="submit">Upload</gov-button>
+                <ck-loader v-if="form.$submitting">Please wait, this may take up to 5 minutes. Do not navigate away or refresh the page</ck-loader>
                 <ck-submit-error v-if="form.$errors.any()" />
             </gov-grid-column>
             </gov-grid-row>
             <gov-grid-row v-if="invalidRows">
               <gov-grid-column width="full">
-                <gov-heading size="m">Invalid rows</gov-heading>
-                <gov-table>
-                  <template slot="header">
-                    <gov-table-row>
-                      <gov-table-header
-                        v-for="(field, index) in fields"
-                        :key="`ServiceImportErrorHeader-${index}`"
-                      >
-                        {{ field }}
-                      </gov-table-header>
-                    </gov-table-row>
-                  </template>
-                  <template slot="body">
-                    <gov-table-row v-for="(error, index) in invalidRows" :key="`ServiceImportErrorRow-${index}`">
-                      <gov-table-cell
-                        v-for="(field, index) in fields"
-                        :key="`ServiceImportErrorField-${index}`">{{error.row[index]}}
-                        <gov-error-message
-                          v-if="error.errors[index]"
-                          :for="`ServiceImportErrorField-${index}`">{{error.errors[index][0]}}</gov-error-message>
-                      </gov-table-cell>
-                    </gov-table-row>
-                  </template>
-                </gov-table>
+                <spreadsheet-import-errors
+                  :fields="fields"
+                  :invalidRows="invalidRows"
+                />
               </gov-grid-column>
             </gov-grid-row>
         </gov-main-wrapper>
@@ -63,18 +50,24 @@
 </template>
 <script>
 import Form from '@/classes/Form';
+import OrganisationSelectForm from '@/views/organisations/forms/OrganisationSelectForm';
 import SpreadsheetImportForm from '@/components/SpreadsheetImportForm';
+import SpreadsheetImportErrors from '@/components/SpreadsheetImportErrors';
 
 export default {
   name: 'OrganisationsImport',
   components: {
     Form,
+    OrganisationSelectForm,
     SpreadsheetImportForm,
+    SpreadsheetImportErrors,
   },
 
   data() {
     return {
       file: null,
+
+      organisationId: null,
 
       uploadRows: null,
 
@@ -82,15 +75,40 @@ export default {
 
       form: new Form({
         spreadsheet: null,
+        organisation_id: null,
       }),
 
       fields: {
         index: 'Index',
         name: 'Name',
+        type: 'Type',
+        status: 'Status',
+        is_national: 'Is National',
+        intro: 'Introduction',
         description: 'Description',
-        email: 'Email',
-        phone: 'Phone',
+        wait_time: 'Wait Time',
+        is_free: 'Is Free',
+        fees_text: 'Fees Text',
+        fees_url: 'Fees URL',
+        testimonial: 'Testimonial',
+        video_embed: 'Video Embed',
         url: 'Url',
+        contact_name: 'Contact Name',
+        contact_phone: 'Contact Phone',
+        contact_email: 'Contact Email',
+        show_referral_disclaimer: 'Show Referral Disclaimer',
+        referral_method: 'Referral Method',
+        referral_button_text: 'Referral Button Text',
+        referral_email: 'Referral Email',
+        referral_url: 'Referral Url',
+        criteria_age_group: 'Age Group',
+        criteria_disability: 'Disability',
+        criteria_employment: 'Employment',
+        criteria_gender: 'Gender',
+        criteria_housing: 'Housing',
+        criteria_income: 'Income',
+        criteria_language: 'Language',
+        criteria_other: 'Other',
       },
     };
   },
@@ -118,16 +136,24 @@ export default {
     },
     async onSubmit() {
       this.form.spreadsheet = this.file;
+      this.form.organisation_id = this.organisationId;
 
       this.form
         .post('/services/import')
         .then((response) => {
           this.uploadRows = response.data.imported_row_count;
           this.file = null;
+          this.organisationId = null;
         })
         .catch((error) => {
-          this.invalidRows = error.data.errors.spreadsheet;
-          this.file = null;
+          if (error.data) {
+            this.invalidRows = error.data.errors.spreadsheet;
+            this.file = null;
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log(error.message);
+          }
         });
     },
   },

@@ -5,7 +5,7 @@
     id="spreadsheet"
     label="Upload Spreadsheet (.xls or .xlsx)"
     accept="*"
-    :error="errors.get('invalidRows')"
+    :error="errors.get('invalidRows') || errors.get('spreadsheet')"
     :hint="feedback"
   >
   </ck-file-input>
