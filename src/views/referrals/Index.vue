@@ -73,11 +73,9 @@
             <template slot="cell:2" slot-scope="{ resource: referral }">
               {{ referral.referee_name || '-' }}
             </template>
-
             <template slot="cell:3" slot-scope="{ resource: referral }">
               {{ $options.filters.status(referral.status) }}
             </template>
-
             <template slot="cell:4" slot-scope="{ resource: referral }">
               <div>
                 {{ formatDateTime(referral.created_at) }}

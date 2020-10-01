@@ -23,7 +23,7 @@
             </gov-grid-column>
           </gov-grid-row>
 
-          <gov-tabs :tabs="tabs">
+          <gov-tabs :tabs="allowedTabs">
             <router-view :service="service" />
           </gov-tabs>
 
@@ -67,6 +67,21 @@ export default {
         { heading: "Referral", to: { name: "services-show-referral" } }
       ]
     };
+  },
+  computed: {
+    allowedTabs() {
+      if (this.service.is_national) {
+        const locationsTabIndex = this.tabs.findIndex(
+          tab => tab.heading === "Locations"
+        );
+        const tabs = this.tabs.slice();
+        tabs.splice(locationsTabIndex, 1);
+
+        return tabs;
+      }
+
+      return this.tabs;
+    }
   },
   methods: {
     async fetchService() {

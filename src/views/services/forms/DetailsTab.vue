@@ -89,6 +89,16 @@
         </ck-image-input>
 
         <ck-radio-input
+          :value="is_national"
+          @input="$emit('update:is_national', $event); $emit('clear', 'is_national')"
+          id="is_national"
+          label="National?"
+          hint="Details if the service is only available at specific locations or can be accessed nationwide, e.g. via web or phone."
+          :options="isNationalOptions"
+          :error="errors.get('is_national')"
+        />
+
+        <ck-radio-input
           :value="status"
           @input="$emit('update:status', $event); $emit('clear', 'status')"
           id="status"
@@ -150,6 +160,9 @@ export default {
     url: {
       required: true
     },
+    is_national: {
+      required: true
+    },
     status: {
       required: true
     },
@@ -172,7 +185,8 @@ export default {
         { text: "It is a Group", value: "group" },
         { text: "It is a Helpline", value: "helpline" },
         { text: "It is an Information", value: "information" },
-        { text: "It is an App", value: "app" }
+        { text: "It is an App", value: "app" },
+        { text: "It is an Advice", value: "advice" }
       ],
       statusOptions: [
         { label: "Enabled", value: "active" },
@@ -186,6 +200,17 @@ export default {
       const subject = "Help uploading service logo";
 
       return `mailto:${to}?subject=${encodeURIComponent(subject)}`;
+    },
+    isNationalOptions() {
+      return [
+        { value: true, label: `Yes - The ${this.type} is nationwide` },
+        {
+          value: false,
+          label: `No - this ${
+            this.type
+          } is only available at specific locations`
+        }
+      ];
     }
   },
   methods: {

@@ -75,7 +75,8 @@ export default {
         { text: "It is a Group", value: "group" },
         { text: "It is a Helpline", value: "helpline" },
         { text: "It is an Information", value: "information" },
-        { text: "It is an App", value: "app" }
+        { text: "It is an App", value: "app" },
+        { text: "It is an Advice", value: "advice" }
       ]
     };
   }
