@@ -12,51 +12,51 @@
 </template>
 
 <script>
-import http from '@/http';
+import http from "@/http";
 
 export default {
   model: {
-    prop: 'organisationId',
-    event: 'change',
+    prop: "organisationId",
+    event: "change"
   },
   props: {
     filter: {
       type: String,
-      default: null,
+      default: null
     },
     label: {
       type: String,
-      default: 'Select Organisation',
+      default: "Select Organisation"
     },
     organisationId: {
       type: String,
-      default: '',
-    },
+      default: ""
+    }
   },
   data() {
     return {
-      organisations: [],
+      organisations: []
     };
   },
   computed: {
     organisationsFilter() {
-      return this.filter ? `?filter[${this.filter}]=true'` : '';
+      return this.filter ? `?filter[${this.filter}]=true'` : "";
     },
     organisationOptions() {
-      const orgs = this.organisations.map((o) => {
+      const orgs = this.organisations.map(o => {
         return {
           value: o.id,
           text: o.name,
-          disabled: false,
+          disabled: false
         };
       });
       orgs.splice(0, 0, {
-        value: '',
-        text: 'Please Select',
-        disabled: true,
+        value: "",
+        text: "Please Select",
+        disabled: true
       });
       return orgs;
-    },
+    }
   },
   methods: {
     async fetchOrganisations() {
@@ -66,11 +66,11 @@ export default {
         `/organisations${this.organisationsFilter}`
       );
       this.organisations = response.data.data;
-    },
+    }
   },
   created() {
     this.fetchOrganisations();
-  },
+  }
 };
 </script>
 

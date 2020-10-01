@@ -49,18 +49,18 @@
     </gov-width-container>
 </template>
 <script>
-import Form from '@/classes/Form';
-import OrganisationSelectForm from '@/views/organisations/forms/OrganisationSelectForm';
-import SpreadsheetImportForm from '@/components/SpreadsheetImportForm';
-import SpreadsheetImportErrors from '@/components/SpreadsheetImportErrors';
+import Form from "@/classes/Form";
+import OrganisationSelectForm from "@/views/organisations/forms/OrganisationSelectForm";
+import SpreadsheetImportForm from "@/components/SpreadsheetImportForm";
+import SpreadsheetImportErrors from "@/components/SpreadsheetImportErrors";
 
 export default {
-  name: 'OrganisationsImport',
+  name: "OrganisationsImport",
   components: {
     Form,
     OrganisationSelectForm,
     SpreadsheetImportForm,
-    SpreadsheetImportErrors,
+    SpreadsheetImportErrors
   },
 
   data() {
@@ -75,57 +75,57 @@ export default {
 
       form: new Form({
         spreadsheet: null,
-        organisation_id: null,
+        organisation_id: null
       }),
 
       fields: {
-        index: 'Index',
-        name: 'Name',
-        type: 'Type',
-        status: 'Status',
-        is_national: 'Is National',
-        intro: 'Introduction',
-        description: 'Description',
-        wait_time: 'Wait Time',
-        is_free: 'Is Free',
-        fees_text: 'Fees Text',
-        fees_url: 'Fees URL',
-        testimonial: 'Testimonial',
-        video_embed: 'Video Embed',
-        url: 'Url',
-        contact_name: 'Contact Name',
-        contact_phone: 'Contact Phone',
-        contact_email: 'Contact Email',
-        show_referral_disclaimer: 'Show Referral Disclaimer',
-        referral_method: 'Referral Method',
-        referral_button_text: 'Referral Button Text',
-        referral_email: 'Referral Email',
-        referral_url: 'Referral Url',
-        criteria_age_group: 'Age Group',
-        criteria_disability: 'Disability',
-        criteria_employment: 'Employment',
-        criteria_gender: 'Gender',
-        criteria_housing: 'Housing',
-        criteria_income: 'Income',
-        criteria_language: 'Language',
-        criteria_other: 'Other',
-      },
+        index: "Index",
+        name: "Name",
+        type: "Type",
+        status: "Status",
+        is_national: "Is National",
+        intro: "Introduction",
+        description: "Description",
+        wait_time: "Wait Time",
+        is_free: "Is Free",
+        fees_text: "Fees Text",
+        fees_url: "Fees URL",
+        testimonial: "Testimonial",
+        video_embed: "Video Embed",
+        url: "Url",
+        contact_name: "Contact Name",
+        contact_phone: "Contact Phone",
+        contact_email: "Contact Email",
+        show_referral_disclaimer: "Show Referral Disclaimer",
+        referral_method: "Referral Method",
+        referral_button_text: "Referral Button Text",
+        referral_email: "Referral Email",
+        referral_url: "Referral Url",
+        criteria_age_group: "Age Group",
+        criteria_disability: "Disability",
+        criteria_employment: "Employment",
+        criteria_gender: "Gender",
+        criteria_housing: "Housing",
+        criteria_income: "Income",
+        criteria_language: "Language",
+        criteria_other: "Other"
+      }
     };
   },
 
   computed: {
     formResponse() {
       return this.uploadRows
-        ? 'Imported ' +
+        ? "Imported " +
             this.uploadRows +
-            (this.uploadRows === 1 ? ' Service' : ' Services')
+            (this.uploadRows === 1 ? " Service" : " Services")
         : null;
     },
     exampleSpreadsheetDownloadLink() {
       return `${
         process.env.VUE_APP_API_URI
       }/downloads/services_import_example.xls`;
-    },
+    }
   },
 
   methods: {
@@ -139,13 +139,13 @@ export default {
       this.form.organisation_id = this.organisationId;
 
       this.form
-        .post('/services/import')
-        .then((response) => {
+        .post("/services/import")
+        .then(response => {
           this.uploadRows = response.data.imported_row_count;
           this.file = null;
           this.organisationId = null;
         })
-        .catch((error) => {
+        .catch(error => {
           if (error.data) {
             this.invalidRows = error.data.errors.spreadsheet;
             this.file = null;
@@ -155,8 +155,8 @@ export default {
             console.log(error.message);
           }
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

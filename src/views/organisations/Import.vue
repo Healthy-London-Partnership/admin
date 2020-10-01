@@ -42,16 +42,16 @@
     </gov-width-container>
 </template>
 <script>
-import Form from '@/classes/Form';
-import SpreadsheetImportForm from '@/components/SpreadsheetImportForm';
-import SpreadsheetImportErrors from '@/components/SpreadsheetImportErrors';
+import Form from "@/classes/Form";
+import SpreadsheetImportForm from "@/components/SpreadsheetImportForm";
+import SpreadsheetImportErrors from "@/components/SpreadsheetImportErrors";
 
 export default {
-  name: 'OrganisationsImport',
+  name: "OrganisationsImport",
   components: {
     Form,
     SpreadsheetImportForm,
-    SpreadsheetImportErrors,
+    SpreadsheetImportErrors
   },
 
   data() {
@@ -63,33 +63,33 @@ export default {
       invalidRows: null,
 
       form: new Form({
-        spreadsheet: null,
+        spreadsheet: null
       }),
 
       fields: {
-        index: 'Index',
-        name: 'Name',
-        description: 'Description',
-        email: 'Email',
-        phone: 'Phone',
-        url: 'Url',
-      },
+        index: "Index",
+        name: "Name",
+        description: "Description",
+        email: "Email",
+        phone: "Phone",
+        url: "Url"
+      }
     };
   },
 
   computed: {
     formResponse() {
       return this.uploadRows
-        ? 'Imported ' +
+        ? "Imported " +
             this.uploadRows +
-            (this.uploadRows === 1 ? ' Organisation' : ' Organisations')
+            (this.uploadRows === 1 ? " Organisation" : " Organisations")
         : null;
     },
     exampleSpreadsheetDownloadLink() {
       return `${
         process.env.VUE_APP_API_URI
       }/downloads/organisations_import_example.xls`;
-    },
+    }
   },
 
   methods: {
@@ -102,17 +102,17 @@ export default {
       this.form.spreadsheet = this.file;
 
       this.form
-        .post('/organisations/import')
-        .then((response) => {
+        .post("/organisations/import")
+        .then(response => {
           this.uploadRows = response.data.imported_row_count;
           this.file = null;
         })
-        .catch((error) => {
+        .catch(error => {
           this.invalidRows = error.data.errors.spreadsheet;
           this.file = null;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

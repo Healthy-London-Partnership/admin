@@ -32,23 +32,23 @@ export default {
   props: {
     fields: {
       type: Array,
-      required: true,
+      required: true
     },
     invalidRows: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     isWideTable() {
       return Object.keys(this.fields).length > 6;
-    },
+    }
   },
   methods: {
     trimString(s) {
-      return String(s).length > 30 ? String(s).slice(0, 30) + '...' : s;
-    },
-  },
+      return String(s).length > 30 ? String(s).slice(0, 30) + "..." : s;
+    }
+  }
 };
 </script>
 
