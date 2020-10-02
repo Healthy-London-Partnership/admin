@@ -1,6 +1,7 @@
 <template>
   <div :class="{'responsive-table-wrapper': isWideTable}">
-    <gov-heading size="s"><gov-error-message>Invalid rows</gov-error-message></gov-heading>
+    <gov-heading size="m">Invalid rows</gov-heading>
+    <p><gov-hint>Scroll the table left and right to see all columns. Fix the listed errors and resubmit. Some large text fields have been shortened for display, indicated by (...).</gov-hint></p>
     <gov-table>
       <template slot="header">
         <gov-table-row>
