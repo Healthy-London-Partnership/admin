@@ -134,7 +134,7 @@ export default {
       this.form.$errors.clear(event);
       this.invalidRows = null;
     },
-    async onSubmit() {
+    onSubmit() {
       this.form.spreadsheet = this.file;
       this.form.organisation_id = this.organisationId;
 
@@ -150,9 +150,9 @@ export default {
             this.invalidRows = error.data.errors.spreadsheet;
             this.file = null;
           } else if (error.request) {
-            console.log(error.request);
+            console.error(error.request);
           } else {
-            console.log(error.message);
+            console.error(error.message);
           }
         });
     }
