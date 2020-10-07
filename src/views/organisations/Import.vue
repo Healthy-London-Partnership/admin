@@ -30,11 +30,13 @@
                 <ck-submit-error v-if="form.$errors.any()" />
             </gov-grid-column>
             </gov-grid-row>
-            <gov-grid-row v-if="invalidRows">
+            <gov-grid-row v-if="invalidRows.length || duplicateRows.length">
               <gov-grid-column width="full">
                 <spreadsheet-import-errors
                   :fields="fields"
                   :invalidRows="invalidRows"
+                  :duplicateRows="duplicateRows"
+                  @ignoreDuplicate="ignoreDuplicate"
                 />
               </gov-grid-column>
             </gov-grid-row>
@@ -42,16 +44,16 @@
     </gov-width-container>
 </template>
 <script>
-import Form from "@/classes/Form";
-import SpreadsheetImportForm from "@/components/SpreadsheetImportForm";
-import SpreadsheetImportErrors from "@/components/SpreadsheetImportErrors";
+import Form from '@/classes/Form';
+import SpreadsheetImportForm from '@/components/SpreadsheetImportForm';
+import SpreadsheetImportErrors from '@/components/SpreadsheetImportErrors';
 
 export default {
-  name: "OrganisationsImport",
+  name: 'OrganisationsImport',
   components: {
     Form,
     SpreadsheetImportForm,
-    SpreadsheetImportErrors
+    SpreadsheetImportErrors,
   },
 
   data() {
@@ -60,59 +62,99 @@ export default {
 
       uploadRows: null,
 
-      invalidRows: null,
+      invalidRows: [],
+
+      duplicateRows: [],
+
+      ignoreDuplicateIds: [],
 
       form: new Form({
-        spreadsheet: null
+        spreadsheet: null,
+        ignore_duplicates: null,
       }),
 
       fields: {
-        index: "Index",
-        name: "Name",
-        description: "Description",
-        email: "Email",
-        phone: "Phone",
-        url: "Url"
-      }
+        index: 'Index',
+        name: 'Name',
+        description: 'Description',
+        email: 'Email',
+        phone: 'Phone',
+        url: 'Url',
+      },
     };
   },
 
   computed: {
     formResponse() {
       return this.uploadRows
-        ? "Imported " +
+        ? 'Imported ' +
             this.uploadRows +
-            (this.uploadRows === 1 ? " Organisation" : " Organisations")
+            (this.uploadRows === 1 ? ' Organisation' : ' Organisations')
         : null;
     },
     exampleSpreadsheetDownloadLink() {
       return `${
         process.env.VUE_APP_API_URI
       }/downloads/organisations_import_example.xls`;
-    }
+    },
   },
 
   methods: {
     resetForm(event) {
-      this.uploadRows = null;
       this.form.$errors.clear(event);
-      this.invalidRows = null;
     },
     async onSubmit() {
       this.form.spreadsheet = this.file;
+      this.form.ignore_duplicates = this.duplicateRows.reduce(
+        (duplicateIds, duplicateRow) => {
+          return duplicateIds.concat(
+            duplicateRow.originals
+              .filter((original) => {
+                return original.ignored;
+              })
+              .map((original) => {
+                return original.id;
+              })
+          );
+        },
+        []
+      );
+      this.uploadRows = null;
+      this.duplicateRows = [];
+      this.invalidRows = [];
 
       this.form
-        .post("/organisations/import")
-        .then(response => {
+        .post('/organisations/import')
+        .then((response) => {
           this.uploadRows = response.data.imported_row_count;
           this.file = null;
         })
-        .catch(error => {
-          this.invalidRows = error.data.errors.spreadsheet;
+        .catch((error) => {
+          this.invalidRows = error.data.errors
+            ? error.data.errors.spreadsheet
+            : [];
+          this.duplicateRows =
+            error.data.duplicates.map((duplicateRow) => {
+              for (let i = 0; i < duplicateRow.originals.length; i++) {
+                duplicateRow.originals[i].ignored = false;
+              }
+              return duplicateRow;
+            }) || [];
           this.file = null;
         });
-    }
-  }
+    },
+    ignoreDuplicate(duplicateId) {
+      for (let i = 0; i < this.duplicateRows.length; i++) {
+        for (let j = 0; j < this.duplicateRows[i].originals.length; j++) {
+          if (this.duplicateRows[i].originals[j].id === duplicateId) {
+            this.duplicateRows[i].originals[j].ignored = !this.duplicateRows[i]
+              .originals[j].ignored;
+            return;
+          }
+        }
+      }
+    },
+  },
 };
 </script>
 

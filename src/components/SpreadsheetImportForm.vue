@@ -1,5 +1,6 @@
 <template>
   <ck-file-input
+    ref="fileInput"
     :value="spreadsheet"
     @input="onInput('spreadsheet', $event === null ? null : $event.content)"
     id="spreadsheet"
@@ -13,29 +14,37 @@
 
 <script>
 export default {
-  name: "SpreadsheetImportForm",
+  name: 'SpreadsheetImportForm',
 
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
     },
 
     spreadsheet: {
-      required: true
+      required: true,
     },
 
     feedback: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
+  },
+
+  watch: {
+    spreadsheet(isNow, wasThen) {
+      if (wasThen && !isNow) {
+        this.$refs.fileInput.$refs.file.$el.value = '';
+      }
+    },
   },
 
   methods: {
     onInput(field, value) {
       this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
-    }
-  }
+      this.$emit('clear', field);
+    },
+  },
 };
 </script>
