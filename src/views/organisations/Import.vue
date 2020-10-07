@@ -44,16 +44,16 @@
     </gov-width-container>
 </template>
 <script>
-import Form from '@/classes/Form';
-import SpreadsheetImportForm from '@/components/SpreadsheetImportForm';
-import SpreadsheetImportErrors from '@/components/SpreadsheetImportErrors';
+import Form from "@/classes/Form";
+import SpreadsheetImportForm from "@/components/SpreadsheetImportForm";
+import SpreadsheetImportErrors from "@/components/SpreadsheetImportErrors";
 
 export default {
-  name: 'OrganisationsImport',
+  name: "OrganisationsImport",
   components: {
     Form,
     SpreadsheetImportForm,
-    SpreadsheetImportErrors,
+    SpreadsheetImportErrors
   },
 
   data() {
@@ -70,33 +70,33 @@ export default {
 
       form: new Form({
         spreadsheet: null,
-        ignore_duplicates: null,
+        ignore_duplicates: null
       }),
 
       fields: {
-        index: 'Index',
-        name: 'Name',
-        description: 'Description',
-        email: 'Email',
-        phone: 'Phone',
-        url: 'Url',
-      },
+        index: "Index",
+        name: "Name",
+        description: "Description",
+        email: "Email",
+        phone: "Phone",
+        url: "Url"
+      }
     };
   },
 
   computed: {
     formResponse() {
       return this.uploadRows
-        ? 'Imported ' +
+        ? "Imported " +
             this.uploadRows +
-            (this.uploadRows === 1 ? ' Organisation' : ' Organisations')
+            (this.uploadRows === 1 ? " Organisation" : " Organisations")
         : null;
     },
     exampleSpreadsheetDownloadLink() {
       return `${
         process.env.VUE_APP_API_URI
       }/downloads/organisations_import_example.xls`;
-    },
+    }
   },
 
   methods: {
@@ -109,10 +109,10 @@ export default {
         (duplicateIds, duplicateRow) => {
           return duplicateIds.concat(
             duplicateRow.originals
-              .filter((original) => {
+              .filter(original => {
                 return original.ignored;
               })
-              .map((original) => {
+              .map(original => {
                 return original.id;
               })
           );
@@ -124,17 +124,17 @@ export default {
       this.invalidRows = [];
 
       this.form
-        .post('/organisations/import')
-        .then((response) => {
+        .post("/organisations/import")
+        .then(response => {
           this.uploadRows = response.data.imported_row_count;
           this.file = null;
         })
-        .catch((error) => {
+        .catch(error => {
           this.invalidRows = error.data.errors
             ? error.data.errors.spreadsheet
             : [];
           this.duplicateRows =
-            error.data.duplicates.map((duplicateRow) => {
+            error.data.duplicates.map(duplicateRow => {
               for (let i = 0; i < duplicateRow.originals.length; i++) {
                 duplicateRow.originals[i].ignored = false;
               }
@@ -153,8 +153,8 @@ export default {
           }
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

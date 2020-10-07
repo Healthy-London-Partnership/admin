@@ -57,23 +57,23 @@ export default {
   props: {
     fields: {
       type: Object,
-      required: true,
+      required: true
     },
     invalidRows: {
       type: Array,
-      required: false,
+      required: false
     },
     duplicateRows: {
       type: Array,
-      required: false,
-    },
+      required: false
+    }
   },
   computed: {
     combinedRows() {
       const combinedRows = this.invalidRows.slice();
       if (this.duplicateRows.length) {
-        this.duplicateRows.forEach((duplicateRow) => {
-          const index = this.invalidRows.findIndex((invalidRow) => {
+        this.duplicateRows.forEach(duplicateRow => {
+          const index = this.invalidRows.findIndex(invalidRow => {
             return invalidRow.row.index === duplicateRow.row.index;
           });
           if (-1 === index) {
@@ -84,16 +84,16 @@ export default {
         });
       }
       return combinedRows;
-    },
+    }
   },
   methods: {
     trimString(s) {
-      return String(s).length > 30 ? String(s).slice(0, 30) + '...' : s;
+      return String(s).length > 30 ? String(s).slice(0, 30) + "..." : s;
     },
     ignoreDuplicate(duplicate) {
-      this.$emit('ignoreDuplicate', duplicate.id);
-    },
-  },
+      this.$emit("ignoreDuplicate", duplicate.id);
+    }
+  }
 };
 </script>
 
