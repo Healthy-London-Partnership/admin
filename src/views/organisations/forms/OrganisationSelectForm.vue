@@ -1,6 +1,7 @@
 <template>
   <div>
     <ck-select-input
+      v-if="!loading"
       :value="organisationId"
       :label="label"
       :error="null"
@@ -35,7 +36,8 @@ export default {
   },
   data() {
     return {
-      organisations: []
+      organisations: [],
+      loading: false
     };
   },
   computed: {
@@ -65,6 +67,7 @@ export default {
       const response = await http.get(
         `/organisations${this.organisationsFilter}`
       );
+      this.loading = false;
       this.organisations = response.data.data;
     }
   },
