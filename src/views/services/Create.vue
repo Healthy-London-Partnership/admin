@@ -42,6 +42,8 @@
               :type.sync="form.type"
               :organisation_id.sync="form.organisation_id"
               :url.sync="form.url"
+              :ios_app_url.sync="form.ios_app_url"
+              :android_app_url.sync="form.android_app_url"
               @update:logo_file_id="form.logo_file_id = $event"
               :is_national.sync="form.is_national"
               :status.sync="form.status"
@@ -184,6 +186,8 @@ export default {
         testimonial: "",
         video_embed: "",
         url: "",
+        ios_app_url: "",
+        android_app_url: "",
         contact_name: "",
         contact_phone: "",
         contact_email: "",

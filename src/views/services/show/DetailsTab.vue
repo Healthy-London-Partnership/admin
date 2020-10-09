@@ -13,7 +13,15 @@
         </gov-table-row>
         <gov-table-row>
           <gov-table-header top scope="row">{{ service.type | ucfirst }} website address</gov-table-header>
-          <gov-table-cell break>{{ service.url }}</gov-table-cell>
+          <gov-table-cell break><gov-link :href="service.url" external="true">{{ service.url }}</gov-link></gov-table-cell>
+        </gov-table-row>
+        <gov-table-row v-if="service.type === 'app' && service.ios_app_url">
+          <gov-table-header top scope="row">{{ service.type | ucfirst }} iOS app store</gov-table-header>
+          <gov-table-cell break><gov-link :href="service.ios_app_url" external="true">{{ service.ios_app_url }}</gov-link></gov-table-cell>
+        </gov-table-row>
+        <gov-table-row v-if="service.type === 'app' && service.android_app_url">
+          <gov-table-header top scope="row">{{ service.type | ucfirst }} Android app store</gov-table-header>
+          <gov-table-cell break><gov-link :href="service.android_app_url" external="true">{{ service.android_app_url }}</gov-link></gov-table-cell>
         </gov-table-row>
         <gov-table-row>
           <gov-table-header top scope="row">{{ service.type | ucfirst }} logo</gov-table-header>
