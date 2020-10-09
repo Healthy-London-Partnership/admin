@@ -30,21 +30,6 @@
           :error="errors.get('name')"
         />
 
-        <ck-text-input
-          :value="slug"
-          @input="$emit('update:slug', $event); $emit('clear', 'slug')"
-          id="slug"
-          label="Unique slug"
-          type="text"
-          :error="errors.get('slug')"
-          v-if="auth.isGlobalAdmin"
-        >
-          <gov-hint slot="hint" for="slug">
-            This will be used to access the {{ type }} page.<br>
-            e.g. example.com/services/{{ slug }}
-          </gov-hint>
-        </ck-text-input>
-
         <template v-if="isNew || auth.isGlobalAdmin">
           <ck-loader v-if="loading" />
           <ck-select-input
@@ -178,9 +163,6 @@ export default {
       default: false
     },
     name: {
-      required: true
-    },
-    slug: {
       required: true
     },
     type: {

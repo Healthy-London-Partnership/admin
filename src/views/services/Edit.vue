@@ -28,7 +28,6 @@
                   :errors="form.$errors"
                   :organisation_id.sync="form.organisation_id"
                   :name.sync="form.name"
-                  :slug.sync="form.slug"
                   :type.sync="form.type"
                   :url.sync="form.url"
                   :ios_app_url.sync="form.ios_app_url"
@@ -210,7 +209,6 @@ export default {
       this.form = new Form({
         organisation_id: this.service.organisation_id,
         name: this.service.name,
-        slug: this.service.slug,
         type: this.service.type,
         status: this.service.status,
         is_national: this.service.is_national,
@@ -267,9 +265,6 @@ export default {
         }
         if (data.name === this.service.name) {
           delete data.name;
-        }
-        if (data.slug === this.service.slug) {
-          delete data.slug;
         }
         if (data.type === this.service.type) {
           delete data.type;

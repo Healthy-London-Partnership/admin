@@ -38,7 +38,6 @@
               :errors="form.$errors"
               :is-new="true"
               :name.sync="form.name"
-              :slug.sync="form.slug"
               :type.sync="form.type"
               :organisation_id.sync="form.organisation_id"
               :url.sync="form.url"
@@ -173,7 +172,6 @@ export default {
         id: null,
         organisation_id: null,
         name: "",
-        slug: "",
         type: "service",
         status: "inactive",
         is_national: true,
