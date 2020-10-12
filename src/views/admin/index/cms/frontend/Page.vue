@@ -1,34 +1,26 @@
 <template>
   <gov-grid-row>
     <gov-grid-column width="two-thirds">
-      <gov-heading size="l">About</gov-heading>
+      <gov-heading size="l">{{$route.params.pageTitle}}</gov-heading>
 
-      <gov-body>Review the content for the about page on the frontend.</gov-body>
+      <gov-body>Review the content for the {{$route.params.pageTitle}} page on the frontend.</gov-body>
 
       <ck-text-input
-        :value="frontend.about.title"
+        :key="'frontend-' + $route.params.pageSlug + '-title'"
+        :value="frontend[$route.params.pageSlug].title"
         @input="onInput({ field: 'title', value: $event })"
         label="Title"
-        :error="errors.get('cms.frontend.about.title')"
-        id="cms.frontend.about.title"
+        :error="errors.get('cms.frontend[$route.params.pageSlug].title')"
+        id="cms.frontend[$route.params.pageSlug].title"
       />
 
       <ck-wysiwyg-input
-        :value="frontend.about.content"
+        :key="'frontend-' + $route.params.pageSlug + '-content'"
+        :value="frontend[$route.params.pageSlug].content"
         @input="onInput({ field: 'content', value: $event })"
         label="Content"
-        :error="errors.get('cms.frontend.about.content')"
-        id="cms.frontend.about.content"
-      />
-
-      <ck-text-input
-        :value="frontend.about.video_url"
-        @input="onInput({ field: 'video_url', value: $event })"
-        label="Video URL"
-        hint="Only YoutTube and Vimeo URLs supported."
-        :error="errors.get('cms.frontend.about.video_url')"
-        id="cms.frontend.about.video_url"
-        type="url"
+        :error="errors.get('cms.frontend[$route.params.pageSlug].content')"
+        id="cms.frontend[$route.params.pageSlug].content"
       />
     </gov-grid-column>
   </gov-grid-row>
@@ -59,7 +51,7 @@ export default {
     onInput({ field, value }) {
       const frontend = { ...this.frontend };
 
-      frontend.about[field] = value;
+      frontend[this.$route.params.pageSlug][field] = value;
 
       this.$emit("input", frontend);
       this.$emit("clear", `frontend.about.${field}`);

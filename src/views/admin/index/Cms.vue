@@ -54,16 +54,36 @@ export default {
           to: { name: "admin-index-cms-frontend-privacy-policy" }
         },
         {
-          heading: "About",
-          to: { name: "admin-index-cms-frontend-about" }
+          heading: "About Connect",
+          to: {
+            name: "admin-index-cms-frontend-page",
+            params: { pageSlug: "about_connect", pageTitle: "About Connect" }
+          }
+        },
+        {
+          heading: "Providers",
+          to: {
+            name: "admin-index-cms-frontend-page",
+            params: { pageSlug: "providers", pageTitle: "Providers" }
+          }
+        },
+        {
+          heading: "Supporters",
+          to: {
+            name: "admin-index-cms-frontend-page",
+            params: { pageSlug: "supporters", pageTitle: "Supporters" }
+          }
+        },
+        {
+          heading: "Funders",
+          to: {
+            name: "admin-index-cms-frontend-page",
+            params: { pageSlug: "funders", pageTitle: "Funders" }
+          }
         },
         {
           heading: "Contact",
           to: { name: "admin-index-cms-frontend-contact" }
-        },
-        {
-          heading: "Get Involved",
-          to: { name: "admin-index-cms-frontend-get-involved" }
         },
         {
           heading: "Favourites",
