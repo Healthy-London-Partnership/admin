@@ -54,7 +54,7 @@ export default {
       frontend[this.$route.params.pageSlug][field] = value;
 
       this.$emit("input", frontend);
-      this.$emit("clear", `frontend.about.${field}`);
+      this.$emit("clear", `frontend.${this.$route.params.pageSlug}.${field}`);
     }
   }
 };

@@ -57,7 +57,7 @@ export default {
           heading: "About Connect",
           to: {
             name: "admin-index-cms-frontend-page",
-            params: { pageSlug: "about_connect", pageTitle: "About Connect" }
+            params: { pageSlug: "about", pageTitle: "About Connect" }
           }
         },
         {
