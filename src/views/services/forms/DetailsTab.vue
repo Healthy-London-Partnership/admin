@@ -69,6 +69,38 @@
           :error="errors.get('url')"
         />
 
+        <ck-text-input
+          :disabled="type !== 'app'"
+          :value="ios_app_url"
+          @input="$emit('update:ios_app_url', $event); $emit('clear', 'ios_app_url')"
+          id="ios_app_url"
+          :label="`What is the iOS App Store address of your App?`"
+          type="url"
+          :error="errors.get('ios_app_url')"
+        >
+          <template slot="hint">
+            <gov-hint for="ios_app_url">
+              See <gov-link :href="androidAppStoreHelpUrl" external="true"> help creating Apple App Store links</gov-link>.
+            </gov-hint>
+          </template>
+        </ck-text-input>
+
+        <ck-text-input
+          :disabled="type !== 'app'"
+          :value="android_app_url"
+          @input="$emit('update:android_app_url', $event); $emit('clear', 'android_app_url')"
+          id="android_app_url"
+          :label="'What is the Android App Store address of your App?'"
+          type="url"
+          :error="errors.get('android_app_url')"
+        >
+          <template slot="hint">
+            <gov-hint for="android_app_url">
+              See <gov-link :href="androidAppStoreHelpUrl" external="true"> help on creating Google Play Store links</gov-link>.
+            </gov-hint>
+          </template>
+        </ck-text-input>
+
         <ck-image-input
           @input="$emit('update:logo_file_id', $event.file_id); $emit('update:logo', $event.image);"
           id="logo"
@@ -160,6 +192,14 @@ export default {
     url: {
       required: true
     },
+    ios_app_url: {
+      required: false,
+      type: String
+    },
+    android_app_url: {
+      required: false,
+      type: String
+    },
     is_national: {
       required: true
     },
@@ -191,7 +231,11 @@ export default {
       statusOptions: [
         { label: "Enabled", value: "active" },
         { label: "Disabled", value: "inactive" }
-      ]
+      ],
+      iosAppStoreHelpUrl:
+        "https://developer.apple.com/library/archive/qa/qa1633/_index.html",
+      androidAppStoreHelpUrl:
+        "https://support.google.com/admob/answer/3086746?hl=en"
     };
   },
   computed: {
