@@ -340,27 +340,21 @@ let router = new Router({
                 import("@/views/admin/index/cms/frontend/PrivacyPolicy")
             },
             {
-              path: "frontend/about",
-              name: "admin-index-cms-frontend-about",
-              component: () => import("@/views/admin/index/cms/frontend/About")
-            },
-            {
               path: "frontend/contact",
               name: "admin-index-cms-frontend-contact",
               component: () =>
                 import("@/views/admin/index/cms/frontend/Contact")
             },
             {
-              path: "frontend/get-involved",
-              name: "admin-index-cms-frontend-get-involved",
-              component: () =>
-                import("@/views/admin/index/cms/frontend/GetInvolved")
-            },
-            {
               path: "frontend/favourites",
               name: "admin-index-cms-frontend-favourites",
               component: () =>
                 import("@/views/admin/index/cms/frontend/Favourites")
+            },
+            {
+              path: "frontend/page/:pageSlug",
+              name: "admin-index-cms-frontend-page",
+              component: () => import("@/views/admin/index/cms/frontend/Page")
             }
           ]
         },
