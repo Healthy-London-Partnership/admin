@@ -39,7 +39,8 @@
                 </gov-link>
               </gov-grid-column>
               <gov-grid-column width="one-third">
-                <gov-button :success="!!original.ignored" @click="ignoreDuplicate(original)">{{!!original.ignored? 'Ignored' : 'Ignore'}}</gov-button>
+                <gov-button v-if="original.id" :success="!!original.ignored" @click="ignoreDuplicate(original)">{{!!original.ignored? 'Ignored' : 'Ignore'}}</gov-button>
+                <gov-error-message v-else>Repeated row</gov-error-message>
               </gov-grid-column>
               </gov-grid-row>
               </li>
