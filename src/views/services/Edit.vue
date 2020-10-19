@@ -31,6 +31,8 @@
                   :slug.sync="form.slug"
                   :type.sync="form.type"
                   :url.sync="form.url"
+                  :ios_app_url.sync="form.ios_app_url"
+                  :android_app_url.sync="form.android_app_url"
                   @update:logo_file_id="form.logo_file_id = $event"
                   @update:logo="form.logo = $event"
                   :is_national.sync="form.is_national"
@@ -221,6 +223,8 @@ export default {
         testimonial: this.service.testimonial || "",
         video_embed: this.service.video_embed || "",
         url: this.service.url,
+        ios_app_url: this.service.ios_app_url,
+        android_app_url: this.service.android_app_url,
         contact_name: this.service.contact_name || "",
         contact_phone: this.service.contact_phone || "",
         contact_email: this.service.contact_email || "",
@@ -302,6 +306,12 @@ export default {
         }
         if (data.url === this.service.url) {
           delete data.url;
+        }
+        if (data.ios_app_url === (this.service.ios_app_url || "")) {
+          delete data.ios_app_url;
+        }
+        if (data.android_app_url === (this.service.android_app_url || "")) {
+          delete data.android_app_url;
         }
         if (data.contact_name === (this.service.contact_name || "")) {
           delete data.contact_name;
