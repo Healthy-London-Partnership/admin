@@ -235,17 +235,13 @@ export default {
   },
   computed: {
     allowedTabs() {
-      if (!(this.auth.isGlobalAdmin || this.auth.isLocalAdmin)) {
-        const taxonomiesTabIndex = this.tabs.findIndex(
-          tab => tab.id === "taxonomies"
-        );
-        const tabs = this.tabs.slice();
-        tabs.splice(taxonomiesTabIndex, 1);
-
-        return tabs;
+      // Super or Global Admin see all tabs
+      if (this.auth.isGlobalAdmin) {
+        return this.tabs;
+      } else {
+        // Service, Organisation and Local admins see all tabs except taxonomies
+        return this.tabs.filter(tab => tab.id !== "taxonomies");
       }
-
-      return this.tabs;
     }
   },
   methods: {
