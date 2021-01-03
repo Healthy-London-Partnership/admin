@@ -91,10 +91,6 @@
               :disability.sync="form.criteria.disability"
               :employment.sync="form.criteria.employment"
               :gender.sync="form.criteria.gender"
-              :housing.sync="form.criteria.housing"
-              :income.sync="form.criteria.income"
-              :language.sync="form.criteria.language"
-              :other.sync="form.criteria.other"
             >
               <gov-button @click="onNext" start>Next</gov-button>
             </who-for-tab>
