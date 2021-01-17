@@ -171,6 +171,7 @@ export default {
   },
   data() {
     return {
+      version: 1,
       form: new Form({
         id: null,
         organisation_id: null,
@@ -265,12 +266,12 @@ export default {
       // Refetch the user as new permissions added for the new service.
       await this.auth.fetchUser();
 
+      this.clearFormCache();
+
       if (data.data.is_national) {
-        this.clearFormStore();
         // Cannot add locations so go direct to Support listing view
         this.$router.push({ path: `/services/${serviceId}` });
       } else {
-        this.clearFormStore();
         // Add locations if required
         this.$router.push({
           name: "services-post-create",
@@ -282,7 +283,7 @@ export default {
       this.tabs.forEach(tab => (tab.active = false));
       const tabId = this.allowedTabs[index].id;
       this.tabs.find(tab => tab.id === tabId).active = true;
-      this.$webStorage.set("activeTabIndex", index);
+      this.storeFormCache()
     },
     onNext() {
       const currentTabIndex = this.allowedTabs.findIndex(
@@ -301,34 +302,38 @@ export default {
 
       return tab === undefined ? false : tab.active;
     },
-    storeFormChanges(newData) {
-      // Store the form data
-      this.$webStorage.set("serviceCreating", newData);
+    storeFormCache() {
+      this.$webStorage.set("serviceFormVersion", this.version)
+      this.$webStorage.set("serviceFormData", this.form.data());
+      this.$webStorage.set("serviceFormTabIndex", this.allowedTabs.findIndex(tab => tab.active))
     },
-    clearFormStore() {
-      // Clear the support listing store
-      this.$webStorage.remove("serviceCreating");
-      // Clear the tab index
-      this.$webStorage.remove("activeTabIndex");
+    clearFormCache() {
+      this.$webStorage.remove("serviceFormVersion")
+      this.$webStorage.remove("serviceFormData");
+      this.$webStorage.remove("serviceFormTabIndex");
+    },
+    hydrateFormCache() {
+      console.log(this.$webStorage.get("serviceFormVersion"))
+      if (this.$webStorage.get("serviceFormVersion") !== this.version) {
+        this.storeFormCache()
+        return
+      }
+
+      this.form = new Form(this.$webStorage.get("serviceFormData"))
+      this.onTabChange({ index: this.$webStorage.get("serviceFormTabIndex") })
     }
   },
   mounted() {
-    // Set storage to localStorage
-    this.$webStorage.setStorage("localStorage");
-    // Look for a serviceCreating key and use it to populate form if found
-    const service = this.$webStorage.get("serviceCreating");
-    if (service) {
-      this.form = new Form(service);
+    this.$webStorage.setStorage("localStorage")
+    this.hydrateFormCache()
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler() {
+        this.storeFormCache()
+      }
     }
-    // Look for a stored tabIndex and use it to set the active tab if found
-    const tabIndex = this.$webStorage.get("activeTabIndex");
-    if (tabIndex) {
-      this.onTabChange({ index: tabIndex });
-    }
-    // Watch the form data for changes
-    this.$watch(() => {
-      return this.form.data();
-    }, this.storeFormChanges);
   }
 };
 </script>
