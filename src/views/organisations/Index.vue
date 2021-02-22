@@ -126,7 +126,7 @@
               slot-scope="{ resource: organisation }"
             >
               <gov-checkbox
-                @input="onInviteOrganisation(organisation.id)"
+                @input="onInviteOrganisation(organisation)"
                 :value="organisationInviteSelected(organisation.id)"
                 :id="`organisation_invite_${organisation.id}`"
                 :name="`organisation_invite_${organisation.id}`"
@@ -265,19 +265,26 @@ export default {
     onAddOrganisation() {
       this.$router.push({ name: "organisations-create" });
     },
-    onInviteOrganisation(organisationId) {
-      if (this.organisationInviteSelected(organisationId)) {
+    onInviteOrganisation(organisation) {
+      if (this.organisationInviteSelected(organisation.id)) {
         this.organisationInvites.splice(
-          this.organisationInvites.indexOf(organisationId),
+          this.organisationInvites.findIndex(oi => {
+            oi.organisation_id === organisation.id;
+          }),
           1
         );
         return;
       }
 
-      this.organisationInvites.push(organisationId);
+      this.organisationInvites.push({
+        organisation_id: organisation.id,
+        use_email: organisation.email !== null
+      });
     },
     organisationInviteSelected(organisationId) {
-      return this.organisationInvites.includes(organisationId);
+      return this.organisationInvites.find(oi => {
+        oi.organisation_id === organisationId;
+      });
     },
     onSelectAllInvites() {
       if (
@@ -293,19 +300,17 @@ export default {
       this.$refs.organisationsTable.resources
         .filter(this.canInvite)
         .forEach(organisation =>
-          this.organisationInvites.push(organisation.id)
+          this.organisationInvites.push({
+            organisation_id: organisation.id,
+            use_email: organisation.email !== null
+          })
         );
     },
     async onInvite() {
       this.inviting = true;
 
       await http.post("/organisation-admin-invites", {
-        organisations: this.organisationInvites.map(organisationId => {
-          return {
-            organisation_id: organisationId,
-            use_email: true
-          };
-        })
+        organisations: this.organisationInvites
       });
 
       this.$refs.organisationsTable.fetchResources();
@@ -322,7 +327,7 @@ export default {
     canInvite(organisation) {
       if (
         !this.inviting &&
-        organisation.email !== null &&
+        (organisation.email !== null || organisation.phone.startsWith("07")) &&
         organisation.admin_invite_status === "none"
       ) {
         return this.organisationInviteLimitReached
